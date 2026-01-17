@@ -1,3 +1,3 @@
-import { OrderSection } from "./OrderSection";
+import { OrderSection } from './OrderSection'
 
 export default OrderSection

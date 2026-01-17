@@ -4,8 +4,8 @@ const NotFound = React.lazy(() => import('@pages/NotFound'))
 const Dashboard = React.lazy(() => import('@pages/Dashboard'))
 
 const PAGES = {
+  Dashboard,
   NotFound,
-  Dashboard
 }
 
 export default PAGES

@@ -1,5 +1,5 @@
-import Skeleton from 'react-loading-skeleton'
 import { type JSX } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import styles from './styles.module.css'
 

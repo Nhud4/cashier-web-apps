@@ -1,27 +1,27 @@
-import PAGES from '@configs/pages'
 import ICONS from '@configs/icons'
+import PAGES from '@configs/pages'
 
 const routes: Route[] = [
   {
-    icon: <ICONS.Home />,
     component: <PAGES.Dashboard />,
+    icon: <ICONS.Home />,
+    isSidebar: true,
     name: 'Dashboard',
     path: '/',
-    isSidebar: true,
   },
   {
-    icon: <ICONS.Report />,
     component: <PAGES.Dashboard />,
+    icon: <ICONS.Report />,
+    isSidebar: true,
     name: 'Daftar Pesanan',
     path: '/order',
-    isSidebar: true,
   },
   {
-    icon: <ICONS.Setting />,
     component: <PAGES.Dashboard />,
+    icon: <ICONS.Setting />,
+    isSidebar: true,
     name: 'Pengaturan',
     path: '/setting',
-    isSidebar: true,
   },
   {
     component: <PAGES.NotFound />,

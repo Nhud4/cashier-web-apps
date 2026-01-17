@@ -1,6 +1,7 @@
-import styles from './styles.module.css'
-import Button from '../Button'
 import { formatIDR } from '@utils/index'
+
+import Button from '../Button'
+import styles from './styles.module.css'
 
 export const OrderSection = () => {
   const summary = [
@@ -31,7 +32,7 @@ export const OrderSection = () => {
       <div className="p-8 border border-t-neutral-2">
         <div className="flex flex-col gap-3 pb-8">
           {summary.map((item, index) => (
-            <div key={index} className="flex justify-between text-sm">
+            <div className="flex justify-between text-sm" key={index}>
               <p className="text-neutral-5">{item.label}</p>
               <p>{formatIDR(item.value)}</p>
             </div>

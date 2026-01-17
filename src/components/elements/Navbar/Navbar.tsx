@@ -1,5 +1,6 @@
-import styles from './styles.module.css'
 import Search from '@components/fields/Search'
+
+import styles from './styles.module.css'
 
 type Props = {
   title?: string
