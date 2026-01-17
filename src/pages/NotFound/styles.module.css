@@ -11,5 +11,5 @@
 }
 
 .button {
-  @apply p-2 px-4 mt-8 text-white rounded-md bg-primary;
+  @apply p-2 px-4 mt-8 text-white rounded-md bg-orange;
 }

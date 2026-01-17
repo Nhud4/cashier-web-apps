@@ -21,6 +21,7 @@ import Wallet from '@assets/icons/Wallet.svg?react'
 
 const ICONS = {
   Arrow,
+  Calendar,
   CheckCircle,
   Close,
   Eye,
@@ -29,7 +30,6 @@ const ICONS = {
   Logo,
   MinusCircle,
   Plus,
-  Calendar,
   PlusCircle,
   Printer,
   Qris,

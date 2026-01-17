@@ -22,7 +22,7 @@ export const Dashboard: React.FC = () => {
       title="SaR-1 Cafe and Resto"
     >
       <section className="page layout">
-        <div className="flex flex-wrap justify-between overflow-y-auto pb-10">
+        <div className="flex flex-wrap gap-[35px] overflow-y-auto pb-10">
           <CardMenu />
           <CardMenu />
           <CardMenu />
