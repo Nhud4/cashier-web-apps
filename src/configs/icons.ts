@@ -1,6 +1,7 @@
 import Arrow from '@assets/icons/angle.svg?react'
 import CheckCircle from '@assets/icons/check-circle 1.svg?react'
 import Close from '@assets/icons/close.svg?react'
+import Calendar from '@assets/icons/date-calendar.svg?react'
 import Eye from '@assets/icons/eye.svg?react'
 import EyeSlash from '@assets/icons/eye-slash.svg?react'
 import Home from '@assets/icons/home.svg?react'
@@ -28,6 +29,7 @@ const ICONS = {
   Logo,
   MinusCircle,
   Plus,
+  Calendar,
   PlusCircle,
   Printer,
   Qris,

@@ -23,9 +23,9 @@ module.exports = {
           DEFAULT: '#FFFFFF'
         },
         neutral: {
-          1: '#ABBBC2',
-          2: '#889898',
-          3: '#F5F5F5',
+          1: '#E0E6E9',
+          2: '#ABBBC2',
+          3: '#889898',
           4: '#F5F5F5',
           5: '#737373',
           DEFAULT: '#E0E6E9'

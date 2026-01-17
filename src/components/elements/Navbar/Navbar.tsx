@@ -1,4 +1,3 @@
-import Search from '@components/fields/Search'
 import { clsx } from '@utils/index'
 
 import styles from './styles.module.css'
@@ -7,12 +6,14 @@ type Props = {
   title?: string
   subtitle?: string
   headerMenu?: boolean
+  actionComponent?: React.ReactElement
 }
 
 const Navbar: React.FC<Props> = ({
   title = 'Dasboard',
   subtitle,
   headerMenu,
+  actionComponent,
 }) => {
   return (
     <nav className={clsx([styles.navbar, headerMenu ? '' : styles.menu])}>
@@ -21,7 +22,7 @@ const Navbar: React.FC<Props> = ({
         <p>{subtitle}</p>
       </div>
 
-      <Search placeholder="Cari menu disini..." />
+      {actionComponent}
     </nav>
   )
 }

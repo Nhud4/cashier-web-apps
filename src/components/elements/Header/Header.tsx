@@ -9,6 +9,7 @@ type Props = {
   subTitle?: string
   headerMenu?: boolean
   orderCard?: boolean
+  actionComponent?: React.ReactElement
 }
 
 export const Header: React.FC<Props> = ({
@@ -16,6 +17,7 @@ export const Header: React.FC<Props> = ({
   subTitle,
   headerMenu,
   orderCard,
+  actionComponent,
 }) => {
   return (
     <header
@@ -24,7 +26,12 @@ export const Header: React.FC<Props> = ({
         orderCard ? styles.order : styles.notOrder,
       ])}
     >
-      <Navbar headerMenu={headerMenu} subtitle={subTitle} title={title} />
+      <Navbar
+        actionComponent={actionComponent}
+        headerMenu={headerMenu}
+        subtitle={subTitle}
+        title={title}
+      />
       {headerMenu ? <HeaderMenuCategory /> : null}
     </header>
   )

@@ -1,3 +1,4 @@
+import Search from '@components/fields/Search'
 import Layout from '@components/layout'
 import CardMenu from '@features/CardMenu'
 import { getLocalDay } from '@utils/date'
@@ -14,6 +15,7 @@ export const Dashboard: React.FC = () => {
 
   return (
     <Layout
+      actionComponent={<Search placeholder="Cari menu disini..." />}
       headerMenu
       orderCard
       subTitle={getLocalDay()}

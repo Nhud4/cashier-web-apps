@@ -1,3 +1,4 @@
+import ICONS from '@configs/icons'
 import { clsx } from '@utils/index'
 import { forwardRef } from 'react'
 import { type FieldError } from 'react-hook-form'
@@ -29,7 +30,6 @@ const CustomDatePickerInput = forwardRef<HTMLButtonElement, Props>(
       onClick,
       isDisabled,
       label,
-      icon,
       labelClassname,
       placeholderText,
       onBlur,
@@ -63,12 +63,12 @@ const CustomDatePickerInput = forwardRef<HTMLButtonElement, Props>(
         ) : (
           <button
             className={clsx([
-              'flex items-center justify-between p-2 text-base border rounded-md text-left w-[17rem]',
+              'flex items-center p-2 text-base border rounded-lg text-left w-[13rem] h-[48px]',
               value || placeholderText ? 'pb-1' : '',
               error ? 'border-danger-500' : '',
               isDisabled
                 ? 'bg-gray-100 pointer-events-none cursor-not-allowed'
-                : '',
+                : 'bg-white',
               customWidth,
             ])}
             onBlur={onBlur}
@@ -76,9 +76,12 @@ const CustomDatePickerInput = forwardRef<HTMLButtonElement, Props>(
             ref={ref}
             type="button"
           >
+            <div className="ml-1">
+              <ICONS.Calendar />
+            </div>
             <p
               className={clsx([
-                'w-full',
+                'w-full pl-4',
                 placeholderText && !customPlaceholder && !value
                   ? 'opacity-50'
                   : '',
@@ -86,7 +89,6 @@ const CustomDatePickerInput = forwardRef<HTMLButtonElement, Props>(
             >
               {value || customPlaceholder || placeholderText}
             </p>
-            <div className="-mt-1 ml-1">{icon}</div>
           </button>
         )}
       </div>

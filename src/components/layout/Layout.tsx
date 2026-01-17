@@ -14,6 +14,7 @@ type Props = {
   orderCard?: boolean
   subTitle?: string
   headerMenu?: boolean
+  actionComponent?: React.ReactElement
 }
 
 const Layout: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const Layout: React.FC<Props> = ({
   orderCard = true,
   subTitle,
   headerMenu,
+  actionComponent,
 }) => {
   const { setNotify } = useContext(NotifyContext)
   // const dispatch = useAppDispatch()
@@ -58,6 +60,7 @@ const Layout: React.FC<Props> = ({
         className={`${styles.content} ${orderCard ? styles.orderCard : ''}`}
       >
         <Header
+          actionComponent={actionComponent}
           headerMenu={headerMenu}
           orderCard={orderCard}
           subTitle={subTitle}

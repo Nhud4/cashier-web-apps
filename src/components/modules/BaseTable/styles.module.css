@@ -12,7 +12,7 @@
 }
 
 .name > h4 {
-  @apply text-2xl font-medium text-title;
+  @apply text-2xl font-medium text-primary-3;
 }
 
 .name > span {

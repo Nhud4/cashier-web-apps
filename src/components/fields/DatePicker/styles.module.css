@@ -45,6 +45,10 @@
 }
 
 .clear__button::after {
-  @apply absolute bg-transparent outline-none w-[1.65rem] h-[1.65rem] -left-[3.25rem];
-  content: url('@assets/icons/close-outline.svg') !important;
+  @apply absolute bg-transparent outline-none;
+  width: 30px;
+  height: 30px;
+  left: -40px;
+  top: 10px;
+  content: url('@assets/icons/close.svg') !important;
 }
