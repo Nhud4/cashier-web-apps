@@ -1,5 +1,5 @@
 .main {
-  @apply p-4 bg-white rounded-lg place-self-stretch shadow-card;
+  @apply p-4 bg-white rounded-2xl place-self-stretch shadow-card;
 }
 
 .header {

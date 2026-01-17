@@ -116,10 +116,7 @@ export function TextInput<T extends FieldValues>({
     <div className={clsx(['space-y-1', className])}>
       {label ? (
         <label
-          className={clsx([
-            'flex items-center',
-            labelClassname || 'font-semibold',
-          ])}
+          className={clsx(['flex items-center', labelClassname])}
           htmlFor={props.id}
         >
           {label}
@@ -152,7 +149,7 @@ export function TextInput<T extends FieldValues>({
                   'focus-within:outline focus-within:outline-2 focus-within:outline-orange',
                   errorMessage
                     ? 'border-danger-500 focus-within:border-transparent'
-                    : '',
+                    : 'border-border',
                   prefix ? 'pl-0' : '',
                   props.disabled ? 'bg-neutral-100' : '',
                 ])}
@@ -238,14 +235,14 @@ export function TextInput<T extends FieldValues>({
       {!control && !isLoading ? (
         <div
           className={clsx([
-            'border rounded-lg focus-within:border-orange',
+            'border border-border rounded-lg focus-within:border-orange',
             prefix ? 'flex items-center space-x-2 pl-0' : 'pl-4',
             isPassword ? 'flex items-center justify-between' : '',
             props.disabled ? 'bg-white' : '',
           ])}
         >
           {prefix ? (
-            <div className="flex items-center justify-center w-10 px-1 bg-opacity-25 rounded-l-lg h-9 bg-gray-3">
+            <div className="flex items-center justify-center w-16 px-1 bg-opacity-25 rounded-l-lg h-12 bg-neutral-2">
               {prefix}
             </div>
           ) : null}

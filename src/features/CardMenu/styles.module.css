@@ -1,6 +1,6 @@
 .container {
   @apply relative pt-20 cursor-pointer;
-  width: 192px;
+  width: 220px;
 }
 
 .card {

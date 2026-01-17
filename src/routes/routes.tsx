@@ -17,7 +17,7 @@ const routes: Route[] = [
     path: '/order',
   },
   {
-    component: <PAGES.Dashboard />,
+    component: <PAGES.Settings />,
     icon: <ICONS.Setting />,
     isSidebar: true,
     name: 'Pengaturan',

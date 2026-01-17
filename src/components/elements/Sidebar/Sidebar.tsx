@@ -57,6 +57,10 @@ export const Sidebar: React.FC = () => {
             )
           })}
         </ul>
+
+        <button className="absolute bottom-10">
+          <ICONS.SingOut />
+        </button>
       </div>
     </section>
   )

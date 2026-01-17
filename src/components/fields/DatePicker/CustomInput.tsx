@@ -63,7 +63,7 @@ const CustomDatePickerInput = forwardRef<HTMLButtonElement, Props>(
         ) : (
           <button
             className={clsx([
-              'flex items-center p-2 text-base border rounded-lg text-left w-[13rem] h-[48px]',
+              'flex items-center p-2 text-base border border-border rounded-lg text-left w-[13rem] h-[48px]',
               value || placeholderText ? 'pb-1' : '',
               error ? 'border-danger-500' : '',
               isDisabled

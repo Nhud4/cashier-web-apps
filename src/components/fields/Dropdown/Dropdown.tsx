@@ -47,10 +47,7 @@ export function Dropdown<
     <div className="space-y-1" style={{ maxWidth }}>
       {label ? (
         <label
-          className={clsx([
-            'flex items-center',
-            labelClassname || 'font-semibold',
-          ])}
+          className={clsx(['flex items-center', labelClassname])}
           htmlFor="services"
         >
           {label}
@@ -106,13 +103,28 @@ export function Dropdown<
               name={name}
               styles={{
                 ...styles,
-                control: (rest) => ({
+                control: (rest, state) => ({
                   ...rest,
+                  '&:hover': {
+                    borderColor: state.isFocused ? '#EA7C69' : rest.borderColor,
+                  },
+                  borderColor: state.isFocused ? '#EA7C69' : rest.borderColor,
+                  borderRadius: 8,
+                  boxShadow: state.isFocused ? '#EA7C69' : rest.boxShadow,
                   cursor: 'pointer',
+                  minHeight: 48,
                   minWidth: minWidth || 175,
                 }),
                 menu: (rest) => ({ ...rest, zIndex: 9999 }),
-                option: (rest) => ({ ...rest, cursor: 'pointer' }),
+                option: (rest, state) => ({
+                  ...rest,
+                  backgroundColor: state.isSelected
+                    ? '#EA7C69'
+                    : state.isFocused
+                      ? 'rgba(234, 124, 105, 0.2)'
+                      : rest.backgroundColor,
+                  cursor: 'pointer',
+                }),
               }}
             />
           )}

@@ -3,7 +3,7 @@
 }
 
 .menu {
-  @apply border-b;
+  @apply border-b border-b-border;
 }
 
 .title > h1 {

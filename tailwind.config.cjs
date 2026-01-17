@@ -29,6 +29,9 @@ module.exports = {
           4: '#F5F5F5',
           5: '#737373',
           DEFAULT: '#E0E6E9'
+        },
+        border: {
+          DEFAULT: 'hsl(0, 0%, 80%)'
         }
       },
       boxShadow: {

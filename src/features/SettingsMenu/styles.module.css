@@ -1,0 +1,4 @@
+.button {
+  @apply flex items-center justify-between p-6 border-b w-full rounded-t-2xl;
+  background-color: rgba(234, 124, 105, 0.2);
+}
