@@ -1,0 +1,34 @@
+.main {
+  @apply p-4 bg-white rounded-lg shadow-card;
+}
+
+.header {
+  @apply flex items-center justify-between;
+}
+
+.headerLeft {
+  @apply flex items-center space-x-4;
+}
+
+.icon {
+  @apply grid w-12 h-12 rounded-full place-items-center;
+}
+
+.title {
+  @apply text-base font-semibold text-title;
+}
+
+.subtitle {
+  @apply text-sm text-black/80;
+}
+
+@media screen and (max-width: 768px) {
+  .header.responsive {
+    @apply flex-col;
+    align-items: normal;
+  }
+
+  .headerLeft.responsive {
+    @apply pb-4;
+  }
+}

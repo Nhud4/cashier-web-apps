@@ -1,0 +1,13 @@
+.search {
+  @apply flex items-center p-2 px-4 space-x-4 border border-transparent rounded-lg border-neutral-2;
+  height: 48px;
+  width: 302px;
+}
+
+.search > input {
+  @apply w-full;
+}
+
+.search > input:focus {
+  @apply outline-none;
+}

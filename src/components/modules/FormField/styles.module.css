@@ -1,0 +1,30 @@
+.main {
+  @apply space-y-2;
+}
+
+.field {
+  @apply flex items-center p-2 px-4 space-x-4 border border-transparent rounded-md bg-gray-70;
+}
+
+.field:focus-within {
+  @apply border-primary;
+}
+
+.field > input,
+.field > textarea {
+  @apply w-full bg-gray-70;
+}
+
+.field > input:focus .field > textarea:focus,
+.field > input:focus-visible,
+.field > textarea:focus-visible {
+  @apply outline-none;
+}
+
+.submit {
+  @apply cursor-pointer bg-primary;
+}
+
+.field > input[type='submit'] {
+  @apply font-medium text-white cursor-pointer bg-primary;
+}

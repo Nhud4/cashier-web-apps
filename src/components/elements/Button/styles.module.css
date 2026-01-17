@@ -1,0 +1,19 @@
+.button,
+.button[type='button'],
+.button[type='reset'],
+.button[type='submit'] {
+  @apply flex items-center px-3 py-2 space-x-2 text-sm font-medium rounded-lg;
+  height: 48px;
+}
+
+.button:disabled {
+  @apply cursor-not-allowed opacity-60;
+}
+
+.button.fill {
+  @apply text-white bg-orange;
+}
+
+.button.outline {
+  @apply bg-white border text-orange border-orange;
+}

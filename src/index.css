@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Poppins';
+    src: url('./assets/fonts/poppins/Poppins-Regular.woff2');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url('./assets/fonts/poppins/Poppins-Medium.woff2');
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url('./assets/fonts/poppins/Poppins-SemiBold.woff2');
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url('./assets/fonts/poppins/Poppins-Bold.woff2');
+    font-weight: 700;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #e1e1e1;
+  }
+
+  body {
+    @apply box-border relative flex flex-col h-screen p-0 m-0 text-primary-3 font-poppins bg-neutral-4;
+  }
+
+  body::before {
+    @apply absolute inset-0 bg-no-repeat opacity-20;
+    background-size: 100% auto;
+    content: '';
+  }
+
+  #root {
+    @apply relative flex-1 min-h-0;
+  }
+
+  .layout {
+    @apply px-8 pt-4;
+  }
+
+  .title {
+    @apply mb-4 text-2xl font-bold;
+  }
+
+  .page {
+    @apply grid pb-10 bg-neutral-4;
+    height: calc(100vh - 6rem);
+  }
+
+  @media screen and (max-width: 768px) {
+    .layout {
+      @apply px-4 min-h-screen overflow-y-auto;
+    }
+  }
+}

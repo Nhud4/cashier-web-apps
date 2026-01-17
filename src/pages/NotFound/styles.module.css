@@ -1,0 +1,15 @@
+.root {
+  @apply flex flex-col items-center justify-center min-h-screen;
+}
+
+.content {
+  @apply space-y-2 text-center;
+}
+
+.content > h2 {
+  @apply text-5xl;
+}
+
+.button {
+  @apply p-2 px-4 mt-8 text-white rounded-md bg-primary;
+}

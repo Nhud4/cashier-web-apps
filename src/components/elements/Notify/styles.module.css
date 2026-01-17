@@ -1,0 +1,31 @@
+.info {
+  @apply bg-blue-600;
+}
+
+.info + div > h6 {
+  @apply text-blue-600;
+}
+
+.success {
+  @apply bg-green-600;
+}
+
+.success + div > h6 {
+  @apply text-green-600;
+}
+
+.warning {
+  @apply bg-yellow-600;
+}
+
+.warning + div > h6 {
+  @apply text-yellow-600;
+}
+
+.error {
+  @apply bg-red-600;
+}
+
+.error + div > h6 {
+  @apply text-red-600;
+}

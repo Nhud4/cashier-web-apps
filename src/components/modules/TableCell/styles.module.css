@@ -1,0 +1,7 @@
+.clampText {
+  display: -webkit-box;
+  -webkit-line-clamp: var(--clamp-line);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  pointer-events: none;
+}

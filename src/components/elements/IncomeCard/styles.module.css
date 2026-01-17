@@ -1,0 +1,42 @@
+.wrapper {
+  @apply p-4 space-y-2 h-fit bg-white rounded-xl;
+}
+
+.wrapper > h1 {
+  @apply text-base font-medium text-title;
+}
+
+.price {
+  @apply flex justify-between items-center;
+}
+
+.price > h2 {
+  @apply text-sm text-neutral-500;
+}
+
+.price > div {
+  @apply text-sm;
+}
+
+.negativePrice {
+  @apply flex justify-between items-center;
+}
+
+.negativePrice > h2 {
+  @apply text-sm text-danger-500;
+}
+
+.negativePrice > div {
+  @apply text-sm text-danger-500;
+}
+
+.subMenu::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  @apply absolute bg-neutral-500 rounded-full;
+}
+
+.subMenu > h2 {
+  @apply pl-4;
+}

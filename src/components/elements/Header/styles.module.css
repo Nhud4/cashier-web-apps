@@ -1,0 +1,11 @@
+.header {
+  @apply fixed z-40 w-full bg-neutral-4;
+}
+
+.title {
+  @apply text-3xl;
+}
+
+.subtitle {
+  @apply text-2xl;
+}

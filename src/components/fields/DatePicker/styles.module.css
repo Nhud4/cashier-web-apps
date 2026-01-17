@@ -1,0 +1,50 @@
+.popper {
+  z-index: 9 !important;
+}
+
+.root > div:first-child {
+  @apply block w-full;
+}
+
+.label {
+  @apply flex w-full h-full select-none pointer-events-none absolute left-0 font-normal transition-all -top-[0.48rem] text-sm text-blue-200 leading-[3.25rem] pl-3;
+}
+
+.label__filled {
+  @apply text-[11px] leading-4 pl-0;
+  color: var(--color);
+}
+
+.label__filled::after {
+  @apply block flex-grow box-border w-2.5 h-1.5 mt-[6.5px] ml-1 rounded-tr-md border-t border-r pointer-events-none transition-all;
+  content: '';
+  border-color: var(--border-color);
+  border-top-width: var(--border-width);
+  border-right-width: var(--border-width);
+}
+
+.label__filled::before {
+  @apply block box-border w-2.5 h-1.5 mt-[6.5px] mr-1 rounded-tl-md border-t pointer-events-none transition-all;
+  content: '';
+  border-color: var(--border-color);
+  border-top-width: var(--border-width);
+  border-left-width: var(--border-width);
+}
+
+.input {
+  @apply ml-3 !text-sm bg-transparent pointer-events-none font-sans w-full;
+}
+
+.icon {
+  @apply absolute w-5 h-5 text-blue-200 transform -translate-y-1/2 right-3 top-1/2;
+}
+
+.icon > * {
+  width: inherit;
+  height: inherit;
+}
+
+.clear__button::after {
+  @apply absolute bg-transparent outline-none w-[1.65rem] h-[1.65rem] -left-[3.25rem];
+  content: url('@assets/icons/close-outline.svg') !important;
+}
