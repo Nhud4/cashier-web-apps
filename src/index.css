@@ -61,7 +61,7 @@
 
   .page {
     @apply grid pb-10 bg-neutral-4;
-    height: calc(100vh - 6rem);
+    /* height: calc(100vh - 6rem); */
   }
 
   @media screen and (max-width: 768px) {

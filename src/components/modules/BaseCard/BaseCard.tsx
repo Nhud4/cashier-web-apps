@@ -19,7 +19,7 @@ export const BaseCard: React.FC<Props> = React.memo(
     className,
     icon,
     bgColorIcon,
-    title = 'Base Card',
+    title,
     subtitle,
     topRightComponent,
     variant = 'base',

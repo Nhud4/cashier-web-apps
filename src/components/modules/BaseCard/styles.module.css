@@ -15,11 +15,11 @@
 }
 
 .title {
-  @apply text-base font-semibold text-title;
+  @apply text-base font-semibold text-primary-3;
 }
 
 .subtitle {
-  @apply text-sm text-black/80;
+  @apply text-sm text-neutral-5;
 }
 
 @media screen and (max-width: 768px) {

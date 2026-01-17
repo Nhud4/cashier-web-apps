@@ -8,6 +8,7 @@ import styles from './styles.module.css'
 
 export const OrderSection = () => {
   const [qty, setQty] = useState(1)
+  const [orderType, setOrderType] = useState('in')
 
   const summary = [
     { label: 'Subtotal', value: 12000 },
@@ -24,6 +25,10 @@ export const OrderSection = () => {
     setQty((prev) => prev - 1)
   }
 
+  const handleOrderType = (val: string) => {
+    setOrderType(val)
+  }
+
   return (
     <div className={styles.container}>
       {/* content */}
@@ -32,8 +37,18 @@ export const OrderSection = () => {
         <div className="space-y-4">
           <h1 className={styles.title}>Dfatar Pesanan</h1>
           <div className="flex gap-4">
-            <Button>Dine In</Button>
-            <Button variant="outline">Take Way</Button>
+            <Button
+              onClick={() => handleOrderType('in')}
+              variant={orderType === 'in' ? 'fill' : 'outline'}
+            >
+              Dine In
+            </Button>
+            <Button
+              onClick={() => handleOrderType('out')}
+              variant={orderType === 'out' ? 'fill' : 'outline'}
+            >
+              Take Way
+            </Button>
           </div>
         </div>
 

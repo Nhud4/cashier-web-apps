@@ -1,0 +1,32 @@
+.container {
+  @apply relative pt-20 cursor-pointer;
+  width: 192px;
+}
+
+.card {
+  @apply flex flex-col justify-end text-center space-y-2 !rounded-2xl;
+  height: 228px;
+}
+
+.card > h1 {
+  @apply font-semibold;
+}
+
+.card > h2 {
+  @apply text-orange;
+}
+
+.card > p {
+  @apply text-sm text-neutral-5;
+}
+
+.images {
+  @apply absolute flex justify-center w-full;
+  top: 35px;
+}
+
+.photo {
+  @apply rounded-full;
+  width: 140px;
+  height: 140px;
+}

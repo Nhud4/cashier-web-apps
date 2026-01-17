@@ -32,7 +32,7 @@ module.exports = {
         }
       },
       boxShadow: {
-        card: '0px 15px 50px rgba(160, 163, 189, 0.1)',
+        card: '0px 4px 10px 0px rgba(0, 0, 0, 0.15)',
       },
     },
   },
