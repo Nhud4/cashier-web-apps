@@ -1,0 +1,30 @@
+.container {
+  @apply px-8;
+}
+
+.content {
+  @apply relative flex items-center space-x-8 border-b pb-2;
+}
+
+.content > button > h1 {
+  @apply capitalize text-neutral-2;
+}
+
+.active {
+  @apply relative;
+}
+
+.active > h1 {
+  @apply !text-orange;
+}
+
+.active > h1::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  bottom: -10px;
+  width: 90%;
+  height: 3px;
+  background-color: #fb7185;
+  border-radius: 4px;
+}
