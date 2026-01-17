@@ -1,6 +1,5 @@
 import Button from '@components/elements/Button'
 import ICONS from '@configs/icons'
-import { useWindowWidth } from '@utils/hooks'
 import { type PropsWithChildren, useEffect } from 'react'
 
 type Props = {
@@ -23,11 +22,6 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
     }
   }
 
-  const windowWidth = useWindowWidth()
-  const isMobile = windowWidth <= 640
-  const maxWidth = isMobile ? `${windowWidth - 32}px` : ''
-  const minWidth = isMobile ? `${windowWidth - 32}px` : '600px'
-
   useEffect(() => {
     document.addEventListener('keydown', handleEscPress)
     return () => {
@@ -38,12 +32,12 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
 
   if (open) {
     return (
-      <div className="absolute inset-0 z-50 flex items-center justify-center bg-opacity-25 bg-gray-3">
+      <div className="absolute inset-0 z-50 flex items-center justify-end bg-opacity-25 bg-black">
         <div
-          className="py-4 bg-white rounded-md"
-          style={{ maxHeight: isMobile ? '85vh' : '', maxWidth, minWidth }}
+          className="py-4 bg-white rounded-l-xl h-screen"
+          style={{ minWidth: '500px' }}
         >
-          <div className="flex flex-row-reverse items-center justify-between px-4 pb-4 border-b bordoer-dashed">
+          <div className="flex items-center gap-4 px-4 pb-4">
             <button onClick={onClose}>
               <ICONS.Close fill="#000" height="28" width="28" />
             </button>

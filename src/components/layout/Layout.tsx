@@ -1,8 +1,8 @@
 import Header from '@components/elements/Header'
 import Notify from '@components/elements/Notify'
-import OrderSection from '@components/elements/OrderSection'
 import Sidebar from '@components/elements/Sidebar'
 import { NotifyContext } from '@contexts/NotifyContext'
+import OrderSection from '@features/OrderSection'
 // import { authProfile } from '@redux/slices/auth/action'
 import { useContext, useEffect } from 'react'
 

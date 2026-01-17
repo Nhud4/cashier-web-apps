@@ -1,12 +1,14 @@
 import TextInput from '@components/fields/TextInput'
 import ICONS from '@configs/icons'
+import { ModalContext } from '@contexts/ModalContext'
 import { formatIDR } from '@utils/index'
-import { useState } from 'react'
+import { useContext,useState } from 'react'
 
-import Button from '../Button'
+import Button from '../../components/elements/Button'
 import styles from './styles.module.css'
 
 export const OrderSection = () => {
+  const { setModal } = useContext(ModalContext)
   const [qty, setQty] = useState(1)
   const [orderType, setOrderType] = useState('in')
 
@@ -27,6 +29,13 @@ export const OrderSection = () => {
 
   const handleOrderType = (val: string) => {
     setOrderType(val)
+  }
+
+  const handlePayment = () => {
+    setModal({
+      content: 'hallo',
+      open: true,
+    })
   }
 
   return (
@@ -132,7 +141,9 @@ export const OrderSection = () => {
             <p>{formatIDR(bill)}</p>
           </div>
         </div>
-        <Button className="w-full justify-center">Pembayaran</Button>
+        <Button className="w-full justify-center" onClick={handlePayment}>
+          Pembayaran
+        </Button>
       </div>
     </div>
   )
