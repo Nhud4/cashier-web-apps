@@ -10,7 +10,7 @@ const routes: Route[] = [
     path: '/',
   },
   {
-    component: <PAGES.Dashboard />,
+    component: <PAGES.Orders />,
     icon: <ICONS.Report />,
     isSidebar: true,
     name: 'Daftar Pesanan',

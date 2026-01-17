@@ -2,6 +2,10 @@
   @apply flex items-center justify-between w-full p-8;
 }
 
+.menu {
+  @apply border-b;
+}
+
 .title > h1 {
   @apply text-xl font-bold;
 }

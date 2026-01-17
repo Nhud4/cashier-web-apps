@@ -4,5 +4,6 @@ declare const styles: {
   readonly mainContent: string
   readonly open: string
   readonly withSidebar: string
+  readonly orderCard: string
 }
 export = styles

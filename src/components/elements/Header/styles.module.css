@@ -1,5 +1,12 @@
 .header {
   @apply fixed z-40 w-full bg-neutral-4;
+}
+
+.notOrder {
+  padding-right: 113px;
+}
+
+.order {
   padding-right: 590px;
 }
 

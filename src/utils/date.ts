@@ -1,6 +1,10 @@
 import { format, isValid } from 'date-fns'
 import { id } from 'date-fns/locale'
 
+export const getLocalDay = () => {
+  return format(new Date(), 'EEEE, dd MMMM yyyy', { locale: id })
+}
+
 export const dateOfBirthFormat = (date: string) => {
   return format(new Date(date), 'dd-MM-yy')
 }
