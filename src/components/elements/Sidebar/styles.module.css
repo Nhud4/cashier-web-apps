@@ -40,7 +40,7 @@
 }
 
 .topCurved {
-  @apply bg-neutral-4 w-5 h-5;
+  @apply w-5 h-5;
 }
 
 .topCurved > div {
@@ -48,9 +48,14 @@
 }
 
 .bottomCurved {
-  @apply bg-neutral-4 w-5 h-5;
+  @apply w-5 h-5;
 }
 
 .bottomCurved > div {
   @apply bg-white w-5 h-5 rounded-tr-full;
+}
+
+.topCurved.active,
+.bottomCurved.active {
+  @apply bg-neutral-4;
 }

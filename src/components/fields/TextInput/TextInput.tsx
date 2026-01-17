@@ -148,8 +148,8 @@ export function TextInput<T extends FieldValues>({
             return (
               <div
                 className={clsx([
-                  'border flex items-center justify-between rounded-md pl-2 relative',
-                  'focus-within:outline focus-within:outline-2 focus-within:outline-primary',
+                  'border flex items-center justify-between rounded-lg pl-4 relative',
+                  'focus-within:outline focus-within:outline-2 focus-within:outline-orange',
                   errorMessage
                     ? 'border-danger-500 focus-within:border-transparent'
                     : '',
@@ -160,7 +160,7 @@ export function TextInput<T extends FieldValues>({
                 {prefix ? (
                   <div
                     className={clsx([
-                      'flex items-center justify-center w-10 px-1 bg-opacity-25 rounded-l-md h-9 bg-gray-3',
+                      'flex items-center justify-center w-10 px-1 bg-opacity-25 rounded-l-lg h-9 bg-gray-3',
                       prefixClassName,
                     ])}
                   >
@@ -191,7 +191,7 @@ export function TextInput<T extends FieldValues>({
                   <input
                     {...props}
                     className={clsx([
-                      'w-full rounded-md outline-none h-9',
+                      'w-full rounded-md outline-none h-12',
                       props.disabled ? 'bg-neutral-100' : '',
                       prefix ? 'pl-1' : '',
                     ])}
@@ -238,14 +238,14 @@ export function TextInput<T extends FieldValues>({
       {!control && !isLoading ? (
         <div
           className={clsx([
-            'border rounded-md focus-within:border-primary',
-            prefix ? 'flex items-center space-x-2 pl-0' : 'pl-2',
+            'border rounded-lg focus-within:border-orange',
+            prefix ? 'flex items-center space-x-2 pl-0' : 'pl-4',
             isPassword ? 'flex items-center justify-between' : '',
             props.disabled ? 'bg-white' : '',
           ])}
         >
           {prefix ? (
-            <div className="flex items-center justify-center w-10 px-1 bg-opacity-25 rounded-l-md h-9 bg-gray-3">
+            <div className="flex items-center justify-center w-10 px-1 bg-opacity-25 rounded-l-lg h-9 bg-gray-3">
               {prefix}
             </div>
           ) : null}
@@ -263,7 +263,7 @@ export function TextInput<T extends FieldValues>({
             <input
               {...props}
               className={clsx([
-                'w-full rounded-md outline-none h-9',
+                'w-full rounded-md outline-none h-12',
                 prefix ? 'pl-1' : '',
               ])}
               name={name}
@@ -279,7 +279,6 @@ export function TextInput<T extends FieldValues>({
               {showPassword ? <ICONS.EyeSlash fill="#000" /> : <ICONS.Eye />}
             </button>
           ) : null}
-          // eslint-disable-next-line react-hooks/refs
           {props.value && !props.disabled && inputRef?.current ? (
             <button
               className={clsx([prefix ? 'w-8 h-8' : 'w-6 h-6', '!mr-2'])}

@@ -28,8 +28,10 @@ export const Sidebar: React.FC = () => {
             const menuPath = menu.path as string
             return (
               <li>
-                <div className={styles.curved}>
-                  <div className={styles.topCurved}>
+                <div className={clsx([styles.curved, isActive(menu.path)])}>
+                  <div
+                    className={clsx([styles.topCurved, isActive(menu.path)])}
+                  >
                     <div />
                   </div>
                 </div>
@@ -44,8 +46,10 @@ export const Sidebar: React.FC = () => {
                     {menu.icon}
                   </button>
                 </div>
-                <div className={styles.curved}>
-                  <div className={styles.bottomCurved}>
+                <div className={clsx([styles.curved, isActive(menu.path)])}>
+                  <div
+                    className={clsx([styles.bottomCurved, isActive(menu.path)])}
+                  >
                     <div />
                   </div>
                 </div>
