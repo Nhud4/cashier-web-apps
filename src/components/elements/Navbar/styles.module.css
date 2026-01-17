@@ -1,3 +1,11 @@
 .navbar {
   @apply flex items-center justify-between w-full p-8;
 }
+
+.title > h1 {
+  @apply text-xl font-bold;
+}
+
+.title > p {
+  @apply text-neutral-5;
+}

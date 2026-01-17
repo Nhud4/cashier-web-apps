@@ -3,7 +3,8 @@
 }
 
 .content {
-  @apply flex-1 px-0 ml-28;
+  @apply relative flex-1 px-0 ml-28;
+  margin-right: 480px;
 }
 
 .withSidebar {
@@ -11,27 +12,5 @@
 }
 
 .mainContent {
-  @apply transition-all duration-500 mt-24;
-}
-
-@media screen and (max-width: 768px) {
-  .mainContent {
-    @apply ml-0 mt-20;
-  }
-
-  .mainContent.open {
-    @apply ml-0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .mainContent.open {
-    @apply ml-64;
-  }
-}
-
-@media (min-width: 1536px) {
-  .mainContent.open {
-    @apply ml-72;
-  }
+  @apply mt-24;
 }

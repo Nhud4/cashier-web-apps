@@ -9,7 +9,7 @@ type Props = {
 const Navbar: React.FC<Props> = ({ title = 'Dasboard' }) => {
   return (
     <nav className={styles.navbar}>
-      <div>
+      <div className={styles.title}>
         <h1>{title}</h1>
         <p>Sabtu, 10 Januari 2026</p>
       </div>

@@ -1,5 +1,6 @@
 .header {
   @apply fixed z-40 w-full bg-neutral-4;
+  padding-right: 590px;
 }
 
 .title {

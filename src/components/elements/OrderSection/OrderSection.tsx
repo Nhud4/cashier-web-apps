@@ -74,7 +74,9 @@ export const OrderSection = () => {
 
           <div className="space-y-4">
             <div className="grid grid-cols-5 gap-2 text-sm">
-              <div className="col-span-3">Mie Goreng sambal mangga</div>
+              <div className="col-span-3 capitalize">
+                Mie Goreng sambal mangga
+              </div>
               <div className="flex items-center space-x-2">
                 <button onClick={minusButton} type="button">
                   <ICONS.MinusCircle />
