@@ -16,7 +16,7 @@ export const Notify: React.FC = (): React.ReactElement => {
   }
 
   return (
-    <div className="absolute z-[999] -translate-x-1/2 top-14 left-1/2">
+    <div className="absolute z-[999] -translate-x-1/2 top-5 left-1/2">
       {isOpen && (
         <div className="flex items-center p-2 bg-white border rounded-lg shadow-md min-w-[350px] space-x-2 relative">
           <div className={clsx(['w-2 h-12 rounded', styles[color]])} />

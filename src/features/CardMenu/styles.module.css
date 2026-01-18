@@ -5,7 +5,7 @@
 
 .card {
   @apply flex flex-col justify-end text-center space-y-2 !rounded-2xl;
-  height: 228px;
+  height: 256px;
 }
 
 .card > h1 {

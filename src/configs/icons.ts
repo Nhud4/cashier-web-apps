@@ -1,4 +1,6 @@
 import Arrow from '@assets/icons/angle.svg?react'
+import Back from '@assets/icons/Back.svg?react'
+import Card from '@assets/icons/card.svg?react'
 import CheckCircle from '@assets/icons/check-circle 1.svg?react'
 import Close from '@assets/icons/close.svg?react'
 import Calendar from '@assets/icons/date-calendar.svg?react'
@@ -30,7 +32,9 @@ const ICONS = {
   Logo,
   MinusCircle,
   Plus,
+  Back,
   PlusCircle,
+  Card,
   Printer,
   Qris,
   Reload,

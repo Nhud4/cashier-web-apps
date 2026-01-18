@@ -1,5 +1,5 @@
 .container {
-  @apply fixed z-50 flex flex-col justify-between right-0 bg-white border-l h-screen;
+  @apply fixed z-50 flex flex-col justify-between right-0 bg-white border-l border-border h-screen;
   width: 480px;
 }
 

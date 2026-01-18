@@ -14,6 +14,14 @@
   @apply text-white bg-orange;
 }
 
+.button.fill > div > svg {
+  color: white;
+}
+
 .button.outline {
   @apply bg-white border text-orange border-orange;
+}
+
+.button.outline > div > svg {
+  color: #ea7c69;
 }

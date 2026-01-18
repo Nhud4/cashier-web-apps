@@ -1,15 +1,14 @@
-import TextInput from '@components/fields/TextInput'
-import ICONS from '@configs/icons'
 import { ModalContext } from '@contexts/ModalContext'
+import CheckoutOrder from '@features/CheckoutOrder'
+import OrderItems from '@features/OrderItems'
 import { formatIDR } from '@utils/index'
-import { useContext,useState } from 'react'
+import { useContext, useState } from 'react'
 
 import Button from '../../components/elements/Button'
 import styles from './styles.module.css'
 
 export const OrderSection = () => {
   const { setModal } = useContext(ModalContext)
-  const [qty, setQty] = useState(1)
   const [orderType, setOrderType] = useState('in')
 
   const summary = [
@@ -19,21 +18,13 @@ export const OrderSection = () => {
   ]
   const bill = summary.map((val) => val.value).reduce((a, b) => a + b, 0)
 
-  const plusButton = () => {
-    setQty((prev) => prev + 1)
-  }
-
-  const minusButton = () => {
-    setQty((prev) => prev - 1)
-  }
-
   const handleOrderType = (val: string) => {
     setOrderType(val)
   }
 
   const handlePayment = () => {
     setModal({
-      content: 'hallo',
+      content: <CheckoutOrder />,
       open: true,
     })
   }
@@ -63,72 +54,22 @@ export const OrderSection = () => {
 
         {/* content */}
         <div className="space-y-4">
-          <div className="grid grid-cols-5 gap-2 border-b pb-4">
+          <div className="grid grid-cols-5 gap-2 border-b border-border pb-4">
             <div className="col-span-3">Menu</div>
-            <div>Qty</div>
-            <div>Total</div>
+            <div className="justify-self-center">Qty</div>
+            <div className="justify-self-end">Total</div>
           </div>
 
-          <div className="space-y-4">
-            <div className="grid grid-cols-5 gap-2 text-sm">
-              <div className="col-span-3">Mie Goreng sambal mangga</div>
-              <div className="flex items-center space-x-2">
-                <button onClick={minusButton} type="button">
-                  <ICONS.MinusCircle />
-                </button>
-                <div className="w-4 text-center">{qty}</div>
-                <button onClick={plusButton} type="button">
-                  <ICONS.PlusCircle />
-                </button>
-              </div>
-              <div>{formatIDR(12000)}</div>
-            </div>
-
-            <div className="flex gap-4 w-full">
-              <TextInput
-                className="text-sm w-full"
-                name="notes"
-                placeholder="Catatan..."
-              />
-              <Button variant="outline">
-                <ICONS.Trash />
-              </Button>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div className="grid grid-cols-5 gap-2 text-sm">
-              <div className="col-span-3 capitalize">
-                Mie Goreng sambal mangga
-              </div>
-              <div className="flex items-center space-x-2">
-                <button onClick={minusButton} type="button">
-                  <ICONS.MinusCircle />
-                </button>
-                <div className="w-4 text-center">{qty}</div>
-                <button onClick={plusButton} type="button">
-                  <ICONS.PlusCircle />
-                </button>
-              </div>
-              <div>{formatIDR(12000)}</div>
-            </div>
-
-            <div className="flex gap-4 w-full">
-              <TextInput
-                className="text-sm w-full"
-                name="notes"
-                placeholder="Catatan..."
-              />
-              <Button variant="outline">
-                <ICONS.Trash />
-              </Button>
-            </div>
+          <div className="overflow-y-auto h-[45vh] p-4 -m-4 space-y-4">
+            {new Array(10).fill('').map((_, i) => (
+              <OrderItems active key={i} notes="notes" />
+            ))}
           </div>
         </div>
       </div>
 
       {/* footer */}
-      <div className="p-8 border-t">
+      <div className="p-8 border-t border-border">
         <div className="flex flex-col gap-3 pb-8">
           {summary.map((item, index) => (
             <div className="flex justify-between text-sm" key={index}>

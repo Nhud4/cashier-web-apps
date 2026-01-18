@@ -1,0 +1,26 @@
+.container {
+  @apply fixed z-50 flex flex-col justify-between right-0 bg-white border-l h-screen;
+  width: 480px;
+}
+
+.title {
+  @apply text-primary-3 font-semibold text-xl;
+}
+
+.paymentButton {
+  @apply relative p-3 border flex flex-col items-center gap-1 rounded-2xl;
+}
+
+.paymentButton > svg,
+.paymentButton > p {
+  @apply text-neutral-2;
+}
+
+.paymentActive {
+  @apply !border-border;
+}
+
+.paymentActive > svg,
+.paymentActive > p {
+  @apply !text-primary;
+}

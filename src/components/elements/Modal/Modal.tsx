@@ -37,15 +37,15 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
           className="py-4 bg-white rounded-l-xl h-screen"
           style={{ minWidth: '500px' }}
         >
-          <div className="flex items-center gap-4 px-4 pb-4">
+          <div className="flex items-center gap-4 px-6 pb-6">
             <button onClick={onClose}>
-              <ICONS.Close fill="#000" height="28" width="28" />
+              <ICONS.Back />
             </button>
             {title ? (
               <h5 className="mt-1 ml-2 font-semibold">{title}</h5>
             ) : null}
           </div>
-          <div className="px-4 mt-4">{children}</div>
+          <div className="px-6 h-full">{children}</div>
           {onConfirm ? (
             <div className="flex items-center ml-auto space-x-2 w-fit">
               <Button
