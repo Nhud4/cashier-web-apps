@@ -6,7 +6,7 @@ import { ModalContext } from '@contexts/ModalContext'
 import { NotifyContext } from '@contexts/NotifyContext'
 import OrderItems from '@features/OrderItems'
 import { clsx, formatIDR } from '@utils/index'
-import { useContext,useState } from 'react'
+import { useContext, useState } from 'react'
 
 import styles from './styles.module.css'
 

@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import styles from './styles.module.css'
 
-export const Sidebar: React.FC = () => {
+export const Sidebar = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const navRef = useRef<HTMLUListElement | null>(null)

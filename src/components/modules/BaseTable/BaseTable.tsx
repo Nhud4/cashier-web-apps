@@ -2,8 +2,9 @@ import ICONS from '@configs/icons'
 import IMAGES from '@configs/images'
 import { tableStyles } from '@utils/datatable'
 import { useDebounce, useWindowHeight, useWindowWidth } from '@utils/hooks'
-import { clsx, formatIDR } from '@utils/index'
-import { type HTMLAttributes, useEffect, useMemo, useState } from 'react'
+import { clsx } from '@utils/index'
+import { getVisiblePages } from '@utils/index'
+import { type HTMLAttributes, useEffect, useState } from 'react'
 import DataTable, {
   type ExpanderComponentProps,
   type SortOrder,
@@ -21,37 +22,50 @@ const options = [
 ]
 
 const customStyles: StylesConfig = {
-  control: () => ({
+  control: (provided, state) => ({
+    ...provided,
+    '&:hover': {
+      borderColor: state.isFocused ? '#EA7C69' : provided.borderColor,
+    },
+    borderColor: state.isFocused ? '#EA7C69' : provided.borderColor,
+    borderRadius: 8,
+    boxShadow: state.isFocused ? '0 0 0 1px #EA7C69' : provided.boxShadow,
     display: 'flex',
-    width: 40,
+    height: 48,
+    width: 73,
   }),
   dropdownIndicator: (provided) => ({
     ...provided,
-    padding: '8px 0',
+    padding: '4px 0',
   }),
   indicatorSeparator: () => ({
     display: 'none',
   }),
-  option: (provided) => ({
+  option: (provided, state) => ({
     ...provided,
-    fontSize: 12,
+    backgroundColor: state.isSelected
+      ? '#EA7C69'
+      : state.isFocused
+        ? 'rgba(234, 124, 105, 0.2)'
+        : provided.backgroundColor,
+    cursor: 'pointer',
+    fontSize: 16,
     padding: 5,
   }),
   singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1
     const transition = 'opacity 300ms'
 
-    return { ...provided, fontSize: 12, opacity, transition }
+    return { ...provided, fontSize: 16, opacity, transition }
   },
   valueContainer: (provided) => ({
     ...provided,
-    padding: 0,
+    padding: '4px 8px',
   }),
 }
 
 type Props<T> = {
   actionComponent?: React.ReactElement
-  bottomTotal?: number
   classBody?: string
   columns: TableColumn<T>[]
   customHeight?: string
@@ -111,7 +125,6 @@ export const BaseTable: <T>(props: Props<T>) => React.ReactElement = ({
   onSelectedRowsChange,
   defaultSearch,
   totalRows = 10,
-  bottomTotal,
   // Expanded row properties
   expandableRows,
   expandableRowsComponent,
@@ -127,19 +140,7 @@ export const BaseTable: <T>(props: Props<T>) => React.ReactElement = ({
   const windowWidth = useWindowWidth()
   const isMobile = windowWidth <= 640
 
-  const showingInfo = useMemo(() => {
-    const start =
-      Number(meta?.page) === 1
-        ? 1
-        : Number(totalRows) * (Number(meta?.page) - 1) + 1
-    const end = Number(meta?.page) * Number(totalRows)
-
-    return Number(meta?.totalData)
-      ? `${start}-${
-          end > Number(meta?.totalData) ? Number(meta?.totalData) : end
-        }`
-      : '0'
-  }, [meta?.page, totalRows, meta?.totalData])
+  const pageInfo = getVisiblePages(meta?.page, meta?.totalPage)
 
   useEffect(() => {
     if (onSearch) {
@@ -225,82 +226,79 @@ export const BaseTable: <T>(props: Props<T>) => React.ReactElement = ({
       </div>
       {meta ? (
         <div className={styles.pagination}>
-          <div>
-            <span>
-              {showingInfo} dari {meta?.totalData}
-            </span>
-          </div>
-          <div className={styles.paginationControl}>
-            <div className={styles.paginationInfo}>
-              <span>Menampilkan baris dalam perhalaman</span>
-              <Select
-                defaultValue={
-                  totalRows
-                    ? options.filter((item) => item.value === totalRows)
-                    : options[0]
+          <Select
+            defaultValue={
+              totalRows
+                ? options.filter((item) => item.value === totalRows)
+                : options[0]
+            }
+            isSearchable={!isMobile}
+            menuPlacement="auto"
+            onChange={(newValue) => {
+              const option = newValue as Option
+              const currentPage = meta?.page as number
+              if (onChangeRowPerPage) {
+                onChangeRowPerPage(currentPage, Number(option.value))
+              }
+            }}
+            options={options}
+            styles={customStyles}
+          />
+          <div className={styles.paginationNavs}>
+            <button
+              className={`flex items-center space-x-4 border-r border-r-border p-2 h-12 ${
+                meta?.page === 1 && 'pointer-events-none opacity-60'
+              }`}
+              disabled={meta?.page === 1}
+              onClick={() => {
+                const currentPage = meta?.page as number
+                if (onChangePage) {
+                  onChangePage(currentPage - 1)
                 }
-                isSearchable={!isMobile}
-                menuPlacement="auto"
-                onChange={(newValue) => {
-                  const option = newValue as Option
-                  const currentPage = meta?.page as number
-                  if (onChangeRowPerPage) {
-                    onChangeRowPerPage(currentPage, Number(option.value))
-                  }
-                }}
-                options={options}
-                styles={customStyles}
-              />
-            </div>
-
-            <div className={styles.paginationNavs}>
+              }}
+            >
+              <div className="transform rotate-180">
+                <ICONS.Arrow />
+              </div>
+              <p>Sebelumnya</p>
+            </button>
+            {pageInfo.map((page, index) => (
               <button
-                className={`transform rotate-180 ${
-                  meta?.page === 1 && 'pointer-events-none opacity-60'
-                }`}
-                disabled={meta?.page === 1}
+                className={clsx([
+                  'w-12 h-12 flex items-center justify-center',
+                  meta.page === page ? 'bg-orange text-white' : '',
+                  index === 1 ? 'border-x border-x-border' : '',
+                ])}
+                key={page}
                 onClick={() => {
-                  const currentPage = meta?.page as number
                   if (onChangePage) {
-                    onChangePage(currentPage - 1)
+                    onChangePage(page)
                   }
                 }}
               >
-                <ICONS.Arrow />
+                {page}
               </button>
-              <span className="text-xs text-medium">
-                {meta?.page}/{' '}
-                <span className="opacity-70">
-                  {meta?.totalPage === 0 ? 1 : meta?.totalPage}
-                </span>{' '}
-              </span>
-              <button
-                className={`${
-                  Boolean(
-                    meta?.page === meta?.totalPage || meta?.totalPage === 0
-                  ) && 'pointer-events-none opacity-60'
-                }`}
-                disabled={Boolean(
+            ))}
+            <button
+              className={`flex items-center space-x-4 border-l border-l-border p-2 h-12 ${
+                Boolean(
                   meta?.page === meta?.totalPage || meta?.totalPage === 0
-                )}
-                onClick={() => {
-                  const currentPage = meta?.page as number
-                  if (onChangePage) {
-                    onChangePage(currentPage + 1)
-                  }
-                }}
-              >
-                <ICONS.Arrow />
-              </button>
-            </div>
+                ) && 'pointer-events-none opacity-60'
+              }`}
+              disabled={Boolean(
+                meta?.page === meta?.totalPage || meta?.totalPage === 0
+              )}
+              onClick={() => {
+                const currentPage = meta?.page as number
+                if (onChangePage) {
+                  onChangePage(currentPage + 1)
+                }
+              }}
+            >
+              <p>Selanjutnya</p>
+              <ICONS.Arrow />
+            </button>
           </div>
-        </div>
-      ) : null}
-
-      {bottomTotal ? (
-        <div className="flex justify-end items-center space-x-8">
-          <h1>Total:</h1>
-          <p className="font-semibold">{formatIDR(bottomTotal)}</p>
         </div>
       ) : null}
     </div>

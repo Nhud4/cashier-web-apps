@@ -1,5 +1,5 @@
 .main {
-  @apply p-4 bg-white rounded-2xl place-self-stretch shadow-card;
+  @apply relative p-4 bg-white rounded-2xl place-self-stretch shadow-card;
 }
 
 .header {
@@ -32,11 +32,8 @@
 }
 
 .pagination {
-  @apply flex items-center justify-between px-4;
-}
-
-.pagination > div > span {
-  @apply text-xs font-medium;
+  @apply absolute bottom-5 flex items-center justify-between px-4 text-sm;
+  width: 98%;
 }
 
 .paginationControl,
@@ -49,7 +46,7 @@
 }
 
 .paginationNavs {
-  @apply flex items-center space-x-1;
+  @apply flex items-center border border-border rounded-lg;
 }
 
 .container {

@@ -134,3 +134,26 @@ export const formatDynamicDesc = (
 
   return text
 }
+
+export function getVisiblePages(
+  currentPage?: number,
+  totalPage?: number
+): number[] {
+  if (currentPage && totalPage) {
+    if (totalPage <= 3) {
+      return Array.from({ length: totalPage }, (_, i) => i + 1)
+    }
+
+    if (currentPage <= 2) {
+      return [1, 2, 3]
+    }
+
+    if (currentPage >= totalPage - 1) {
+      return [totalPage - 2, totalPage - 1, totalPage]
+    }
+
+    return [currentPage - 1, currentPage, currentPage + 1]
+  }
+
+  return []
+}
