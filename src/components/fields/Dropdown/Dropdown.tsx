@@ -110,7 +110,9 @@ export function Dropdown<
                   },
                   borderColor: state.isFocused ? '#EA7C69' : rest.borderColor,
                   borderRadius: 8,
-                  boxShadow: state.isFocused ? '#EA7C69' : rest.boxShadow,
+                  boxShadow: state.isFocused
+                    ? '0 0 0 1px #EA7C69'
+                    : rest.boxShadow,
                   cursor: 'pointer',
                   minHeight: 48,
                   minWidth: minWidth || 175,

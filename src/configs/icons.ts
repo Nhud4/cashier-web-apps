@@ -7,6 +7,7 @@ import Calendar from '@assets/icons/date-calendar.svg?react'
 import Eye from '@assets/icons/eye.svg?react'
 import EyeSlash from '@assets/icons/eye-slash.svg?react'
 import Home from '@assets/icons/home.svg?react'
+import Lock from '@assets/icons/lock.svg?react'
 import Logo from '@assets/icons/Logo.svg?react'
 import MinusCircle from '@assets/icons/minus-circle.svg?react'
 import Plus from '@assets/icons/plus.svg?react'
@@ -23,7 +24,9 @@ import Wallet from '@assets/icons/Wallet.svg?react'
 
 const ICONS = {
   Arrow,
+  Back,
   Calendar,
+  Card,
   CheckCircle,
   Close,
   Eye,
@@ -32,9 +35,8 @@ const ICONS = {
   Logo,
   MinusCircle,
   Plus,
-  Back,
+  Lock,
   PlusCircle,
-  Card,
   Printer,
   Qris,
   Reload,

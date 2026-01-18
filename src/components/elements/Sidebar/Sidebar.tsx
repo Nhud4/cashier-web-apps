@@ -1,5 +1,6 @@
 import ICONS from '@configs/icons'
 import routes from '@routes/index'
+import { clearStorage } from '@storage/index'
 import { clsx } from '@utils/index'
 import { useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -15,6 +16,11 @@ export const Sidebar: React.FC = () => {
 
   const isActive = (path?: string) => {
     return pathname === path ? styles.active : ''
+  }
+
+  const handleLogout = () => {
+    clearStorage()
+    navigate('/login')
   }
 
   return (
@@ -58,7 +64,7 @@ export const Sidebar: React.FC = () => {
           })}
         </ul>
 
-        <button className="absolute bottom-10">
+        <button className="absolute bottom-10" onClick={handleLogout}>
           <ICONS.SingOut />
         </button>
       </div>

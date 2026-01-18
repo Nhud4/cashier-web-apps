@@ -8,6 +8,12 @@ const routes: Route[] = [
     isSidebar: true,
     name: 'Dashboard',
     path: '/',
+    requireAuth: true,
+  },
+  {
+    component: <PAGES.Login />,
+    name: 'Login',
+    path: '/login',
   },
   {
     component: <PAGES.Orders />,
@@ -15,6 +21,7 @@ const routes: Route[] = [
     isSidebar: true,
     name: 'Daftar Pesanan',
     path: '/order',
+    requireAuth: true,
   },
   {
     component: <PAGES.Settings />,
@@ -22,6 +29,7 @@ const routes: Route[] = [
     isSidebar: true,
     name: 'Pengaturan',
     path: '/setting',
+    requireAuth: true,
   },
   {
     component: <PAGES.NotFound />,

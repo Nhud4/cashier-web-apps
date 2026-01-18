@@ -32,7 +32,12 @@ module.exports = {
         },
         border: {
           DEFAULT: 'hsl(0, 0%, 80%)'
-        }
+        },
+        danger: {
+          50: '#FBEAE9',
+          500: '#D62A24',
+          DEFAULT: '#F26464' 
+        },
       },
       boxShadow: {
         card: '0px 4px 10px 0px rgba(0, 0, 0, 0.15)',

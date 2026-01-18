@@ -157,7 +157,7 @@ export function TextInput<T extends FieldValues>({
                 {prefix ? (
                   <div
                     className={clsx([
-                      'flex items-center justify-center w-10 px-1 bg-opacity-25 rounded-l-lg h-9 bg-gray-3',
+                      'flex items-center justify-center w-10 px-1 bg-opacity-25 rounded-l-lg h-[46px] bg-gray-3',
                       prefixClassName,
                     ])}
                   >
@@ -188,7 +188,7 @@ export function TextInput<T extends FieldValues>({
                   <input
                     {...props}
                     className={clsx([
-                      'w-full rounded-md outline-none h-12',
+                      'w-full rounded-md outline-none h-[46px]',
                       props.disabled ? 'bg-neutral-100' : '',
                       prefix ? 'pl-1' : '',
                     ])}
@@ -236,13 +236,14 @@ export function TextInput<T extends FieldValues>({
         <div
           className={clsx([
             'border border-border rounded-lg focus-within:border-orange',
+            'focus-within:outline focus-within:outline-1 focus-within:outline-orange',
             prefix ? 'flex items-center space-x-2 pl-0' : 'pl-4',
             isPassword ? 'flex items-center justify-between' : '',
             props.disabled ? 'bg-white' : '',
           ])}
         >
           {prefix ? (
-            <div className="flex items-center justify-center w-16 px-1 bg-opacity-25 rounded-l-lg h-12 bg-neutral-2">
+            <div className="flex items-center justify-center w-16 px-1 bg-opacity-25 rounded-l-lg h-[46px] bg-neutral-2">
               {prefix}
             </div>
           ) : null}
@@ -260,7 +261,7 @@ export function TextInput<T extends FieldValues>({
             <input
               {...props}
               className={clsx([
-                'w-full rounded-md outline-none h-12',
+                'w-full rounded-md outline-none h-[46px]',
                 prefix ? 'pl-1' : '',
               ])}
               name={name}

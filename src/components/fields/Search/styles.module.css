@@ -4,6 +4,10 @@
   width: 302px;
 }
 
+.search:focus-within {
+  @apply outline outline-2 outline-orange;
+}
+
 .search > input {
   @apply w-full;
 }
