@@ -66,8 +66,6 @@ type Status =
   | 'gagal'
   | 'berhasil'
 
-type User = 'admin' | 'driver' | 'merchant'
-
 type Admin = 'admin' | 'super-admin'
 
 type LoginCredentials = {

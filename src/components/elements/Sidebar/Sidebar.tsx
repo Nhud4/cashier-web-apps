@@ -1,4 +1,6 @@
 import ICONS from '@configs/icons'
+import { useAppDispatch } from '@redux/hooks'
+import { clearAuth } from '@redux/slices/auth'
 import routes from '@routes/index'
 import { clearStorage } from '@storage/index'
 import { clsx } from '@utils/index'
@@ -11,6 +13,7 @@ export const Sidebar = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const navRef = useRef<HTMLUListElement | null>(null)
+  const dispatch = useAppDispatch()
 
   const menus = routes.filter(({ isSidebar }) => isSidebar)
 
@@ -20,7 +23,8 @@ export const Sidebar = () => {
 
   const handleLogout = () => {
     clearStorage()
-    navigate('/login')
+    dispatch(clearAuth('add'))
+    window.location.href = '/login'
   }
 
   return (
