@@ -1,6 +1,7 @@
 import { ModalContext } from '@contexts/ModalContext'
 import CheckoutOrder from '@features/CheckoutOrder'
 import OrderItems from '@features/OrderItems'
+import { getBasket } from '@storage/index'
 import { formatIDR } from '@utils/index'
 import { useContext, useState } from 'react'
 
@@ -10,13 +11,22 @@ import styles from './styles.module.css'
 export const OrderSection = () => {
   const { setModal } = useContext(ModalContext)
   const [orderType, setOrderType] = useState('in')
+  const basket = getBasket()
+
+  const subtotal = basket
+    .map((item) => item.subtotal)
+    .reduce((a, b) => a + b, 0)
+  const discount = basket
+    .map((item) => item.subtotal)
+    .reduce((a, b) => a + b, 0)
+  const textRate = discount > 0 ? discount * 0.1 : subtotal * 0.1
 
   const summary = [
-    { label: 'Subtotal', value: 12000 },
-    { label: 'Diskon', value: 0 },
-    { label: 'Pajak', value: 1200 },
+    { label: 'Subtotal', value: subtotal },
+    { label: 'Diskon', value: discount },
+    { label: 'Pajak 10%', value: textRate },
   ]
-  const bill = summary.map((val) => val.value).reduce((a, b) => a + b, 0)
+  const bill = subtotal - discount + textRate
 
   const handleOrderType = (val: string) => {
     setOrderType(val)
@@ -60,8 +70,8 @@ export const OrderSection = () => {
             <div className="justify-self-end">Total</div>
           </div>
 
-          <div className="overflow-y-auto h-[45vh] p-4 -m-4 space-y-4">
-            {new Array(10).fill('').map((_, i) => (
+          <div className="overflow-y-auto h-[20%] p-4 -m-4 space-y-4">
+            {basket.map((_, i) => (
               <OrderItems active key={i} notes="notes" />
             ))}
           </div>

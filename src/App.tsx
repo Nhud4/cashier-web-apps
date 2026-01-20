@@ -1,5 +1,6 @@
 import 'react-datepicker/dist/react-datepicker.css'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import ErrorFallback from '@components/elements/ErrorFallback'
 import FallbackPage from '@components/elements/FallbackPage'

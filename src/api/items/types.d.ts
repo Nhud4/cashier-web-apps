@@ -15,3 +15,19 @@ type Product = {
   created_at?: string
   updated_at?: string
 }
+
+type ProductList = {
+  id: string
+  code: string
+  name: string
+  price: number
+  discount: number
+  stock: number
+  active: boolean
+  available: boolean
+  img: string
+  category: {
+    id: string
+    name: string
+  }
+}

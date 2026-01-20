@@ -60,16 +60,27 @@
   }
 
   .page {
-    @apply grid pb-10 bg-neutral-4;
-  }
-
-  .pageHight {
-    height: calc(100vh - 10rem);
+    @apply grid pb-10 bg-neutral-4 h-full;
   }
 
   @media screen and (max-width: 768px) {
     .layout {
       @apply px-4 min-h-screen overflow-y-auto;
+    }
+  }
+
+  @media print {
+    body {
+      margin: 0;
+    }
+
+    #receipt {
+      width: 58mm;
+      font-size: 12px;
+    }
+
+    button {
+      display: none;
     }
   }
 }

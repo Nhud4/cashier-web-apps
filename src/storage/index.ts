@@ -48,3 +48,12 @@ export const getAuth = () => {
 export const clearStorage = () => {
   localStorage.clear()
 }
+
+export const getBasket = () => {
+  const data = localStorage.getItem('basket')
+  return (data ? JSON.parse(data) : []) as OrderProduct[]
+}
+
+export const setBasket = (order: OrderProduct[]) => {
+  localStorage.setItem('basket', JSON.stringify(order))
+}

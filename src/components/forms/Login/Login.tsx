@@ -5,14 +5,12 @@ import { authLogin } from '@redux/slices/auth/action'
 import { setUserData, setUserToken } from '@storage/index'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 
 import styles from './styles.module.css'
 import { resolver } from './utils'
 
 export const LoginForm: React.FC = (): React.ReactElement => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const [showPassword, setShowPassword] = useState(false)
   const {
@@ -42,7 +40,7 @@ export const LoginForm: React.FC = (): React.ReactElement => {
         token: data.token,
       })
       setUserData(data.user)
-      navigate('/', { replace: true })
+      window.location.href = '/'
     }
   }, [data])
 

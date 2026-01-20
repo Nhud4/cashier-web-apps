@@ -5,7 +5,7 @@ const endpoints = {
 }
 
 export const ListProduct = async (params: TableParams) => {
-  const data = await req.basicGet<ApiResponse<Product[]>>(
+  const data = await req.basicGet<ApiResponse<ProductList[]>>(
     endpoints.main,
     params
   )

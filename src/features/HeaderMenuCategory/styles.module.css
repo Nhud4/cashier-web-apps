@@ -14,11 +14,13 @@
   @apply relative;
 }
 
-.active > h1 {
-  @apply !text-orange;
+.active > h1,
+.active > div {
+  @apply !text-orange capitalize;
 }
 
-.active > h1::after {
+.active > h1::after,
+.active > div::after {
   content: '';
   position: absolute;
   left: -10px;

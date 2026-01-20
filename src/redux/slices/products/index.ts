@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { fetchProductList } from './action'
 
 interface ProductsState {
-  list: SliceState<Product[]>
+  list: SliceState<ProductList[]>
 }
 
 const initialState: ProductsState = {
