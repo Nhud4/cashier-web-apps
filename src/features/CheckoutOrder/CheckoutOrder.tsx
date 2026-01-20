@@ -5,7 +5,9 @@ import ICONS from '@configs/icons'
 import { ModalContext } from '@contexts/ModalContext'
 import { NotifyContext } from '@contexts/NotifyContext'
 import OrderItems from '@features/OrderItems'
+import { firestore } from '@utils/firebase'
 import { clsx, formatIDR } from '@utils/index'
+import { addDoc, collection } from 'firebase/firestore'
 import { useContext, useRef, useState } from 'react'
 
 import styles from './styles.module.css'
@@ -37,6 +39,25 @@ export const CheckoutOrder = () => {
     return paymentMethod === val ? styles.paymentActive : ''
   }
 
+  const printerJob = async () => {
+    addDoc(collection(firestore, 'prints'), {
+      cashier: 'Wahyudin',
+      date: '2026-02-10',
+      items: [
+        { name: 'Mie goreng aceh', price: 12000, qty: 1 },
+        { name: 'Es teh manis', price: 6000, qty: 2 },
+      ],
+      kembalian: 400,
+      orderNo: 'TRX-2601100001',
+      printed: false,
+      subtotal: 36000,
+      tax: 3600,
+      time: '10.20 WIB',
+      total: 39600,
+      tunai: 40000,
+    })
+  }
+
   const handleSubmit = () => {
     setLoading(true)
 
@@ -49,6 +70,7 @@ export const CheckoutOrder = () => {
       })
       onClose()
     }, 2000)
+    printerJob()
   }
 
   const data = {
