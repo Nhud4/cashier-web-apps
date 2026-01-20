@@ -18,18 +18,7 @@ type SliceReducer<S> = {
 type QuerySliceParams<T, S> = {
   clearSlice?: ActionCreatorWithPayload
   initial?: unknown
-  key:
-    | 'detail'
-    | 'list'
-    | 'transaction'
-    | 'revenue'
-    | 'rank'
-    | 'driverRank'
-    | 'merchantRank'
-    | 'all'
-    | 'report'
-    | 'menu'
-    | 'top'
+  key: 'detail' | 'list'
   onSuccess?: (data: S) => void
   slice: keyof T
   thunk: AsyncThunk
@@ -37,21 +26,7 @@ type QuerySliceParams<T, S> = {
 
 type MutationSliceParams<S, T> = {
   clearSlice?: () => void
-  key:
-    | 'add'
-    | 'edit'
-    | 'remove'
-    | 'sync'
-    | 'editBatch'
-    | 'removeBatch'
-    | 'removeLimitUpdate'
-    | 'syncMPost'
-    | 'send'
-    | 'sendWithoutImage'
-    | 'sendBulk'
-    | 'sendBulkNoImg'
-    | 'evidence'
-    | 'bulkMessage'
+  key: 'add' | 'edit' | 'remove'
   onError?: () => void
   onSuccess?: (data: T) => void
   slice: keyof S

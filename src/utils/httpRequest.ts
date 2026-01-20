@@ -21,11 +21,9 @@ export const baseFetch = async (
   if (!isFormData) {
     headers.set('Content-Type', 'application/json')
   }
-  if (!user) headers.set('Authorization', `Basic ${basicCredentials}`)
-  if (user) {
-    const { token } = user
-    if (token) headers.set('Authorization', `Bearer ${token}`)
-  }
+
+  const { token } = user
+  if (token) headers.set('Authorization', `Bearer ${token}`)
 
   return fetch(url, {
     body: isFormData ? body : JSON.stringify(body),

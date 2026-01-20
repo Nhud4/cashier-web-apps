@@ -20,20 +20,3 @@ type LoginResponse = {
   token: string
   expiredAt: string
 }
-
-type CreateUserRequest = {
-  name: string
-  role: string
-  username: string
-  password: string
-  companyId?: number
-}
-
-type UpdateUserRequest = {
-  name?: string
-  role?: string
-  username?: string
-  password?: string
-  active?: string
-  companyId?: number
-}
