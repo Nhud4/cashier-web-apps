@@ -32,10 +32,10 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
 
   if (open) {
     return (
-      <div className="absolute inset-0 z-50 flex items-center justify-center bg-opacity-25 bg-black">
+      <div className="absolute inset-0 z-50 flex items-center justify-end bg-opacity-25 bg-black">
         <div
-          className="py-4 bg-white rounded-xl"
-          style={{ height: '75%', minWidth: '500px' }}
+          className="py-4 bg-white rounded-l-xl h-screen"
+          style={{ minWidth: '500px' }}
         >
           <div className="flex items-center gap-4 px-6 pb-6">
             <button onClick={onClose}>
@@ -45,7 +45,7 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
               <h5 className="mt-1 ml-2 font-semibold">{title}</h5>
             ) : null}
           </div>
-          <div className="px-6 h-[80%]">{children}</div>
+          <div className="px-6 h-full">{children}</div>
           {onConfirm ? (
             <div className="flex items-center ml-auto space-x-2 w-fit">
               <Button

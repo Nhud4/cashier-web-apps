@@ -2,7 +2,7 @@ import LoadingText from '@components/modules/LoadingText'
 import { useQuerySlice } from '@redux/hooks'
 import { clearCategory } from '@redux/slices/category'
 import { fetchListCategory } from '@redux/slices/category/action'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import styles from './styles.module.css'
@@ -22,10 +22,19 @@ export const HeaderMenuCategory = () => {
     thunk: fetchListCategory(initialParams),
   })
 
-  const categoryOps = data.map((item) => ({
-    label: item.name,
-    value: item.id,
-  }))
+  const categoryOps = useMemo(() => {
+    const cat = [{ label: 'Semua', value: '' }]
+    if (data) {
+      const category = data.map((item) => ({
+        label: item.name,
+        value: item.id,
+      }))
+
+      return [...cat, ...category]
+    }
+
+    return cat
+  }, [data])
 
   const handleMenu = (val: string) => {
     setSearchParams({ cat: val })
@@ -36,11 +45,8 @@ export const HeaderMenuCategory = () => {
     return params === val ? styles.active : ''
   }
 
-  const defaultOps = categoryOps[0]
   useEffect(() => {
-    if (defaultOps) {
-      setSearchParams({ cat: defaultOps.value })
-    }
+    setSearchParams({ cat: '' })
   }, [])
 
   return (
@@ -52,7 +58,11 @@ export const HeaderMenuCategory = () => {
             key={index}
             onClick={() => handleMenu(item?.value)}
           >
-            <LoadingText data={item?.label} loading={loading} />
+            <LoadingText
+              className="capitalize"
+              data={item?.label}
+              loading={loading}
+            />
           </button>
         ))}
       </div>

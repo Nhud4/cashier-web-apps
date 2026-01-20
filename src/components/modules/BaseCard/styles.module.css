@@ -1,5 +1,5 @@
 .main {
-  @apply p-4 bg-white rounded-lg shadow-card;
+  @apply bg-white rounded-lg shadow-card;
 }
 
 .header {

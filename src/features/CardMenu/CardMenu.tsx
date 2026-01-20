@@ -1,9 +1,9 @@
 import BaseCard from '@components/modules/BaseCard'
 import IMAGES from '@configs/images'
-import { setBasket } from '@storage/index'
+import { CartContext } from '@contexts/CartContext/context'
 import { formatIDR } from '@utils/index'
 import type React from 'react'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
 import styles from './styles.module.css'
@@ -14,48 +14,32 @@ type Props = {
 }
 
 export const CardMenu: React.FC<Props> = ({ data, loading }) => {
-  const [products, setProducts] = useState<OrderProduct[]>([])
+  const { addProduct } = useContext(CartContext)
 
   const handleClick = (val: ProductList) => {
-    setProducts((prev) => {
-      const exist = prev.find((item) => item.productId === Number(val.id))
-      if (exist) {
-        return prev.map((item) => {
-          if (item.productId === Number(val.id)) {
-            const qty = item.qty + 1
-            return { ...item, qty: qty, subtotal: val.price * qty }
-          }
-          return item
-        })
-      }
-      return [
-        ...prev,
-        {
-          discount: val.discount,
-          productId: Number(val.id),
-          qty: 1,
-          subtotal: val.price,
-        },
-      ]
+    addProduct({
+      discount: val.discount,
+      name: val.name,
+      price: val.price,
+      productId: Number(val.id),
+      qty: 1,
+      subtotal: val.price,
     })
   }
-
-  useEffect(() => {
-    setBasket(products)
-  }, [products])
 
   if (loading) {
     return new Array(10).fill('').map((_, index) => (
       <div className={styles.container} key={index}>
         <BaseCard className={styles.card}>
+          <img
+            alt="menu"
+            className="object-cover h-40 rounded-t-2xl border-b border-b-border"
+            src={IMAGES.Food}
+          />
           <Skeleton width={150} />
           <Skeleton width={100} />
           <Skeleton width={100} />
         </BaseCard>
-
-        <div className={styles.images}>
-          <img alt="foto" className={styles.photo} src={IMAGES.Food} />
-        </div>
       </div>
     ))
   }
@@ -66,14 +50,18 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
       onClick={() => handleClick(item)}
     >
       <BaseCard className={styles.card}>
-        <h1>{item.name}</h1>
-        <h2>{formatIDR(item.price)}</h2>
-        <p>Tersedia {item.stock}</p>
-      </BaseCard>
+        <img
+          alt="menu"
+          className="object-cover h-40 rounded-t-2xl border-b border-b-border"
+          src={item.img || IMAGES.Food}
+        />
 
-      <div className={styles.images}>
-        <img alt="foto" className={styles.photo} src={IMAGES.Food} />
-      </div>
+        <div>
+          <h1>{item.name}</h1>
+          <h2>{formatIDR(item.price)}</h2>
+          <p>Tersedia {item.stock}</p>
+        </div>
+      </BaseCard>
     </div>
   ))
 }

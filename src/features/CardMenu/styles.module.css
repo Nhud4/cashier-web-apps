@@ -1,22 +1,25 @@
 .container {
-  @apply relative pt-20 cursor-pointer;
-  width: 220px;
+  @apply cursor-pointer;
 }
 
 .card {
-  @apply flex flex-col justify-end text-center space-y-2 !rounded-2xl;
-  height: 256px;
+  @apply flex flex-col space-y-2 !rounded-2xl;
+  min-height: 19rem;
 }
 
-.card > h1 {
+.card > div {
+  @apply p-4 space-y-1;
+}
+
+.card > div > h1 {
   @apply font-semibold capitalize;
 }
 
-.card > h2 {
+.card > div > h2 {
   @apply text-orange;
 }
 
-.card > p {
+.card > div > p {
   @apply text-sm text-neutral-5;
 }
 

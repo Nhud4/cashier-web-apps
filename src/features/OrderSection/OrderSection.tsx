@@ -1,3 +1,4 @@
+import { CartContext } from '@contexts/CartContext/context'
 import { ModalContext } from '@contexts/ModalContext'
 import CheckoutOrder from '@features/CheckoutOrder'
 import OrderItems from '@features/OrderItems'
@@ -10,6 +11,8 @@ import styles from './styles.module.css'
 
 export const OrderSection = () => {
   const { setModal } = useContext(ModalContext)
+  const { products } = useContext(CartContext)
+
   const [orderType, setOrderType] = useState('in')
   const basket = getBasket()
 
@@ -34,7 +37,7 @@ export const OrderSection = () => {
 
   const handlePayment = () => {
     setModal({
-      content: <CheckoutOrder />,
+      content: <CheckoutOrder products={products} />,
       open: true,
     })
   }
@@ -70,9 +73,9 @@ export const OrderSection = () => {
             <div className="justify-self-end">Total</div>
           </div>
 
-          <div className="overflow-y-auto h-[20%] p-4 -m-4 space-y-4">
-            {basket.map((_, i) => (
-              <OrderItems active key={i} notes="notes" />
+          <div className="overflow-y-auto h-[48vh] p-4 -m-4 space-y-4">
+            {products.map((item, i) => (
+              <OrderItems active data={item} key={i} notes="notes" />
             ))}
           </div>
         </div>
