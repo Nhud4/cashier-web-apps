@@ -55,17 +55,14 @@
     @apply px-8 pt-4;
   }
 
-  .title {
-    @apply mb-4 text-2xl font-bold;
-  }
-
   .page {
-    @apply grid pb-10 bg-neutral-4 h-full;
+    @apply grid pb-10 bg-neutral-4 h-full overflow-y-auto;
+    height: calc(100vh - 10rem);
   }
 
   @media screen and (max-width: 768px) {
-    /* .layout {
+    .layout {
       @apply px-4 min-h-screen overflow-y-auto;
-    } */
+    }
   }
 }

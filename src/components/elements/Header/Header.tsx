@@ -18,12 +18,7 @@ export const Header: React.FC<Props> = ({
   orderCard,
 }) => {
   return (
-    <header
-      className={clsx([
-        styles.header,
-        orderCard ? styles.order : styles.notOrder,
-      ])}
-    >
+    <header className={clsx([styles.header, orderCard ? styles.order : ''])}>
       <Navbar headerMenu={headerMenu} subtitle={subTitle} title={title} />
       {headerMenu ? <HeaderMenuCategory /> : null}
     </header>

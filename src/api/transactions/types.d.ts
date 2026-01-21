@@ -40,6 +40,8 @@ type TransactionList = {
   customerName?: string
   paymentMethod: string
   bill: number
+  createdAt: string
+  tableNumber: string
 }
 
 type TransactionProducts = {

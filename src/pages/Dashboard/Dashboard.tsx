@@ -46,20 +46,22 @@ export const Dashboard: React.FC = () => {
       title="SaR-1 Cafe and Resto"
     >
       <section className="page layout">
-        <div className="flex items-center justify-between pb-8">
-          <h1 className="font-semibold text-lg">Pilih Menu</h1>
-          <div className="flex items-center space-x-4">
-            <Search onSearch={onSearch} placeholder="Cari menu disini..." />
-            <Dropdown
-              name="alo"
-              onChange={(ops) => setAlo(ops === null ? '' : ops.value)}
-              options={aloOps}
-              value={selected}
-            />
+        <div className="space-y-8">
+          <div className="flex items-center justify-between">
+            <h1 className="font-semibold text-lg">Pilih Menu</h1>
+            <div className="flex items-center space-x-4">
+              <Search onSearch={onSearch} placeholder="Cari menu disini..." />
+              <Dropdown
+                name="alo"
+                onChange={(ops) => setAlo(ops === null ? '' : ops.value)}
+                options={aloOps}
+                value={selected}
+              />
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-5 gap-4 overflow-y-auto pb-10">
-          <CardMenu data={data} loading={loading} />
+          <div className="grid grid-cols-5 gap-4 overflow-y-auto pb-10">
+            <CardMenu data={data} loading={loading} />
+          </div>
         </div>
       </section>
     </Layout>

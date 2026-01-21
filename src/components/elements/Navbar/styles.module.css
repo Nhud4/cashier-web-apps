@@ -1,5 +1,5 @@
 .navbar {
-  @apply flex items-center justify-between w-full p-8;
+  @apply flex items-center justify-between w-full px-8 py-4;
 }
 
 .menu {
@@ -15,6 +15,5 @@
 }
 
 .report {
-  @apply p-4 rounded-full;
-  background-color: rgba(234, 124, 105, 0.2);
+  @apply p-3 rounded-full border border-orange;
 }

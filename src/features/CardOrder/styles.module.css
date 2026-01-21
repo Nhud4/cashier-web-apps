@@ -1,0 +1,19 @@
+.header {
+  @apply flex items-center justify-between p-4 border-b border-b-border;
+}
+
+.header > p {
+  @apply text-base font-semibold text-orange;
+}
+
+.data {
+  @apply m-4 text-sm;
+}
+
+.data > tr > th {
+  @apply font-normal text-left text-neutral-5 pr-8 pb-2;
+}
+
+.data > tr > td::before {
+  content: ': ';
+}
