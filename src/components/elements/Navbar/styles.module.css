@@ -1,5 +1,5 @@
 .navbar {
-  @apply flex items-center justify-between w-full px-8 py-4;
+  @apply flex items-center justify-between w-full p-8;
 }
 
 .menu {
@@ -14,6 +14,18 @@
   @apply text-neutral-5;
 }
 
-.report {
-  @apply p-3 rounded-full border border-orange;
+.navMenu {
+  @apply p-3 rounded-xl border border-orange;
+}
+
+.navMenu > svg {
+  color: #ea7c69;
+}
+
+.navMenu.active {
+  @apply bg-orange;
+}
+
+.navMenu.active > svg {
+  color: #fff;
 }

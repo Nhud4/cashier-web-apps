@@ -52,7 +52,9 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
     setProducts((prev) => prev.filter((item) => item.productId !== productId))
   }
 
-  const clearCart = () => setProducts([])
+  const clearCart = () => {
+    setProducts([])
+  }
 
   const addNotes = (productId: number, notes: string) => {
     setProducts((prev) => {

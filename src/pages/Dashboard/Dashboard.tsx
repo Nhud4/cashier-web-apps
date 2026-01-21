@@ -2,6 +2,7 @@ import Dropdown from '@components/fields/Dropdown'
 import Search from '@components/fields/Search'
 import Layout from '@components/layout'
 import CardMenu from '@features/CardMenu'
+import HeaderMenuCategory from '@features/HeaderMenuCategory'
 import { useQuerySlice } from '@redux/hooks'
 import { clearProduct } from '@redux/slices/products'
 import { fetchProductList } from '@redux/slices/products/action'
@@ -47,6 +48,8 @@ export const Dashboard: React.FC = () => {
     >
       <section className="page layout">
         <div className="space-y-8">
+          <HeaderMenuCategory />
+
           <div className="flex items-center justify-between">
             <h1 className="font-semibold text-lg">Pilih Menu</h1>
             <div className="flex items-center space-x-4">

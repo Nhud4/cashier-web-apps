@@ -1,32 +1,7 @@
 .container {
-  @apply px-8;
+  @apply pt-8;
 }
 
 .content {
-  @apply relative flex items-center space-x-8 pb-2;
-}
-
-.content > button > h1 {
-  @apply capitalize text-neutral-2;
-}
-
-.active {
-  @apply relative;
-}
-
-.active > h1,
-.active > div {
-  @apply !text-orange capitalize;
-}
-
-.active > h1::after,
-.active > div::after {
-  content: '';
-  position: absolute;
-  left: -10px;
-  bottom: -10px;
-  width: 90%;
-  height: 3px;
-  background-color: #fb7185;
-  border-radius: 4px;
+  @apply relative flex items-center space-x-4 pb-2;
 }

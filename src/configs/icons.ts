@@ -1,5 +1,6 @@
 import Arrow from '@assets/icons/angle.svg?react'
 import Back from '@assets/icons/Back.svg?react'
+import Bags from '@assets/icons/bags.svg?react'
 import Card from '@assets/icons/card.svg?react'
 import CheckCircle from '@assets/icons/check-circle 1.svg?react'
 import Close from '@assets/icons/close.svg?react'
@@ -20,11 +21,13 @@ import Search from '@assets/icons/search.svg?react'
 import Setting from '@assets/icons/setting.svg?react'
 import SingOut from '@assets/icons/sign-out.svg?react'
 import Trash from '@assets/icons/Trash.svg?react'
+import User from '@assets/icons/user.svg?react'
 import Wallet from '@assets/icons/Wallet.svg?react'
 
 const ICONS = {
   Arrow,
   Back,
+  Bags,
   Calendar,
   Card,
   CheckCircle,
@@ -45,6 +48,7 @@ const ICONS = {
   Setting,
   SingOut,
   Trash,
+  User,
   Wallet,
 }
 

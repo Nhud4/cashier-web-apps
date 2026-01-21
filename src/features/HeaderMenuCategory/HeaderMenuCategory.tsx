@@ -1,4 +1,4 @@
-import LoadingText from '@components/modules/LoadingText'
+import Button from '@components/elements/Button'
 import { useQuerySlice } from '@redux/hooks'
 import { clearCategory } from '@redux/slices/category'
 import { fetchListCategory } from '@redux/slices/category/action'
@@ -14,7 +14,7 @@ export const HeaderMenuCategory = () => {
     size: 10,
   }
 
-  const { data, loading } = useQuerySlice<ProductsCategory[], TableParams>({
+  const { data } = useQuerySlice<ProductsCategory[], TableParams>({
     clearSlice: clearCategory('list'),
     initial: initialParams,
     key: 'list',
@@ -42,7 +42,7 @@ export const HeaderMenuCategory = () => {
 
   const isActive = (val: string) => {
     const params = searchParams.get('cat')
-    return params === val ? styles.active : ''
+    return params === val ? 'fill' : 'outline'
   }
 
   useEffect(() => {
@@ -53,17 +53,14 @@ export const HeaderMenuCategory = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         {categoryOps.map((item, index) => (
-          <button
-            className={isActive(item?.value)}
+          <Button
+            className="capitalize !rounded-full !px-4 !h-fit"
             key={index}
             onClick={() => handleMenu(item?.value)}
+            variant={isActive(item?.value)}
           >
-            <LoadingText
-              className="capitalize"
-              data={item?.label}
-              loading={loading}
-            />
-          </button>
+            {item?.label}
+          </Button>
         ))}
       </div>
     </div>

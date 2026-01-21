@@ -8,7 +8,7 @@ export const setUserData = (data: User) => {
 
 export const getUserData = () => {
   const data = localStorage.getItem(USER)
-  return data ? JSON.parse(data || '') : ''
+  return (data ? JSON.parse(data || '') : '') as User
 }
 
 // USER TOKEN

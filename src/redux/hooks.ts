@@ -1,3 +1,4 @@
+import { CartContext } from '@contexts/CartContext/context'
 import { ModalContext } from '@contexts/ModalContext'
 import { NotifyContext } from '@contexts/NotifyContext'
 import { useContext, useEffect } from 'react'
@@ -71,6 +72,7 @@ export const useMutationSlice = <T>({
 }: MutationSliceParams<RootState, T>) => {
   const { onClose: onCloseModal } = useContext(ModalContext)
   const { setNotify } = useContext(NotifyContext)
+  const { clearCart } = useContext(CartContext)
   const sliceState = useAppSelector((state) => {
     const stateObj = state[slice]
     return stateObj[key as keyof typeof stateObj] as unknown as SliceState<T>
@@ -98,8 +100,9 @@ export const useMutationSlice = <T>({
     if (clearSlice) {
       if (error || success) {
         if (success) {
-          onCloseModal()
           if (onSuccess) onSuccess(data)
+          clearCart()
+          onCloseModal()
           clearSlice()
         }
 

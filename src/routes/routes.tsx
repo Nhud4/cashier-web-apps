@@ -1,10 +1,8 @@
-import ICONS from '@configs/icons'
 import PAGES from '@configs/pages'
 
 const routes: Route[] = [
   {
     component: <PAGES.Dashboard />,
-    icon: <ICONS.Home />,
     isSidebar: true,
     name: 'Dashboard',
     path: '/',
@@ -17,15 +15,20 @@ const routes: Route[] = [
   },
   {
     component: <PAGES.Orders />,
-    icon: <ICONS.Report />,
     isSidebar: true,
     name: 'Daftar Pesanan',
     path: '/order',
     requireAuth: true,
   },
   {
+    component: <PAGES.DetailOrder />,
+    isSidebar: true,
+    name: 'Detail Pesanan',
+    path: '/order/:id',
+    requireAuth: true,
+  },
+  {
     component: <PAGES.Settings />,
-    icon: <ICONS.Setting />,
     isSidebar: true,
     name: 'Pengaturan',
     path: '/setting',

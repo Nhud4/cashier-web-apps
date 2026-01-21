@@ -80,7 +80,7 @@ type TransactionDetail = {
   items: TransactionProducts[]
 }
 
-type TransactionCreate = {
+type TransactionCreate = CreateOrderRequest & {
   createdBy?: string
   transactionType: string
   customerName: string

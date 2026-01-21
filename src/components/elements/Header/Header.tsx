@@ -1,4 +1,3 @@
-import HeaderMenuCategory from '@features/HeaderMenuCategory'
 import { clsx } from '@utils/index'
 
 import Navbar from '../Navbar'
@@ -20,7 +19,6 @@ export const Header: React.FC<Props> = ({
   return (
     <header className={clsx([styles.header, orderCard ? styles.order : ''])}>
       <Navbar headerMenu={headerMenu} subtitle={subTitle} title={title} />
-      {headerMenu ? <HeaderMenuCategory /> : null}
     </header>
   )
 }

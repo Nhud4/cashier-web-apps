@@ -1,35 +1,65 @@
 import Button from '@components/elements/Button'
 import Spinner from '@components/elements/Spinner'
+import Dropdown from '@components/fields/Dropdown'
 import TextInput from '@components/fields/TextInput'
 import ICONS from '@configs/icons'
 import { ModalContext } from '@contexts/ModalContext'
-import { NotifyContext } from '@contexts/NotifyContext'
 import OrderItems from '@features/OrderItems'
-// import { firestore } from '@utils/firebase'
+import { useAppDispatch, useMutationSlice } from '@redux/hooks'
+import { clearTransaction } from '@redux/slices/transaction'
+import { fetchTransactionCreate } from '@redux/slices/transaction/action'
+import { getUserData } from '@storage/index'
+import { customDateFormat } from '@utils/date'
+import { firestore } from '@utils/firebase'
 import { clsx, formatIDR } from '@utils/index'
-// import { addDoc, collection } from 'firebase/firestore'
-import React, { useContext, useState } from 'react'
+import { addDoc, collection } from 'firebase/firestore'
+import React, { useContext, useMemo, useState } from 'react'
 
 import styles from './styles.module.css'
 
 type Props = {
   products: CartProduct[]
+  onSuccess: () => void
 }
 
-export const CheckoutOrder: React.FC<Props> = ({ products }) => {
+export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
   const { onClose } = useContext(ModalContext)
-  const { setNotify } = useContext(NotifyContext)
+  const user = getUserData()
+  const dispatch = useAppDispatch()
+  const date = customDateFormat(new Date().toISOString(), 'yyyy-mm-dd')
+  const hour = customDateFormat(new Date().toISOString(), 'HH.mm', 'WIB')
 
+  const [customerName, setCustomerName] = useState('')
+  const [tableNumber, setTableNumber] = useState(0)
   const [paymentStatus, setPaymentStatus] = useState('now')
   const [paymentMethod, setPaymentMethod] = useState('tunai')
-  const [loading, setLoading] = useState(false)
+  const [payment, setPayment] = useState(0)
+  const [deliveryType, setDeliveryType] = useState('dineIn')
+
+  const subtotal = products
+    .map((item) => item.subtotal)
+    .reduce((a, b) => a + b, 0)
+  const discount = products
+    .map((item) => item.discount)
+    .reduce((a, b) => a + b, 0)
+  const textRate = discount > 0 ? discount * 0.1 : subtotal * 0.1
 
   const summary = [
-    { label: 'Subtotal', value: 12000 },
-    { label: 'Diskon', value: 0 },
-    { label: 'Pajak', value: 1200 },
+    { label: 'Subtotal', value: subtotal },
+    { label: 'Diskon', value: discount },
+    { label: 'Pajak 10%', value: textRate },
   ]
-  const bill = summary.map((val) => val.value).reduce((a, b) => a + b, 0)
+  const bill = subtotal - discount + textRate
+
+  const deliveryOps = [
+    { label: 'Dine In', value: 'dineIn' },
+    { label: 'Take Way', value: 'takeWay' },
+    { label: 'Reservasi', value: 'reservation' },
+  ]
+
+  const selectedDelivery = useMemo(() => {
+    return deliveryOps.filter((item) => item.value === deliveryType)
+  }, [deliveryType, deliveryOps])
 
   const handlePaymentStatus = (val: string) => {
     setPaymentStatus(val)
@@ -43,53 +73,65 @@ export const CheckoutOrder: React.FC<Props> = ({ products }) => {
     return paymentMethod === val ? styles.paymentActive : ''
   }
 
-  // const printerJob = async () => {
-  //   addDoc(collection(firestore, 'prints'), {
-  //     cashier: 'Wahyudin',
-  //     date: '2026-02-10',
-  //     items: [
-  //       { name: 'Mie goreng aceh', price: 12000, qty: 1 },
-  //       { name: 'Es teh manis', price: 6000, qty: 2 },
-  //     ],
-  //     kembalian: 400,
-  //     orderNo: 'TRX-2601100001',
-  //     printed: false,
-  //     subtotal: 36000,
-  //     tax: 3600,
-  //     time: '10.20 WIB',
-  //     total: 39600,
-  //     tunai: 40000,
-  //   })
-  // }
+  const printerJob = (code: string) => {
+    addDoc(collection(firestore, 'prints'), {
+      cashier: user.name,
+      date,
+      items: [
+        { name: 'Mie goreng aceh', price: 12000, qty: 1 },
+        { name: 'Es teh manis', price: 6000, qty: 2 },
+      ],
+      kembalian: payment - bill,
+      orderNo: code,
+      printed: false,
+      subtotal,
+      tax: textRate,
+      time: hour,
+      total: bill,
+      tunai: payment,
+    })
+  }
 
   const handleSubmit = () => {
-    setLoading(true)
+    const payload: TransactionCreate = {
+      bill,
+      customerName,
+      deliveryType,
+      items: products,
+      payment,
+      paymentMethod,
+      paymentStatus: 'success',
+      paymentType: paymentStatus,
+      ppn: textRate,
+      subtotal,
+      tableNumber,
+      totalDiscount: discount,
+      transactionDate: date,
+      transactionType: 'transaction',
+    }
 
-    setTimeout(() => {
-      setLoading(false)
-      setNotify({
-        color: 'success',
-        isOpen: true,
-        message: 'Berhasil menambah pesanan',
-      })
-      onClose()
-    }, 2000)
+    dispatch(fetchTransactionCreate(payload))
     // printerJob()
   }
+
+  const { loading } = useMutationSlice({
+    clearSlice: () => dispatch(clearTransaction('add')),
+    key: 'add',
+    onSuccess: (data: { code: string }) => {
+      onSuccess()
+      printerJob(data.code)
+    },
+    slice: 'transaction',
+  })
 
   return (
     <div className="flex">
       <div className="flex flex-col justify-between w-[425px]">
         <div className="relative">
           <div className="flex items-center justify-between pb-4 mb-4 border-b border-border bg-white">
-            <div>
-              <h1 className="text-lg font-semibold text-primary-3">
-                Daftar Pesanan
-              </h1>
-              <p className="text-sm text-neutral-5">
-                No Pesanan: TRX-290110001
-              </p>
-            </div>
+            <h1 className="text-lg font-semibold text-primary-3">
+              Daftar Pesanan
+            </h1>
             <Button className="!h-11" onClick={onClose}>
               <ICONS.Plus />
             </Button>
@@ -134,14 +176,27 @@ export const CheckoutOrder: React.FC<Props> = ({ products }) => {
           <TextInput
             label="Nama Pelanggan"
             name="name"
+            onChange={(e) => setCustomerName(e.target.value)}
             placeholder="Nama pelanggan"
+            value={customerName}
           />
-          <TextInput
-            label="Nomor Menja"
-            name="table"
-            onlyNumber
-            placeholder="Nomor meja"
-          />
+          <div className="grid grid-cols-2 gap-4">
+            <TextInput
+              label="Nomor Menja"
+              name="table"
+              onChange={(e) => setTableNumber(Number(e.target.value))}
+              onlyNumber
+              placeholder="Nomor meja"
+              value={tableNumber}
+            />
+            <Dropdown
+              label="Jenis Transaksi"
+              name="type"
+              onChange={(ops) => setDeliveryType(ops === null ? '' : ops.value)}
+              options={deliveryOps}
+              value={selectedDelivery}
+            />
+          </div>
 
           <div>
             <p className="pb-1">Status Pembayaran</p>
@@ -234,9 +289,11 @@ export const CheckoutOrder: React.FC<Props> = ({ products }) => {
             <TextInput
               label="Total Bayar"
               name="payment"
+              onChange={(e) => setPayment(Number(e.target.value))}
               onlyNumber
               placeholder="0"
               prefix="Rp"
+              value={payment}
             />
             <TextInput
               disabled
@@ -245,6 +302,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products }) => {
               onlyNumber
               placeholder="0"
               prefix="Rp"
+              value={payment > 0 ? payment - bill : 0}
             />
           </div>
         </div>

@@ -2,25 +2,21 @@ import { CartContext } from '@contexts/CartContext/context'
 import { ModalContext } from '@contexts/ModalContext'
 import CheckoutOrder from '@features/CheckoutOrder'
 import OrderItems from '@features/OrderItems'
-import { getBasket } from '@storage/index'
 import { formatIDR } from '@utils/index'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import Button from '../../components/elements/Button'
 import styles from './styles.module.css'
 
 export const OrderSection = () => {
   const { setModal } = useContext(ModalContext)
-  const { products } = useContext(CartContext)
+  const { products, clearCart } = useContext(CartContext)
 
-  const [orderType, setOrderType] = useState('in')
-  const basket = getBasket()
-
-  const subtotal = basket
+  const subtotal = products
     .map((item) => item.subtotal)
     .reduce((a, b) => a + b, 0)
-  const discount = basket
-    .map((item) => item.subtotal)
+  const discount = products
+    .map((item) => item.discount)
     .reduce((a, b) => a + b, 0)
   const textRate = discount > 0 ? discount * 0.1 : subtotal * 0.1
 
@@ -31,13 +27,13 @@ export const OrderSection = () => {
   ]
   const bill = subtotal - discount + textRate
 
-  const handleOrderType = (val: string) => {
-    setOrderType(val)
+  const onSuccess = () => {
+    clearCart()
   }
 
   const handlePayment = () => {
     setModal({
-      content: <CheckoutOrder products={products} />,
+      content: <CheckoutOrder onSuccess={onSuccess} products={products} />,
       open: true,
     })
   }
@@ -47,23 +43,7 @@ export const OrderSection = () => {
       {/* content */}
       <div className="p-8 space-y-4">
         {/* header */}
-        <div className="space-y-4">
-          <h1 className={styles.title}>Dfatar Pesanan</h1>
-          <div className="flex gap-4">
-            <Button
-              onClick={() => handleOrderType('in')}
-              variant={orderType === 'in' ? 'fill' : 'outline'}
-            >
-              Dine In
-            </Button>
-            <Button
-              onClick={() => handleOrderType('out')}
-              variant={orderType === 'out' ? 'fill' : 'outline'}
-            >
-              Take Way
-            </Button>
-          </div>
-        </div>
+        <h1 className={styles.title}>Dfatar Pesanan</h1>
 
         {/* content */}
         <div className="space-y-4">

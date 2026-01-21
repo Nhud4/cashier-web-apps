@@ -52,7 +52,7 @@ const Layout: React.FC<Props> = ({
           subTitle={subTitle}
           title={title}
         />
-        <div className={orderCard ? 'mt-36' : 'mt-28'}>{children}</div>
+        <div className="mt-28">{children}</div>
       </main>
       {orderCard ? <OrderSection /> : null}
       <Notify />
