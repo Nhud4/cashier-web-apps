@@ -1,0 +1,37 @@
+.header {
+  @apply flex items-center justify-between p-4 border-b border-b-border;
+}
+
+.header > p {
+  @apply text-base font-semibold text-orange;
+}
+
+.customer {
+  @apply text-sm;
+}
+
+.customer > tr > th {
+  @apply font-normal text-left text-neutral-5 pr-8 pb-2;
+}
+
+.customer > tr > td::before {
+  content: ': ';
+}
+
+.paymentButton {
+  @apply relative p-3 border flex flex-col items-center gap-1 rounded-2xl;
+}
+
+.paymentButton > svg,
+.paymentButton > p {
+  @apply text-neutral-2;
+}
+
+.paymentActive {
+  @apply !border-border;
+}
+
+.paymentActive > svg,
+.paymentActive > p {
+  @apply !text-primary;
+}

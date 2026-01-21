@@ -76,6 +76,7 @@ type TransactionDetail = {
   ppn: number
   bill: number
   payment?: number
+  createdAt: string
   user: TransactionUser
   items: TransactionProducts[]
 }

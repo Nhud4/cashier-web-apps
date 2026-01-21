@@ -280,12 +280,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
             </button>
           </div>
 
-          <div
-            className={clsx([
-              'space-y-4',
-              paymentMethod === 'tunai' ? '' : 'hidden',
-            ])}
-          >
+          <div className="space-y-4">
             <TextInput
               label="Total Bayar"
               name="payment"

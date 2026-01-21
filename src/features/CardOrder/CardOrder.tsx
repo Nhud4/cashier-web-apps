@@ -19,29 +19,31 @@ export const CardOrder: React.FC<Props> = ({ data }) => {
         <p>{customDateFormat(data.createdAt, 'HH.mm', 'WIB')}</p>
       </div>
 
-      <table className={styles.data}>
-        <tr>
-          <th>Pelanggan</th>
-          <td className="capitalize">{data.customerName}</td>
-        </tr>
-        <tr>
-          <th>No Meja</th>
-          <td>{data.tableNumber}</td>
-        </tr>
-        <tr>
-          <th>Jenis Transaksi</th>
-          <td>Dine In</td>
-        </tr>
-        <tr>
-          <th>Pembayaran</th>
-          <td>Nanti</td>
-        </tr>
+      <table className="m-4">
+        <tbody className={styles.data}>
+          <tr>
+            <th>Pelanggan</th>
+            <td className="capitalize">{data.customerName}</td>
+          </tr>
+          <tr>
+            <th>No Meja</th>
+            <td>{data.tableNumber}</td>
+          </tr>
+          <tr>
+            <th>Jenis Transaksi</th>
+            <td>Dine In</td>
+          </tr>
+          <tr>
+            <th>Pembayaran</th>
+            <td>Nanti</td>
+          </tr>
+        </tbody>
       </table>
 
       <div className="pb-4 px-4">
         <Button
           className="w-full justify-center"
-          onClick={() => navigate('/order/TRX-2601010001')}
+          onClick={() => navigate(`/order/${data.id}?code=${data.code}`)}
           variant="outline"
         >
           Detail Pesanan
