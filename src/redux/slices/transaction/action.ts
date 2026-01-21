@@ -4,7 +4,7 @@ import { generateNoColumn } from '@utils/index'
 
 export const fetchTransactionList = createAsyncThunk(
   'transaction/list',
-  async (params: TableParams, { rejectWithValue }) => {
+  async (params: TransactionListParams, { rejectWithValue }) => {
     try {
       const { data, meta, ...res } = await services.getTransaction(params)
 
@@ -40,6 +40,22 @@ export const fetchTransactionCreate = createAsyncThunk(
   async (payload: TransactionCreate, { rejectWithValue }) => {
     try {
       const response = await services.createTransaction(payload)
+      return response
+    } catch (error) {
+      throw rejectWithValue(error)
+    }
+  }
+)
+
+export const fetchTransactionUpdate = createAsyncThunk(
+  'transaction/update',
+  async (
+    params: { code: string; payload: TransactionUpdate },
+    { rejectWithValue }
+  ) => {
+    try {
+      const { code, payload } = params
+      const response = await services.updateTransaction(code, payload)
       return response
     } catch (error) {
       throw rejectWithValue(error)

@@ -22,6 +22,10 @@ export const CardOrder: React.FC<Props> = ({ data }) => {
       <table className="m-4">
         <tbody className={styles.data}>
           <tr>
+            <th>Tanggal</th>
+            <td>{data.transactionDate}</td>
+          </tr>
+          <tr>
             <th>Pelanggan</th>
             <td className="capitalize">{data.customerName}</td>
           </tr>
@@ -30,12 +34,8 @@ export const CardOrder: React.FC<Props> = ({ data }) => {
             <td>{data.tableNumber}</td>
           </tr>
           <tr>
-            <th>Jenis Transaksi</th>
-            <td>Dine In</td>
-          </tr>
-          <tr>
             <th>Pembayaran</th>
-            <td>Nanti</td>
+            <td>{data.paymentStatus}</td>
           </tr>
         </tbody>
       </table>

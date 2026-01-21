@@ -4,9 +4,12 @@ import TextInput from '@components/fields/TextInput'
 import Layout from '@components/layout'
 import ICONS from '@configs/icons'
 import IMAGES from '@configs/images'
-import { useQuerySlice } from '@redux/hooks'
+import { useAppDispatch,useMutationSlice, useQuerySlice } from '@redux/hooks'
 import { clearTransaction } from '@redux/slices/transaction'
-import { fetchTransactionDetail } from '@redux/slices/transaction/action'
+import {
+  fetchTransactionDetail,
+  fetchTransactionUpdate,
+} from '@redux/slices/transaction/action'
 import { customDateFormat } from '@utils/date'
 import { formatIDR } from '@utils/index'
 import { clsx } from '@utils/index'
@@ -22,13 +25,12 @@ export const DetailOrder = () => {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
   const [paymentMethod, setPaymentMethod] = useState('tunai')
   const [payment, setPayment] = useState(0)
 
-  const { data, loading } = useQuerySlice<
-    TransactionDetail | null,
-    { id: string }
-  >({
+  const { data } = useQuerySlice<TransactionDetail | null, { id: string }>({
     clearSlice: clearTransaction('detail'),
     initial: id,
     key: 'detail',
@@ -52,6 +54,26 @@ export const DetailOrder = () => {
   const handlePaymentMethod = (val: string) => {
     setPaymentMethod(val)
   }
+
+  const handleUpdate = () => {
+    const payload: TransactionUpdate = {
+      payment,
+      paymentMethod,
+      paymentStatus: 'success',
+      paymentType: data?.paymentType || '',
+      transactionType: data?.transactionType || '',
+    }
+    dispatch(fetchTransactionUpdate({ code: id, payload }))
+  }
+
+  const { loading: editLoad } = useMutationSlice({
+    clearSlice: () => dispatch(clearTransaction('edit')),
+    key: 'edit',
+    onSuccess: () => {
+      dispatch(fetchTransactionDetail(id))
+    },
+    slice: 'transaction',
+  })
 
   return (
     <Layout orderCard={false} subTitle={code || ''} title="Detail Transaksi">
@@ -117,7 +139,7 @@ export const DetailOrder = () => {
                   <div
                     className={clsx([
                       'space-y-4',
-                      index !== 0 ? 'border-t border-t-border' : '',
+                      index !== 0 ? 'border-t border-t-border pt-4' : '',
                     ])}
                     key={index}
                   >
@@ -161,12 +183,16 @@ export const DetailOrder = () => {
                         <tr>
                           <th>Metode Pembayaran</th>
                           <td className="capitalize">
-                            {data?.paymentMethod || '-'}
+                            {['finish', 'success'].includes(
+                              data?.paymentStatus || ''
+                            )
+                              ? data?.paymentMethod
+                              : '-'}
                           </td>
                         </tr>
                         <tr>
                           <th>Status pembayaran</th>
-                          <td>{data?.paymentStatus}</td>
+                          <td className="capitalize">{data?.paymentStatus}</td>
                         </tr>
                         <tr>
                           <th>Subtotal</th>
@@ -196,7 +222,10 @@ export const DetailOrder = () => {
                           <th>kembalian</th>
                           <td>
                             {formatIDR(
-                              data?.paymentMethod === 'tunai'
+                              data?.paymentMethod === 'tunai' &&
+                                ['finish', 'success'].includes(
+                                  data?.paymentStatus || ''
+                                )
                                 ? (data?.payment || 0) - (data?.bill || 0)
                                 : 0
                             )}
@@ -286,8 +315,11 @@ export const DetailOrder = () => {
                       />
                     </div>
 
-                    <Button className="!w-full justify-center">
-                      {loading ? <Spinner /> : 'Selesaikan Pembayaran'}
+                    <Button
+                      className="!w-full justify-center"
+                      onClick={handleUpdate}
+                    >
+                      {editLoad ? <Spinner /> : 'Selesaikan Pembayaran'}
                     </Button>
                   </div>
                 </div>

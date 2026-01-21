@@ -100,7 +100,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
       items: products,
       payment,
       paymentMethod,
-      paymentStatus: 'success',
+      paymentStatus: paymentStatus === 'now' ? 'success' : 'pending',
       paymentType: paymentStatus,
       ppn: textRate,
       subtotal,

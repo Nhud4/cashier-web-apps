@@ -42,6 +42,7 @@ type TransactionList = {
   bill: number
   createdAt: string
   tableNumber: string
+  paymentStatus: string
 }
 
 type TransactionProducts = {
@@ -90,4 +91,17 @@ type TransactionCreate = CreateOrderRequest & {
   paymentMethod: string
   paymentStatus: string
   payment: number
+}
+
+type TransactionUpdate = {
+  paymentMethod: string
+  paymentStatus: string
+  payment: number
+  transactionType: string
+  paymentType: string
+}
+
+type TransactionListParams = TableParams & {
+  paymentStatus?: string
+  date?: string
 }

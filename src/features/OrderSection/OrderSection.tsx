@@ -53,7 +53,7 @@ export const OrderSection = () => {
             <div className="justify-self-end">Total</div>
           </div>
 
-          <div className="overflow-y-auto h-[48vh] p-4 -m-4 space-y-4">
+          <div className="overflow-y-auto h-[54vh] p-4 -m-4 space-y-4">
             {products.map((item, i) => (
               <OrderItems active data={item} key={i} notes="notes" />
             ))}

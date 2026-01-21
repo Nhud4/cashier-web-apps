@@ -1,27 +1,40 @@
 import DatePicker from '@components/fields/DatePicker'
+import Dropdown from '@components/fields/Dropdown'
 import Search from '@components/fields/Search'
 import Layout from '@components/layout'
 import CardOrder from '@features/CardOrder'
 import { useQuerySlice } from '@redux/hooks'
 import { clearTransaction } from '@redux/slices/transaction'
 import { fetchTransactionList } from '@redux/slices/transaction/action'
-import { useState } from 'react'
+import { customDateFormat } from '@utils/date'
+import { useMemo, useState } from 'react'
 
 const initialParams = {
+  date: '',
   page: 1,
+  paymentStatus: '',
+  search: '',
   size: 100,
 }
 
 export const Orders = () => {
-  const [date, setDate] = useState<Date | null>()
+  const [params, setParams] = useState(initialParams)
 
-  const { data } = useQuerySlice<TransactionList[], TableParams>({
+  const { data } = useQuerySlice<TransactionList[], TransactionListParams>({
     clearSlice: clearTransaction('list'),
-    initial: initialParams,
+    initial: params,
     key: 'list',
     slice: 'transaction',
-    thunk: fetchTransactionList(initialParams),
+    thunk: fetchTransactionList(params),
   })
+
+  const statusOps = [
+    { label: 'Success', value: 'success' },
+    { label: 'Pending', value: 'pending' },
+  ]
+  const selectedStatus = useMemo(() => {
+    return statusOps.filter((item) => item.value === params.paymentStatus)
+  }, [params.paymentStatus, statusOps])
 
   return (
     <Layout
@@ -39,11 +52,37 @@ export const Orders = () => {
             <div className="flex items-center space-x-4">
               <DatePicker
                 name="date"
-                onChange={(val) => setDate(val ? new Date(val as Date) : null)}
-                placeholderText="Tanggal pesanan"
-                value={date}
+                onChange={(val) => {
+                  setParams((prev) => ({
+                    ...prev,
+                    date: val
+                      ? customDateFormat(val as unknown as string, 'yyyy-MM-dd')
+                      : '',
+                  }))
+                }}
+                placeholderText="Tanggal transaksi"
+                value={params.date ? new Date(params.date) : null}
               />
-              <Search placeholder="Cari pesanan disini..." />
+              <Dropdown
+                isClearable
+                name="status"
+                onChange={(ops) =>
+                  setParams((prev) => ({
+                    ...prev,
+                    paymentStatus: ops === null ? '' : ops.value,
+                  }))
+                }
+                options={statusOps}
+                placeholder="Pembayaran..."
+                value={selectedStatus}
+              />
+              <Search
+                onSearch={(val) =>
+                  setParams((prev) => ({ ...prev, search: val || '' }))
+                }
+                placeholder="Cari transaksi disini..."
+                searchValue={params.search}
+              />
             </div>
           </div>
 

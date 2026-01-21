@@ -17,7 +17,7 @@ export const createOrder = async (payload: CreateOrderRequest) => {
 }
 
 // transaction
-export const getTransaction = async (params: TableParams) => {
+export const getTransaction = async (params: TransactionListParams) => {
   const data = await req.get<ApiResponse<TransactionList[]>>(
     endpoints.main,
     params
@@ -34,5 +34,13 @@ export const detailTransaction = async (code: string) => {
 
 export const createTransaction = async (payload: TransactionCreate) => {
   const data = await req.post(endpoints.main, payload)
+  return data
+}
+
+export const updateTransaction = async (
+  code: string,
+  payload: TransactionUpdate
+) => {
+  const data = await req.put(`${endpoints.main}/${code}`, payload)
   return data
 }
