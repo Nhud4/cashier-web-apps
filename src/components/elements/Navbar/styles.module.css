@@ -13,3 +13,8 @@
 .title > p {
   @apply text-neutral-5;
 }
+
+.report {
+  @apply p-4 rounded-full;
+  background-color: rgba(234, 124, 105, 0.2);
+}

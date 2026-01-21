@@ -3,7 +3,7 @@
 }
 
 .content {
-  @apply relative flex-1 px-0 ml-28;
+  @apply relative flex-1 px-0;
 }
 
 .orderCard {

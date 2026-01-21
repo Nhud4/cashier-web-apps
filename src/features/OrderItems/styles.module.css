@@ -1,0 +1,31 @@
+.container {
+  @apply space-y-2 border-b border-border pb-2;
+}
+
+.wrapper {
+  @apply grid grid-cols-5 gap-2 text-sm;
+}
+
+.header {
+  @apply col-span-3;
+}
+
+.header > h2 {
+  @apply capitalize;
+}
+
+.header > p {
+  @apply text-orange;
+}
+
+.qty {
+  @apply flex items-center space-x-2 justify-self-center h-fit;
+}
+
+.qty > div {
+  @apply w-4 text-center;
+}
+
+.footer {
+  @apply flex gap-4 w-full;
+}

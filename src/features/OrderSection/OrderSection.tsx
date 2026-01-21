@@ -90,7 +90,7 @@ export const OrderSection = () => {
               <p>{formatIDR(item.value)}</p>
             </div>
           ))}
-          <div className="flex justify-between text-base font-bold text-orange">
+          <div className="flex justify-between text-sm font-bold text-orange">
             <p>Total Tagihan</p>
             <p>{formatIDR(bill)}</p>
           </div>

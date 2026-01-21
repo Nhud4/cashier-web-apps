@@ -64,23 +64,8 @@
   }
 
   @media screen and (max-width: 768px) {
-    .layout {
+    /* .layout {
       @apply px-4 min-h-screen overflow-y-auto;
-    }
-  }
-
-  @media print {
-    body {
-      margin: 0;
-    }
-
-    #receipt {
-      width: 58mm;
-      font-size: 12px;
-    }
-
-    button {
-      display: none;
-    }
+    } */
   }
 }

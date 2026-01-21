@@ -9,6 +9,7 @@ import Question from '@assets/images/question.png'
 import QuestionActive from '@assets/images/question-active.png'
 import QuestionEdit from '@assets/images/question-edit.png'
 import QuestionWarning from '@assets/images/question-warning.png'
+import RestoLogo from '@assets/images/resto_logo.png'
 
 const IMAGES = {
   Avatar,
@@ -22,6 +23,7 @@ const IMAGES = {
   QuestionActive,
   QuestionEdit,
   QuestionWarning,
+  RestoLogo,
 }
 
 export default IMAGES

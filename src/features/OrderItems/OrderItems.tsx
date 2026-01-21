@@ -6,6 +6,8 @@ import { useDebounce } from '@utils/hooks'
 import { formatIDR } from '@utils/index'
 import React, { useContext, useEffect, useState } from 'react'
 
+import styles from './styles.module.css'
+
 type Props = {
   data: CartProduct
   active?: boolean
@@ -23,18 +25,18 @@ export const OrderItems: React.FC<Props> = ({ active, notes, data }) => {
   }, [debounceSearch])
 
   return (
-    <div className="space-y-2 border-b border-border pb-2">
-      <div className="grid grid-cols-5 gap-2 text-sm">
-        <div className="col-span-3">
-          <h2 className="capitalize">{data.name}</h2>
-          <p className="text-orange">{formatIDR(data.price)}</p>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <div className={styles.header}>
+          <h2>{data.name}</h2>
+          <p>{formatIDR(data.price)}</p>
         </div>
         {active ? (
-          <div className="flex items-center space-x-2 justify-self-center h-fit">
+          <div className={styles.qty}>
             <button onClick={() => minusQty(data.productId)} type="button">
               <ICONS.MinusCircle />
             </button>
-            <div className="w-4 text-center">{data.qty}</div>
+            <div>{data.qty}</div>
             <button onClick={() => plusQty(data.productId)} type="button">
               <ICONS.PlusCircle />
             </button>
@@ -47,7 +49,7 @@ export const OrderItems: React.FC<Props> = ({ active, notes, data }) => {
         </div>
       </div>
 
-      <div className="flex gap-4 w-full">
+      <div className={styles.footer}>
         {notes ? (
           <TextInput
             className="text-sm w-full"
