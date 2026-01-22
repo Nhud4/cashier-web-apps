@@ -21,7 +21,10 @@ const initialParams = {
 export const Orders = () => {
   const [params, setParams] = useState(initialParams)
 
-  const { data } = useQuerySlice<TransactionList[], TransactionListParams>({
+  const { data, loading } = useQuerySlice<
+    TransactionList[],
+    TransactionListParams
+  >({
     clearSlice: clearTransaction('list'),
     initial: params,
     key: 'list',
@@ -87,11 +90,19 @@ export const Orders = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-4 gap-4">
-            {data.map((item, index) => (
-              <CardOrder data={item} key={index} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-4 gap-4">
+              {new Array(12).fill('').map((_, index) => (
+                <CardOrder key={index} loading />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-4 gap-4">
+              {data.map((item, index) => (
+                <CardOrder data={item} key={index} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </Layout>

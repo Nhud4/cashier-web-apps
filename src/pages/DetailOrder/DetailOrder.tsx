@@ -4,6 +4,7 @@ import TextInput from '@components/fields/TextInput'
 import Layout from '@components/layout'
 import ICONS from '@configs/icons'
 import IMAGES from '@configs/images'
+import PrintDocument from '@features/PrintDocument'
 import { useAppDispatch, useMutationSlice, useQuerySlice } from '@redux/hooks'
 import { clearTransaction } from '@redux/slices/transaction'
 import {
@@ -29,6 +30,7 @@ export const DetailOrder = () => {
 
   const [paymentMethod, setPaymentMethod] = useState('tunai')
   const [payment, setPayment] = useState(0)
+  const [receipt, setReceipt] = useState<ReceiptData>()
 
   const { data } = useQuerySlice<TransactionDetail | null, { id: string }>({
     clearSlice: clearTransaction('detail'),
@@ -75,6 +77,31 @@ export const DetailOrder = () => {
     slice: 'transaction',
   })
 
+  const handlePrint = () => {
+    setReceipt({
+      address: 'Gandrirojo, Kec. Sedan, Kabupaten Rembang, Jawa Tengah',
+      cash: data?.payment || 0,
+      cashier: data?.createdBy || '',
+      change:
+        data?.payment && data?.payment > 0
+          ? data?.payment - (data?.bill || 0)
+          : 0,
+      customer: data?.customerName || '',
+      date: data?.transactionDate || '',
+      items: data?.items || [],
+      orderNumber: data?.code || '',
+      storeName: 'udin',
+      subtotal:
+        data?.totalDiscount && data.totalDiscount > 0
+          ? (data.totalDiscount as number)
+          : (data?.subtotal as number),
+      table: data?.tableNumber || 0,
+      tax: data?.ppn || 0,
+      time: customDateFormat(data?.createdAt, 'HH.mm', 'WIB'),
+      total: data?.bill || 0,
+    })
+  }
+
   return (
     <Layout orderCard={false} subTitle={code || ''} title="Detail Transaksi">
       <section className="layout page">
@@ -92,9 +119,14 @@ export const DetailOrder = () => {
           <div className="grid grid-cols-2 gap-8">
             <div className="bg-white shadow-card p-8 rounded-lg h-fit space-y-8">
               <div className="space-y-4">
-                <h1 className="text-lg font-semibold text-orange">
-                  Informasi Pesanan
-                </h1>
+                <div className="flex items-center justify-between">
+                  <h1 className="text-lg font-semibold text-orange">
+                    Informasi Pesanan
+                  </h1>
+                  <Button leftIcon={<ICONS.Printer />} onClick={handlePrint}>
+                    Cetak resi
+                  </Button>
+                </div>
                 <table>
                   <tbody className={styles.customer}>
                     <tr>
@@ -199,17 +231,14 @@ export const DetailOrder = () => {
                           <td>{formatIDR(data?.subtotal || 0)}</td>
                         </tr>
                         <tr>
-                          <th>Diskon</th>
-                          <td>{formatIDR(data?.totalDiscount || 0)}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table>
-                      <tbody className={styles.customer}>
-                        <tr>
                           <th>PPN</th>
                           <td>{formatIDR(data?.ppn || 0)}</td>
                         </tr>
+                      </tbody>
+                    </table>
+
+                    <table className="h-fit">
+                      <tbody className={styles.customer}>
                         <tr>
                           <th>Total Tagihan</th>
                           <td>{formatIDR(data?.bill || 0)}</td>
@@ -326,6 +355,8 @@ export const DetailOrder = () => {
               ) : null}
             </div>
           </div>
+
+          <PrintDocument receiptData={receipt} />
         </div>
       </section>
     </Layout>
