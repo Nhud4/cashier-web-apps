@@ -120,3 +120,26 @@ type IsActiveDropDown = {
   isDropdown?: boolean
   path?: string
 }
+
+type ReceiptItems = {
+  name: string
+  qty: number
+  price: number
+}
+
+type ReceiptData = {
+  customer: string
+  storeName: string
+  address: string
+  orderNumber: string
+  date: string
+  time: string
+  cashier: string
+  items: ReceiptItems[]
+  subtotal: number
+  tax: number
+  total: number
+  cash: number
+  change: number
+  table: number
+}

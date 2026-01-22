@@ -2,8 +2,9 @@ import { CartContext } from '@contexts/CartContext/context'
 import { ModalContext } from '@contexts/ModalContext'
 import CheckoutOrder from '@features/CheckoutOrder'
 import OrderItems from '@features/OrderItems'
+import PrintDocument from '@features/PrintDocument'
 import { formatIDR } from '@utils/index'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import Button from '../../components/elements/Button'
 import styles from './styles.module.css'
@@ -11,6 +12,7 @@ import styles from './styles.module.css'
 export const OrderSection = () => {
   const { setModal } = useContext(ModalContext)
   const { products, clearCart } = useContext(CartContext)
+  const [printData, setPrintData] = useState<ReceiptData>()
 
   const subtotal = products
     .map((item) => item.subtotal)
@@ -21,13 +23,13 @@ export const OrderSection = () => {
   const textRate = discount > 0 ? discount * 0.1 : subtotal * 0.1
 
   const summary = [
-    { label: 'Subtotal', value: subtotal },
-    { label: 'Diskon', value: discount },
+    { label: 'Subtotal', value: discount > 0 ? discount : subtotal },
     { label: 'Pajak 10%', value: textRate },
   ]
   const bill = subtotal - discount + textRate
 
-  const onSuccess = () => {
+  const onSuccess = (receipt: ReceiptData) => {
+    setPrintData(receipt)
     clearCart()
   }
 
@@ -75,10 +77,16 @@ export const OrderSection = () => {
             <p>{formatIDR(bill)}</p>
           </div>
         </div>
-        <Button className="w-full justify-center" onClick={handlePayment}>
+        <Button
+          className="w-full justify-center"
+          disabled={products.length === 0}
+          onClick={handlePayment}
+        >
           Pembayaran
         </Button>
       </div>
+
+      <PrintDocument receiptData={printData} />
     </div>
   )
 }

@@ -12,14 +12,14 @@ import { getUserData } from '@storage/index'
 import { firestore } from '@utils/firebase'
 import { clsx, formatIDR } from '@utils/index'
 import { format } from 'date-fns'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import React, { useContext, useMemo, useState } from 'react'
 
 import styles from './styles.module.css'
 
 type Props = {
   products: CartProduct[]
-  onSuccess: () => void
+  onSuccess: (receipt: ReceiptData) => void
 }
 
 export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
@@ -74,22 +74,27 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
   }
 
   const printerJob = (code: string) => {
-    addDoc(collection(firestore, 'prints'), {
+    const doc = {
       cashier: user.name,
+      createdAt: serverTimestamp(),
+      customer: customerName,
       date,
-      items: [
-        { name: 'Mie goreng aceh', price: 12000, qty: 1 },
-        { name: 'Es teh manis', price: 6000, qty: 2 },
-      ],
-      kembalian: payment - bill,
+      items: products.map((item) => ({
+        name: item.name,
+        price: item.price,
+        qty: item.qty,
+      })),
+      kembalian: payment > 0 ? payment - bill : 0,
       orderNo: code,
       printed: false,
       subtotal,
+      table: tableNumber,
       tax: textRate,
       time: `${hour} WIB`,
       total: bill,
       tunai: payment,
-    })
+    }
+    addDoc(collection(firestore, 'prints'), doc)
   }
 
   const handleSubmit = () => {
@@ -118,7 +123,26 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
     clearSlice: () => dispatch(clearTransaction('add')),
     key: 'add',
     onSuccess: (data: { code: string }) => {
-      onSuccess()
+      onSuccess({
+        address: 'Gandrirojo, Kec. Sedan, Kabupaten Rembang, Jawa Tengah',
+        cash: payment,
+        cashier: user.name,
+        change: payment > 0 ? payment - bill : 0,
+        customer: customerName,
+        date,
+        items: products.map((item) => ({
+          name: item.name,
+          price: item.price,
+          qty: item.qty,
+        })),
+        orderNumber: data.code,
+        storeName: 'SaR-1 Cafe and Resto',
+        subtotal,
+        table: tableNumber,
+        tax: textRate,
+        time: `${hour} WIB`,
+        total: bill,
+      })
       printerJob(data.code)
     },
     slice: 'transaction',
