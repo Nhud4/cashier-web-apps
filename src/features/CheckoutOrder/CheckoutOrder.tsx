@@ -26,7 +26,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
   const { onClose } = useContext(ModalContext)
   const user = getUserData()
   const dispatch = useAppDispatch()
-  const date = format(new Date(), 'yyyy-mm-dd')
+  const date = format(new Date(), 'yyyy-MM-dd')
   const hour = format(new Date(), 'HH.mm')
 
   const [customerName, setCustomerName] = useState('')

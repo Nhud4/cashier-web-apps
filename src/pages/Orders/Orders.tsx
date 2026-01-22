@@ -7,10 +7,11 @@ import { useQuerySlice } from '@redux/hooks'
 import { clearTransaction } from '@redux/slices/transaction'
 import { fetchTransactionList } from '@redux/slices/transaction/action'
 import { customDateFormat } from '@utils/date'
+import { format } from 'date-fns'
 import { useMemo, useState } from 'react'
 
 const initialParams = {
-  date: '',
+  date: format(new Date(), 'yyyy-MM-dd'),
   page: 1,
   paymentStatus: '',
   search: '',

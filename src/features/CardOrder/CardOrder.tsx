@@ -35,7 +35,7 @@ export const CardOrder: React.FC<Props> = ({ data }) => {
           </tr>
           <tr>
             <th>Pembayaran</th>
-            <td>{data.paymentStatus}</td>
+            <td className="capitalize">{data.paymentStatus}</td>
           </tr>
         </tbody>
       </table>
