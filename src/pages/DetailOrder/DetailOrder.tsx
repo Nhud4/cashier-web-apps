@@ -4,7 +4,7 @@ import TextInput from '@components/fields/TextInput'
 import Layout from '@components/layout'
 import ICONS from '@configs/icons'
 import IMAGES from '@configs/images'
-import { useAppDispatch,useMutationSlice, useQuerySlice } from '@redux/hooks'
+import { useAppDispatch, useMutationSlice, useQuerySlice } from '@redux/hooks'
 import { clearTransaction } from '@redux/slices/transaction'
 import {
   fetchTransactionDetail,
