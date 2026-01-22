@@ -1,4 +1,3 @@
-import Button from '@components/elements/Button'
 import ICONS from '@configs/icons'
 import { type PropsWithChildren, useEffect } from 'react'
 
@@ -14,7 +13,6 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
   title,
   onClose,
   open,
-  onConfirm,
 }) => {
   const handleEscPress = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -45,25 +43,7 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
               <h5 className="mt-1 ml-2 font-semibold">{title}</h5>
             ) : null}
           </div>
-          <div className="px-6 h-full">{children}</div>
-          {onConfirm ? (
-            <div className="flex items-center ml-auto space-x-2 w-fit">
-              <Button
-                className="bg-white border border-primary text-primary"
-                onClick={onClose}
-              >
-                Tutup
-              </Button>
-              <Button
-                onClick={() => {
-                  onClose()
-                  onConfirm()
-                }}
-              >
-                Konfirmasi
-              </Button>
-            </div>
-          ) : null}
+          <div className="px-6 h-full overflow-y-auto">{children}</div>
         </div>
       </div>
     )

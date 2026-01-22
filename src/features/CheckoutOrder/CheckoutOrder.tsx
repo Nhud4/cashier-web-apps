@@ -326,7 +326,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
           </div>
         </div>
 
-        <div className="absolute bottom-16 flex gap-4 w-full">
+        <div className="flex gap-4 w-full pb-20">
           <Button
             className="!w-full justify-center"
             onClick={onClose}
