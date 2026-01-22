@@ -34,7 +34,9 @@ export const Dashboard: React.FC = () => {
   })
 
   const onSearch = (search: string) => {
-    setParam((prev) => ({ ...prev, search }))
+    if (search !== null) {
+      setParam((prev) => ({ ...prev, search }))
+    }
   }
 
   const selected = aloOps.filter((item) => item.value === alo)

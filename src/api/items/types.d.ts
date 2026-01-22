@@ -31,3 +31,8 @@ type ProductList = {
     name: string
   }
 }
+
+type ProductListParams = TableParams & {
+  categoryId?: string
+  allocation?: string
+}
