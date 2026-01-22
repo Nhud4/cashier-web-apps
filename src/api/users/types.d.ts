@@ -12,7 +12,6 @@ type User = {
 type LoginRequest = {
   username: string
   password: string
-  role: string
 }
 
 type LoginResponse = {

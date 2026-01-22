@@ -9,9 +9,9 @@ import { useAppDispatch, useMutationSlice } from '@redux/hooks'
 import { clearTransaction } from '@redux/slices/transaction'
 import { fetchTransactionCreate } from '@redux/slices/transaction/action'
 import { getUserData } from '@storage/index'
-import { customDateFormat } from '@utils/date'
 import { firestore } from '@utils/firebase'
 import { clsx, formatIDR } from '@utils/index'
+import { format } from 'date-fns'
 import { addDoc, collection } from 'firebase/firestore'
 import React, { useContext, useMemo, useState } from 'react'
 
@@ -26,8 +26,8 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
   const { onClose } = useContext(ModalContext)
   const user = getUserData()
   const dispatch = useAppDispatch()
-  const date = customDateFormat(new Date().toISOString(), 'yyyy-mm-dd')
-  const hour = customDateFormat(new Date().toISOString(), 'HH.mm', 'WIB')
+  const date = format(new Date(), 'yyyy-mm-dd')
+  const hour = format(new Date(), 'HH.mm')
 
   const [customerName, setCustomerName] = useState('')
   const [tableNumber, setTableNumber] = useState(0)
@@ -86,7 +86,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
       printed: false,
       subtotal,
       tax: textRate,
-      time: hour,
+      time: `${hour} WIB`,
       total: bill,
       tunai: payment,
     })

@@ -1,5 +1,6 @@
 import ICONS from '@configs/icons'
 import IMAGES from '@configs/images'
+import { clearStorage } from '@storage/index'
 import { clsx } from '@utils/index'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -21,6 +22,11 @@ const Navbar: React.FC<Props> = ({
   const splitPath = pathname
     .split('/')
     .filter((item) => ![''].includes(item))[0]
+
+  const handleSingOut = () => {
+    clearStorage()
+    window.location.href = '/login'
+  }
 
   return (
     <nav className={clsx([styles.navbar, headerMenu ? '' : styles.menu])}>
@@ -57,7 +63,7 @@ const Navbar: React.FC<Props> = ({
           <ICONS.Bags />
         </button>
 
-        <button className={styles.navMenu} onClick={() => navigate('/setting')}>
+        <button className={styles.navMenu} onClick={handleSingOut}>
           <ICONS.SingOut />
         </button>
       </div>
