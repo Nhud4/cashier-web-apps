@@ -195,7 +195,7 @@ export const DetailOrder = () => {
                     </div>
                     {item.note ? (
                       <div className="p-4 border border-border rounded-lg">
-                        Pedes banget ya
+                        {item.note}
                       </div>
                     ) : null}
                   </div>
