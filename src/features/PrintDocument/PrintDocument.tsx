@@ -56,20 +56,22 @@ export const PrintDocument: React.FC<Props> = ({ receiptData }) => {
               margin: 0;
               padding: 0;
               width: 80mm;
-              font-family: 'Courier New', monospace;
+              font-family: 'Courier New', 'Consolas', monospace;
             }
             
             * {
               -webkit-print-color-adjust: exact !important;
               print-color-adjust: exact !important;
+              color-adjust: exact !important;
             }
             
             .receipt-container {
               width: 80mm;
-              padding: 2mm 2mm 0 2mm;
-              font-size: 9pt;
+              padding: 3mm 3mm 0 3mm;
+              font-size: 11pt;
               background: white;
-              color: black;
+              color: #000;
+              font-weight: 600;
             }
             
             .receipt-header {
@@ -93,31 +95,36 @@ export const PrintDocument: React.FC<Props> = ({ receiptData }) => {
             }
             
             .store-name {
-              font-size: 14pt;
-              font-weight: bold;
-              margin: 5px 0;
+              font-size: 15pt;
+              font-weight: 800;
+              margin: 4px 0;
+              letter-spacing: 0.3px;
+              color: #000;
             }
             
             .store-address {
-              font-size: 9pt;
-              line-height: 1.3;
+              font-size: 10pt;
+              line-height: 1.4;
               margin: 3px 0;
+              font-weight: 600;
             }
             
             .divider {
-              border-top: 1px dashed #000;
+              border-top: 2px dashed #000;
               margin: 8px 0;
             }
             
             .receipt-info {
-              font-size: 10pt;
+              font-size: 11pt;
               margin: 5px 0;
+              font-weight: 600;
             }
             
             .info-row {
               display: flex;
               justify-content: space-between;
-              margin: 2px 0;
+              margin: 3px 0;
+              line-height: 1.3;
             }
             
             .items-section {
@@ -125,40 +132,52 @@ export const PrintDocument: React.FC<Props> = ({ receiptData }) => {
             }
             
             .item {
-              margin: 5px 0;
+              margin: 6px 0;
             }
             
             .item-header {
               display: flex;
               justify-content: space-between;
-              font-weight: normal;
+              font-weight: 700;
+              font-size: 11pt;
             }
             
             .item-detail {
-              font-size: 9pt;
+              font-size: 10pt;
               margin-left: 0;
+              margin-top: 2px;
+              font-weight: 600;
             }
             
             .totals-section {
               margin-top: 8px;
+              font-weight: 700;
             }
             
             .total-row {
               display: flex;
               justify-content: space-between;
-              margin: 3px 0;
+              margin: 4px 0;
+              font-size: 11pt;
             }
             
             .total-row.grand-total {
-              font-weight: bold;
-              font-size: 11pt;
-              margin-top: 5px;
+              font-weight: 900;
+              font-size: 13pt;
+              margin-top: 6px;
+              padding-top: 3px;
+              border-top: 1px solid #000;
             }
             
             .footer {
               text-align: center;
               margin-top: 15px;
-              font-size: 10pt;
+              font-size: 11pt;
+              font-weight: 700;
+            }
+            
+            .footer p {
+              margin: 5px 0;
             }
           </style>
         </head>
