@@ -7,3 +7,15 @@
 .title {
   @apply text-primary-3 font-semibold text-xl;
 }
+
+@media screen and (max-width: 640px) {
+  .container {
+    @apply hidden;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    @apply hidden;
+  }
+}

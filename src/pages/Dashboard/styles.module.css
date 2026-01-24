@@ -1,0 +1,36 @@
+.header {
+  @apply flex items-center justify-between;
+}
+
+.header > h1 {
+  @apply font-semibold text-lg;
+}
+
+.action {
+  @apply flex items-center space-x-4;
+}
+
+.menu {
+  @apply grid grid-cols-5 gap-4 overflow-y-auto pb-10;
+}
+
+@media screen and (max-width: 640px) {
+  .header,
+  .action {
+    @apply flex-col items-start space-x-0 space-y-4;
+  }
+
+  .header > h1 {
+    @apply font-semibold text-base;
+  }
+
+  .menu {
+    @apply grid-cols-2;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .menu {
+    @apply grid-cols-4;
+  }
+}

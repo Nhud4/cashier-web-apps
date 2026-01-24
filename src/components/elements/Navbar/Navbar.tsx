@@ -1,6 +1,7 @@
 import ICONS from '@configs/icons'
 import IMAGES from '@configs/images'
 import { clearStorage } from '@storage/index'
+import { useWindowWidth } from '@utils/hooks'
 import { clsx } from '@utils/index'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -22,6 +23,8 @@ const Navbar: React.FC<Props> = ({
   const splitPath = pathname
     .split('/')
     .filter((item) => ![''].includes(item))[0]
+  const windowWidth = useWindowWidth()
+  const isMobile = windowWidth <= 640
 
   const handleSingOut = () => {
     clearStorage()
@@ -42,31 +45,33 @@ const Navbar: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className="flex items-center space-x-4">
-        <button
-          className={clsx([
-            styles.navMenu,
-            pathname === '/' ? styles.active : '',
-          ])}
-          onClick={() => navigate('/')}
-        >
-          <ICONS.Home />
-        </button>
+      {!isMobile ? (
+        <div className="flex items-center space-x-4">
+          <button
+            className={clsx([
+              styles.navMenu,
+              pathname === '/' ? styles.active : '',
+            ])}
+            onClick={() => navigate('/')}
+          >
+            <ICONS.Home />
+          </button>
 
-        <button
-          className={clsx([
-            styles.navMenu,
-            splitPath === 'order' ? styles.active : '',
-          ])}
-          onClick={() => navigate('/order')}
-        >
-          <ICONS.Bags />
-        </button>
+          <button
+            className={clsx([
+              styles.navMenu,
+              splitPath === 'order' ? styles.active : '',
+            ])}
+            onClick={() => navigate('/order')}
+          >
+            <ICONS.Bags />
+          </button>
 
-        <button className={styles.navMenu} onClick={handleSingOut}>
-          <ICONS.SingOut />
-        </button>
-      </div>
+          <button className={styles.navMenu} onClick={handleSingOut}>
+            <ICONS.SingOut />
+          </button>
+        </div>
+      ) : null}
     </nav>
   )
 }

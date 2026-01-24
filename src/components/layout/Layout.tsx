@@ -1,7 +1,9 @@
 import Header from '@components/elements/Header'
 import Notify from '@components/elements/Notify'
 import { NotifyContext } from '@contexts/NotifyContext'
+import FloatingMenu from '@features/FloatingMenu'
 import OrderSection from '@features/OrderSection'
+import { useWindowWidth } from '@utils/hooks'
 import { useContext, useEffect } from 'react'
 
 import styles from './styles.module.css'
@@ -22,6 +24,8 @@ const Layout: React.FC<Props> = ({
   headerMenu,
 }) => {
   const { setNotify } = useContext(NotifyContext)
+  const windowWidth = useWindowWidth()
+  const isMobile = windowWidth <= 640
 
   useEffect(() => {
     window.addEventListener('offline', () => {
@@ -54,6 +58,7 @@ const Layout: React.FC<Props> = ({
         />
         <div className="mt-32">{children}</div>
       </main>
+      {isMobile ? <FloatingMenu /> : null}
       {orderCard ? <OrderSection /> : null}
       <Notify />
     </div>

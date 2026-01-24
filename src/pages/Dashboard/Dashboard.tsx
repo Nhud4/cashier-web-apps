@@ -10,6 +10,8 @@ import { getLocalDay } from '@utils/date'
 import type React from 'react'
 import { useState } from 'react'
 
+import styles from './styles.module.css'
+
 const initialParams = {
   page: 1,
   size: 0,
@@ -49,12 +51,12 @@ export const Dashboard: React.FC = () => {
       title="SaR-1 Cafe and Resto"
     >
       <section className="page layout">
-        <div className="space-y-8">
+        <div className="space-y-4">
           <HeaderMenuCategory />
 
-          <div className="flex items-center justify-between">
-            <h1 className="font-semibold text-lg">Pilih Menu</h1>
-            <div className="flex items-center space-x-4">
+          <div className={styles.header}>
+            <h1>Pilih Menu</h1>
+            <div className={styles.action}>
               <Search onSearch={onSearch} placeholder="Cari menu disini..." />
               <Dropdown
                 name="alo"
@@ -64,7 +66,7 @@ export const Dashboard: React.FC = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-5 gap-4 overflow-y-auto pb-10">
+          <div className={styles.menu}>
             <CardMenu data={data} loading={loading} />
           </div>
         </div>

@@ -13,3 +13,15 @@
 .subtitle {
   @apply text-2xl;
 }
+
+@media screen and (max-width: 640px) {
+  .order {
+    @apply pr-0;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .order {
+    @apply pr-0;
+  }
+}

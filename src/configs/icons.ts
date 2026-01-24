@@ -2,6 +2,7 @@ import Arrow from '@assets/icons/angle.svg?react'
 import Back from '@assets/icons/Back.svg?react'
 import Bags from '@assets/icons/bags.svg?react'
 import Card from '@assets/icons/card.svg?react'
+import Cart from '@assets/icons/cart.svg?react'
 import CheckCircle from '@assets/icons/check-circle 1.svg?react'
 import Close from '@assets/icons/close.svg?react'
 import Calendar from '@assets/icons/date-calendar.svg?react'
@@ -10,6 +11,7 @@ import EyeSlash from '@assets/icons/eye-slash.svg?react'
 import Home from '@assets/icons/home.svg?react'
 import Lock from '@assets/icons/lock.svg?react'
 import Logo from '@assets/icons/Logo.svg?react'
+import Menu from '@assets/icons/menu.svg?react'
 import MinusCircle from '@assets/icons/minus-circle.svg?react'
 import Plus from '@assets/icons/plus.svg?react'
 import PlusCircle from '@assets/icons/plus-circle.svg?react'
@@ -30,6 +32,7 @@ const ICONS = {
   Bags,
   Calendar,
   Card,
+  Cart,
   CheckCircle,
   Close,
   Eye,
@@ -37,6 +40,7 @@ const ICONS = {
   Home,
   Lock,
   Logo,
+  Menu,
   MinusCircle,
   Plus,
   PlusCircle,

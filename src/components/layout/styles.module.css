@@ -17,3 +17,15 @@
 .mainContent {
   @apply mt-40;
 }
+
+@media screen and (max-width: 640px) {
+  .orderCard {
+    @apply mr-0;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .orderCard {
+    @apply mr-0;
+  }
+}
