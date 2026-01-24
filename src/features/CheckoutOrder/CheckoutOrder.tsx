@@ -132,6 +132,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
         date,
         items: products.map((item) => ({
           name: item.name,
+          note: item.notes,
           price: item.price,
           qty: item.qty,
         })),
