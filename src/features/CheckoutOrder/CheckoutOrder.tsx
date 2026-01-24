@@ -116,7 +116,6 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
     }
 
     dispatch(fetchTransactionCreate(payload))
-    // printerJob()
   }
 
   const { loading } = useMutationSlice({

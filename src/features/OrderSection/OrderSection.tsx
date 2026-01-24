@@ -2,9 +2,9 @@ import { CartContext } from '@contexts/CartContext/context'
 import { ModalContext } from '@contexts/ModalContext'
 import CheckoutOrder from '@features/CheckoutOrder'
 import OrderItems from '@features/OrderItems'
-// import PrintDocument from '@features/PrintDocument'
+import PrintDocument from '@features/PrintDocument'
 import { formatIDR } from '@utils/index'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import Button from '../../components/elements/Button'
 import { PrintStruk } from './action'
@@ -13,7 +13,7 @@ import styles from './styles.module.css'
 export const OrderSection = () => {
   const { setModal } = useContext(ModalContext)
   const { products, clearCart } = useContext(CartContext)
-  // const [printData, setPrintData] = useState<ReceiptData>()
+  const [printData, setPrintData] = useState<ReceiptData>()
 
   const subtotal = products
     .map((item) => item.subtotal)
@@ -29,8 +29,8 @@ export const OrderSection = () => {
   ]
   const bill = subtotal - discount + textRate
 
-  const onSuccess = () => {
-    // setPrintData(receipt)
+  const onSuccess = (receipt: ReceiptData) => {
+    setPrintData(receipt)
     PrintStruk()
     clearCart()
   }
@@ -88,7 +88,7 @@ export const OrderSection = () => {
         </Button>
       </div>
 
-      {/* <PrintDocument receiptData={printData} /> */}
+      <PrintDocument receiptData={printData} />
     </div>
   )
 }
