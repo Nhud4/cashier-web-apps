@@ -143,3 +143,14 @@ type ReceiptData = {
   change: number
   table: number
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+declare global {
+  interface Window {
+    electronAPI?: {
+      isElectron: boolean
+      getPrinters: () => Promise<any[]>
+      printReceipt: (data: any) => Promise<{ success: boolean; error?: string }>
+    }
+  }
+}
