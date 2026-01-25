@@ -1,5 +1,5 @@
 .navbar {
-  @apply flex items-center justify-between w-full p-8;
+  @apply flex items-center justify-between w-full px-8 py-8;
 }
 
 .menu {
@@ -28,4 +28,10 @@
 
 .navMenu.active > svg {
   color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    @apply shadow-card px-4 py-6;
+  }
 }

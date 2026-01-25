@@ -1,3 +1,4 @@
+import EmptyData from '@components/elements/EmptyData'
 import Dropdown from '@components/fields/Dropdown'
 import Search from '@components/fields/Search'
 import Layout from '@components/layout'
@@ -18,8 +19,7 @@ const initialParams = {
 }
 
 export const Dashboard: React.FC = () => {
-  const [params, setParam] = useState<TableParams>(initialParams)
-  const [alo, setAlo] = useState('in')
+  const [params, setParam] = useState<ProductListParams>(initialParams)
 
   const aloOps = [
     { label: 'Dine In', value: 'in' },
@@ -27,7 +27,7 @@ export const Dashboard: React.FC = () => {
     { label: 'Paket', value: 'batch' },
   ]
 
-  const { data, loading } = useQuerySlice<ProductList[], TableParams>({
+  const { data, loading } = useQuerySlice<ProductList[], ProductListParams>({
     clearSlice: clearProduct('list'),
     initial: params,
     key: 'list',
@@ -41,7 +41,15 @@ export const Dashboard: React.FC = () => {
     }
   }
 
-  const selected = aloOps.filter((item) => item.value === alo)
+  const onSetCategory = (val: string) => {
+    setParam((prev) => ({ ...prev, categoryId: val }))
+  }
+
+  const onChangeAllocation = (val: string) => {
+    setParam((prev) => ({ ...prev, allocation: val }))
+  }
+
+  const selected = aloOps.filter((item) => item.value === params.allocation)
 
   return (
     <Layout
@@ -50,25 +58,33 @@ export const Dashboard: React.FC = () => {
       subTitle={getLocalDay()}
       title="SaR-1 Cafe and Resto"
     >
-      <section className="page layout">
+      <section className="page layout overflow-y-auto">
         <div className="space-y-4">
-          <HeaderMenuCategory />
+          <HeaderMenuCategory setCategory={(val) => onSetCategory(val)} />
 
           <div className={styles.header}>
             <h1>Pilih Menu</h1>
             <div className={styles.action}>
               <Search onSearch={onSearch} placeholder="Cari menu disini..." />
               <Dropdown
+                isClearable
                 name="alo"
-                onChange={(ops) => setAlo(ops === null ? '' : ops.value)}
+                onChange={(ops) =>
+                  onChangeAllocation(ops === null ? '' : ops.value)
+                }
                 options={aloOps}
+                placeholder="Jenis menu..."
                 value={selected}
               />
             </div>
           </div>
-          <div className={styles.menu}>
-            <CardMenu data={data} loading={loading} />
-          </div>
+          {!loading && data.length === 0 ? (
+            <EmptyData />
+          ) : (
+            <div className={styles.menu}>
+              <CardMenu data={data} loading={loading} />
+            </div>
+          )}
         </div>
       </section>
     </Layout>

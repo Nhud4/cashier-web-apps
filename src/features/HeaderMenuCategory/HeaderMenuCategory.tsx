@@ -2,12 +2,16 @@ import Button from '@components/elements/Button'
 import { useQuerySlice } from '@redux/hooks'
 import { clearCategory } from '@redux/slices/category'
 import { fetchListCategory } from '@redux/slices/category/action'
-import { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import styles from './styles.module.css'
 
-export const HeaderMenuCategory = () => {
+type Props = {
+  setCategory: (cal: string) => void
+}
+
+export const HeaderMenuCategory: React.FC<Props> = ({ setCategory }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const initialParams = {
     page: 1,
@@ -38,6 +42,7 @@ export const HeaderMenuCategory = () => {
 
   const handleMenu = (val: string) => {
     setSearchParams({ cat: val })
+    setCategory(val)
   }
 
   const isActive = (val: string) => {

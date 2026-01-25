@@ -51,9 +51,9 @@ export const clearStorage = () => {
 
 export const getBasket = () => {
   const data = localStorage.getItem('basket')
-  return (data ? JSON.parse(data) : []) as OrderProduct[]
+  return (data ? JSON.parse(data) : []) as CartProduct[]
 }
 
-export const setBasket = (order: OrderProduct[]) => {
+export const setBasket = (order: CartProduct[]) => {
   localStorage.setItem('basket', JSON.stringify(order))
 }

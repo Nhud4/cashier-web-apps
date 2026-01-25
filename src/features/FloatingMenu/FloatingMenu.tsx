@@ -2,33 +2,27 @@ import ICONS from '@configs/icons'
 import { clearStorage } from '@storage/index'
 import { clsx } from '@utils/index'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './styles.module.css'
 
 export const FloatingMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
-
-  const handleClick = (key: string) => {
-    if (key === 'home') {
-      window.location.assign('/')
-    }
-    if (key === 'order') {
-      window.location.assign('/order')
-    }
-    if (key === 'out') {
-      clearStorage()
-      window.location.replace('/login')
-    }
-  }
+  const navigate = useNavigate()
 
   const menuItems = [
-    { icon: <ICONS.Home />, key: 'home', label: 'Beranda' },
+    { icon: <ICONS.Home />, label: 'Beranda', path: '/' },
     {
       icon: <ICONS.Bags />,
-      key: 'order',
       label: 'Daftar Pesanan',
+      path: '/order',
     },
-    { icon: <ICONS.SingOut />, key: 'out', label: 'Keluar' },
+    {
+      icon: <ICONS.Cart />,
+      label: 'Keranjang',
+      path: '/keranjang',
+    },
+    { icon: <ICONS.SingOut />, label: 'Keluar', path: '/login' },
   ]
 
   return (
@@ -56,7 +50,12 @@ export const FloatingMenu = () => {
             {/* Icon Button */}
             <button
               className={styles.icon}
-              onClick={() => handleClick(item.key)}
+              onClick={() => {
+                navigate(item.path)
+                if (item.path === '/login') {
+                  clearStorage()
+                }
+              }}
             >
               {item.icon}
             </button>

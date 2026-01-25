@@ -19,7 +19,7 @@
 }
 
 .toggleMenu {
-  @apply w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ease-out bg-orange hover:shadow-xl;
+  @apply w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ease-out bg-orange shadow-xl;
 }
 
 .toggleIcon {

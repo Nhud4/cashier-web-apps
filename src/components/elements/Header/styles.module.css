@@ -15,6 +15,10 @@
 }
 
 @media screen and (max-width: 640px) {
+  .header {
+    @apply border-none;
+  }
+
   .order {
     @apply pr-0;
   }

@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const fetchProductList = createAsyncThunk(
   'products/list',
-  async (params: TableParams, { rejectWithValue }) => {
+  async (params: ProductListParams, { rejectWithValue }) => {
     try {
       const response = await services.ListProduct(params)
       return response

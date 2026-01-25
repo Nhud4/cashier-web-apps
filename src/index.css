@@ -56,13 +56,17 @@
   }
 
   .page {
-    @apply grid pb-10 bg-neutral-4 h-full overflow-y-auto;
+    @apply grid pb-10 bg-neutral-4 overflow-y-auto;
     height: calc(100vh - 10rem);
   }
 
   @media screen and (max-width: 768px) {
     .layout {
       @apply px-4 min-h-screen overflow-y-auto;
+    }
+
+    .page {
+      @apply h-full;
     }
   }
 }
