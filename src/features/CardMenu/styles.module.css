@@ -1,5 +1,5 @@
 .container {
-  @apply cursor-pointer;
+  @apply relative;
 }
 
 .card {
