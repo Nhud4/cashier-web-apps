@@ -1,5 +1,6 @@
 import ICONS from '@configs/icons'
 import { useDebounce } from '@utils/hooks'
+import { clsx } from '@utils/index'
 import { useEffect, useState } from 'react'
 
 import styles from './styles.module.css'
@@ -9,6 +10,7 @@ type Props = {
   onSearch?: (search: string) => void
   searchValue?: string
   placeholder?: string
+  className?: string
 }
 
 export const Search: React.FC<Props> = ({
@@ -16,6 +18,7 @@ export const Search: React.FC<Props> = ({
   defaultSearch,
   searchValue,
   placeholder,
+  className,
 }) => {
   const [search, setSearch] = useState<string | null>(null)
   const debounceSearch = useDebounce(search, 500)
@@ -32,7 +35,7 @@ export const Search: React.FC<Props> = ({
   }, [searchValue])
 
   return (
-    <div className={styles.search}>
+    <div className={clsx([styles.search, className])}>
       <ICONS.Search />
       <input
         className="text-sm bg-transparent"

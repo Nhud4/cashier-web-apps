@@ -6,5 +6,6 @@ declare const styles: {
   readonly label__filled: string
   readonly popper: string
   readonly root: string
+  readonly dateButton: string
 }
 export = styles

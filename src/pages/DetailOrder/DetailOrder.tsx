@@ -12,6 +12,7 @@ import {
   fetchTransactionUpdate,
 } from '@redux/slices/transaction/action'
 import { customDateFormat } from '@utils/date'
+import { useWindowWidth } from '@utils/hooks'
 import { formatIDR } from '@utils/index'
 import { clsx } from '@utils/index'
 import { useState } from 'react'
@@ -27,6 +28,9 @@ export const DetailOrder = () => {
   const code = searchParams.get('code')
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const windowWidth = useWindowWidth()
+  const isMobile = windowWidth <= 640
+  const isTablet = windowWidth > 640 && windowWidth <= 1024
 
   const [paymentMethod, setPaymentMethod] = useState('tunai')
   const [payment, setPayment] = useState(0)
@@ -116,7 +120,7 @@ export const DetailOrder = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className={styles.wrapper}>
             <div className="bg-white shadow-card p-8 rounded-lg h-fit space-y-8">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -203,65 +207,125 @@ export const DetailOrder = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-8">
+            <div className={styles.payment}>
               <div className="bg-white shadow-card p-8 rounded-lg h-fit space-y-8">
                 <div className="space-y-4">
                   <h1 className="text-lg font-semibold text-orange">
                     Informasi Pembayaran
                   </h1>
-                  <div className="grid grid-cols-2 gap-8">
-                    <table>
-                      <tbody className={styles.customer}>
-                        <tr>
-                          <th>Metode Pembayaran</th>
-                          <td className="capitalize">
-                            {['finish', 'success'].includes(
-                              data?.paymentStatus || ''
-                            )
-                              ? data?.paymentMethod
-                              : '-'}
-                          </td>
-                        </tr>
-                        <tr>
-                          <th>Status pembayaran</th>
-                          <td className="capitalize">{data?.paymentStatus}</td>
-                        </tr>
-                        <tr>
-                          <th>Subtotal</th>
-                          <td>{formatIDR(data?.subtotal || 0)}</td>
-                        </tr>
-                        <tr>
-                          <th>PPN</th>
-                          <td>{formatIDR(data?.ppn || 0)}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-                    <table className="h-fit">
-                      <tbody className={styles.customer}>
-                        <tr>
-                          <th>Total Tagihan</th>
-                          <td>{formatIDR(data?.bill || 0)}</td>
-                        </tr>
-                        <tr>
-                          <th>Total Bayar</th>
-                          <td>{formatIDR(data?.payment || data?.bill || 0)}</td>
-                        </tr>
-                        <tr>
-                          <th>kembalian</th>
-                          <td>
-                            {formatIDR(
-                              data?.paymentMethod === 'tunai' &&
-                                ['finish', 'success'].includes(
+                  <div className={styles.wrapperCustomer}>
+                    {isMobile || isTablet ? (
+                      <table>
+                        <tbody className={styles.customer}>
+                          <tr>
+                            <th>Metode Pembayaran</th>
+                            <td className="capitalize">
+                              {['finish', 'success'].includes(
+                                data?.paymentStatus || ''
+                              )
+                                ? data?.paymentMethod
+                                : '-'}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Status pembayaran</th>
+                            <td className="capitalize">
+                              {data?.paymentStatus}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Subtotal</th>
+                            <td>{formatIDR(data?.subtotal || 0)}</td>
+                          </tr>
+                          <tr>
+                            <th>PPN</th>
+                            <td>{formatIDR(data?.ppn || 0)}</td>
+                          </tr>
+                          <tr>
+                            <th>Total Tagihan</th>
+                            <td>{formatIDR(data?.bill || 0)}</td>
+                          </tr>
+                          <tr>
+                            <th>Total Bayar</th>
+                            <td>
+                              {formatIDR(data?.payment || data?.bill || 0)}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>kembalian</th>
+                            <td>
+                              {formatIDR(
+                                data?.paymentMethod === 'tunai' &&
+                                  ['finish', 'success'].includes(
+                                    data?.paymentStatus || ''
+                                  )
+                                  ? (data?.payment || 0) - (data?.bill || 0)
+                                  : 0
+                              )}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    ) : (
+                      <>
+                        <table>
+                          <tbody className={styles.customer}>
+                            <tr>
+                              <th>Metode Pembayaran</th>
+                              <td className="capitalize">
+                                {['finish', 'success'].includes(
                                   data?.paymentStatus || ''
                                 )
-                                ? (data?.payment || 0) - (data?.bill || 0)
-                                : 0
-                            )}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                                  ? data?.paymentMethod
+                                  : '-'}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Status pembayaran</th>
+                              <td className="capitalize">
+                                {data?.paymentStatus}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Subtotal</th>
+                              <td>{formatIDR(data?.subtotal || 0)}</td>
+                            </tr>
+                            <tr>
+                              <th>PPN</th>
+                              <td>{formatIDR(data?.ppn || 0)}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table className="h-fit">
+                          <tbody className={styles.customer}>
+                            <tr>
+                              <th>Total Tagihan</th>
+                              <td>{formatIDR(data?.bill || 0)}</td>
+                            </tr>
+                            <tr>
+                              <th>Total Bayar</th>
+                              <td>
+                                {formatIDR(data?.payment || data?.bill || 0)}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>kembalian</th>
+                              <td>
+                                {formatIDR(
+                                  data?.paymentMethod === 'tunai' &&
+                                    ['finish', 'success'].includes(
+                                      data?.paymentStatus || ''
+                                    )
+                                    ? (data?.payment || 0) - (data?.bill || 0)
+                                    : 0
+                                )}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

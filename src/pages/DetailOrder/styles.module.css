@@ -35,3 +35,35 @@
 .paymentActive > p {
   @apply !text-primary;
 }
+
+.wrapper {
+  @apply grid grid-cols-2 gap-8;
+}
+
+.payment {
+  @apply flex flex-col gap-8;
+}
+
+.wrapperCustomer {
+  @apply grid grid-cols-2 gap-8;
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper {
+    @apply grid-cols-1 gap-4;
+  }
+
+  .payment {
+    @apply gap-4;
+  }
+
+  .wrapperCustomer {
+    @apply grid-cols-1 gap-4;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .wrapperCustomer {
+    @apply grid-cols-1 gap-4;
+  }
+}

@@ -10,6 +10,8 @@ import { customDateFormat } from '@utils/date'
 import { format } from 'date-fns'
 import { useMemo, useState } from 'react'
 
+import styles from './styles.module.css'
+
 const initialParams = {
   date: format(new Date(), 'yyyy-MM-dd'),
   page: 1,
@@ -48,12 +50,12 @@ export const Orders = () => {
     >
       <section className="layout page">
         <div>
-          <div className="flex items-center justify-between pb-8">
+          <div className={styles.container}>
             <div>
-              <h1 className="font-semibold text-lg">Daftar Transaksi</h1>
-              <p className="text-sm">Total transaksi: 10</p>
+              <h1>Daftar Transaksi</h1>
+              <p>Total transaksi: 10</p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className={styles.action}>
               <DatePicker
                 name="date"
                 onChange={(val) => {
@@ -81,6 +83,7 @@ export const Orders = () => {
                 value={selectedStatus}
               />
               <Search
+                className="col-span-2 !w-full"
                 onSearch={(val) =>
                   setParams((prev) => ({ ...prev, search: val || '' }))
                 }
@@ -91,13 +94,13 @@ export const Orders = () => {
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-4 gap-4">
+            <div className={styles.list}>
               {new Array(12).fill('').map((_, index) => (
                 <CardOrder key={index} loading />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-4 gap-4">
+            <div className={styles.list}>
               {data.map((item, index) => (
                 <CardOrder data={item} key={index} />
               ))}

@@ -52,3 +52,16 @@
   top: 10px;
   content: url('@assets/icons/close.svg') !important;
 }
+
+.dateButton {
+  @apply flex items-center p-2 text-base border border-border rounded-lg text-left;
+  width: 13rem;
+  height: 48px;
+}
+
+@media screen and (max-width: 640px) {
+  .dateButton {
+    min-width: 11rem;
+    width: 100%;
+  }
+}

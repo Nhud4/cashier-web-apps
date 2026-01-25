@@ -15,3 +15,10 @@
 .search > input:focus {
   @apply outline-none;
 }
+
+@media screen and (max-width: 640px) {
+  .search {
+    min-width: 11rem;
+    width: 100% !important;
+  }
+}

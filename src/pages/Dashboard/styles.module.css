@@ -15,9 +15,17 @@
 }
 
 @media screen and (max-width: 640px) {
-  .header,
-  .action {
+  .header {
     @apply flex-col items-start space-x-0 space-y-4;
+  }
+
+  .action {
+    @apply grid grid-cols-2 gap-4 space-x-0;
+  }
+
+  .action > .search {
+    min-width: 11rem;
+    width: 100%;
   }
 
   .header > h1 {

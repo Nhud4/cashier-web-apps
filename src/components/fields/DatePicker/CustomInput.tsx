@@ -4,6 +4,8 @@ import { forwardRef } from 'react'
 import { type FieldError } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 
+import styles from './styles.module.css'
+
 type Props = {
   control?: boolean
   customPlaceholder?: string
@@ -63,7 +65,7 @@ const CustomDatePickerInput = forwardRef<HTMLButtonElement, Props>(
         ) : (
           <button
             className={clsx([
-              'flex items-center p-2 text-base border border-border rounded-lg text-left w-[13rem] h-[48px]',
+              styles.dateButton,
               value || placeholderText ? 'pb-1' : '',
               error ? 'border-danger-500' : '',
               isDisabled
