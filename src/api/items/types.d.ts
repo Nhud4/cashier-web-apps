@@ -26,6 +26,7 @@ type ProductList = {
   active: boolean
   available: boolean
   img: string
+  discountPrice: number
   category: {
     id: string
     name: string

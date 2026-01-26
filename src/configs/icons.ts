@@ -13,6 +13,7 @@ import Lock from '@assets/icons/lock.svg?react'
 import Logo from '@assets/icons/Logo.svg?react'
 import Menu from '@assets/icons/menu.svg?react'
 import MinusCircle from '@assets/icons/minus-circle.svg?react'
+import Note from '@assets/icons/note.svg?react'
 import Plus from '@assets/icons/plus.svg?react'
 import PlusCircle from '@assets/icons/plus-circle.svg?react'
 import Printer from '@assets/icons/printer.svg?react'
@@ -42,6 +43,7 @@ const ICONS = {
   Logo,
   Menu,
   MinusCircle,
+  Note,
   Plus,
   PlusCircle,
   Printer,

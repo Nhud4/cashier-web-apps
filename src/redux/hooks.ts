@@ -81,44 +81,48 @@ export const useMutationSlice = <T>({
 
   const customMessage = {
     add: 'Data berhasil ditambahkan',
-    bulkMessage: 'Pesan berhasil dikirim',
     edit: 'Data berhasil diperbarui',
-    editBatch: 'Data berhasil diperbarui',
-    evidence: 'Pesanan berhasil diselesaikan',
     remove: 'Data berhasil dihapus',
-    removeBatch: 'Data berhasil dihapus',
-    removeLimitUpdate: 'Data berhasil diperbarui',
-    send: 'Pesan berhasil dikirim',
-    sendBulk: 'Pesan berhasil dikirim',
-    sendBulkNoImg: 'Pesan berhasil dikirim',
-    sendWithoutImage: 'Pesan berhasil dikirim',
-    sync: 'Data berhasil disinkronisasi',
-    syncMPost: 'Data berhasil disinkronisasi',
   }
 
   useEffect(() => {
     if (clearSlice) {
-      if (error || success) {
-        if (success) {
-          if (onSuccess) onSuccess(data)
-          clearCart()
-          onCloseModal()
-          clearSlice()
-        }
+      if (success) {
+        if (onSuccess) onSuccess(data)
+        onCloseModal()
+        clearSlice()
+        clearCart()
 
         setNotify({
           callback: () => {
             if (onError) onError()
             clearSlice()
           },
-          color: error ? 'error' : 'success',
+          color: 'success',
           isOpen: true,
-          message: error ? message : customMessage[key],
+          message: customMessage[key],
         })
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error, success, message, data])
+  }, [success, data])
+
+  useEffect(() => {
+    if (clearSlice) {
+      if (error) {
+        setNotify({
+          callback: () => {
+            if (onError) onError()
+            clearSlice()
+          },
+          color: 'error',
+          isOpen: true,
+          message: message,
+        })
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, message])
 
   return { ...sliceState, onCloseModal }
 }

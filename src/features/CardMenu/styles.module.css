@@ -15,7 +15,8 @@
   @apply font-semibold capitalize;
 }
 
-.card > div > h2 {
+.card > div > h2,
+.card > div > div > h2 {
   @apply text-orange;
 }
 

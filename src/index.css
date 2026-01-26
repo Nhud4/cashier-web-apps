@@ -62,7 +62,8 @@
 
   @media screen and (max-width: 768px) {
     .layout {
-      @apply px-4 min-h-screen overflow-y-auto;
+      @apply px-4 overflow-y-auto;
+      min-height: 80vh;
     }
 
     .page {

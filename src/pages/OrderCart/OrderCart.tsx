@@ -14,7 +14,7 @@ import { firestore } from '@utils/firebase'
 import { clsx, formatIDR } from '@utils/index'
 import { format } from 'date-fns'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { useContext, useMemo, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './styles.module.css'
@@ -55,9 +55,9 @@ export const OrderCart = () => {
     { label: 'Reservasi', value: 'reservation' },
   ]
 
-  const selectedDelivery = useMemo(() => {
-    return deliveryOps.filter((item) => item.value === deliveryType)
-  }, [deliveryType, deliveryOps])
+  const selectedDelivery = deliveryOps.filter(
+    (item) => item.value === deliveryType
+  )
 
   const handlePaymentStatus = (val: string) => {
     setPaymentStatus(val)

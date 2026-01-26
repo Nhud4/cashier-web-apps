@@ -13,7 +13,7 @@ import { firestore } from '@utils/firebase'
 import { clsx, formatIDR } from '@utils/index'
 import { format } from 'date-fns'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import styles from './styles.module.css'
 
@@ -57,9 +57,9 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
     { label: 'Reservasi', value: 'reservation' },
   ]
 
-  const selectedDelivery = useMemo(() => {
-    return deliveryOps.filter((item) => item.value === deliveryType)
-  }, [deliveryType, deliveryOps])
+  const selectedDelivery = deliveryOps.filter(
+    (item) => item.value === deliveryType
+  )
 
   const handlePaymentStatus = (val: string) => {
     setPaymentStatus(val)

@@ -1,20 +1,21 @@
 import ICONS from '@configs/icons'
 import { clearStorage } from '@storage/index'
 import { clsx } from '@utils/index'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './styles.module.css'
 
 export const FloatingMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
   const navigate = useNavigate()
 
   const menuItems = [
     { icon: <ICONS.Home />, label: 'Beranda', path: '/' },
     {
       icon: <ICONS.Bags />,
-      label: 'Daftar Pesanan',
+      label: 'Pesanan',
       path: '/order',
     },
     {
@@ -25,10 +26,20 @@ export const FloatingMenu = () => {
     { icon: <ICONS.SingOut />, label: 'Keluar', path: '/login' },
   ]
 
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+    if (!isOpen) {
+      timeout = setTimeout(() => {
+        setShowMenu(false)
+      }, 1000)
+    }
+    return () => clearTimeout(timeout)
+  }, [isOpen])
+
   return (
     <div className={styles.container}>
       {/* Menu Items */}
-      <div className={styles.wrapperMenu}>
+      <div className={clsx([styles.wrapperMenu, !showMenu ? 'w-0 !h-0' : ''])}>
         {menuItems.map((item, index) => (
           <div
             className={clsx([
@@ -64,7 +75,13 @@ export const FloatingMenu = () => {
       </div>
 
       {/* Main Toggle Button */}
-      <button className={styles.toggleMenu} onClick={() => setIsOpen(!isOpen)}>
+      <button
+        className={styles.toggleMenu}
+        onClick={() => {
+          setIsOpen(!isOpen)
+          setShowMenu(true)
+        }}
+      >
         <div
           className={clsx([
             styles.toggleIcon,

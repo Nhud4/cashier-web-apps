@@ -22,7 +22,7 @@ export const OrderItems: React.FC<Props> = ({ active, notes, data }) => {
 
   useEffect(() => {
     addNotes(data.productId, debounceSearch as string)
-  }, [debounceSearch])
+  }, [debounceSearch, data.productId, addNotes])
 
   return (
     <div className={styles.container}>

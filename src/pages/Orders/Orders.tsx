@@ -8,7 +8,7 @@ import { clearTransaction } from '@redux/slices/transaction'
 import { fetchTransactionList } from '@redux/slices/transaction/action'
 import { customDateFormat } from '@utils/date'
 import { format } from 'date-fns'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 import styles from './styles.module.css'
 
@@ -38,9 +38,9 @@ export const Orders = () => {
     { label: 'Success', value: 'success' },
     { label: 'Pending', value: 'pending' },
   ]
-  const selectedStatus = useMemo(() => {
-    return statusOps.filter((item) => item.value === params.paymentStatus)
-  }, [params.paymentStatus, statusOps])
+  const selectedStatus = statusOps.filter(
+    (item) => item.value === params.paymentStatus
+  )
 
   return (
     <Layout

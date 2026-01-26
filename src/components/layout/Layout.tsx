@@ -58,9 +58,9 @@ const Layout: React.FC<Props> = ({
         />
         <div className="mt-32">{children}</div>
       </main>
+      <Notify />
       {isMobile ? <FloatingMenu /> : null}
       {orderCard ? <OrderSection /> : null}
-      <Notify />
     </div>
   )
 }

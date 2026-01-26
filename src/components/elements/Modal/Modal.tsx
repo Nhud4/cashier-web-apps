@@ -1,4 +1,6 @@
 import ICONS from '@configs/icons'
+import { useWindowWidth } from '@utils/hooks'
+import { clsx } from '@utils/index'
 import { type PropsWithChildren, useEffect } from 'react'
 
 type Props = {
@@ -20,6 +22,9 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
     }
   }
 
+  const windowWidth = useWindowWidth()
+  const isMobile = windowWidth <= 640
+
   useEffect(() => {
     document.addEventListener('keydown', handleEscPress)
     return () => {
@@ -30,10 +35,18 @@ export const Modal: React.FC<PropsWithChildren<Props>> = ({
 
   if (open) {
     return (
-      <div className="absolute inset-0 z-50 flex items-center justify-end bg-opacity-25 bg-black">
+      <div
+        className={clsx([
+          'absolute inset-0 z-50 flex bg-opacity-25 bg-black',
+          isMobile ? 'items-end' : 'items-center justify-end',
+        ])}
+      >
         <div
-          className="py-4 bg-white rounded-l-xl h-screen"
-          style={{ minWidth: '500px' }}
+          className={clsx([
+            'py-4 bg-white rounded-l-xl',
+            isMobile ? 'h-2/5' : 'h-screen',
+          ])}
+          style={{ minWidth: isMobile ? `${windowWidth}px` : '500px' }}
         >
           <div className="flex items-center gap-4 px-6 pb-6">
             <button onClick={onClose}>
