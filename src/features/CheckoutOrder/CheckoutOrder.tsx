@@ -22,6 +22,8 @@ type Props = {
   onSuccess: (receipt: ReceiptData) => void
 }
 
+const collectionName = import.meta.env.REACT_APP_COLLECTION
+
 export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
   const { onClose } = useContext(ModalContext)
   const user = getUserData()
@@ -94,7 +96,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
       total: bill,
       tunai: payment,
     }
-    addDoc(collection(firestore, 'prints'), doc)
+    addDoc(collection(firestore, collectionName), doc)
   }
 
   const handleSubmit = () => {
