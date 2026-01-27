@@ -4,7 +4,8 @@ import ICONS from '@configs/icons'
 import IMAGES from '@configs/images'
 import { CartContext } from '@contexts/CartContext/context'
 import { ModalContext } from '@contexts/ModalContext'
-import { formatIDR } from '@utils/index'
+import { useWindowWidth } from '@utils/hooks'
+import { clsx, formatIDR } from '@utils/index'
 import type React from 'react'
 import { useContext } from 'react'
 import Skeleton from 'react-loading-skeleton'
@@ -20,15 +21,18 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
   const { addProduct, products, minusQty, plusQty, addNotes } =
     useContext(CartContext)
   const { setModal, onClose } = useContext(ModalContext)
+  const windowWidth = useWindowWidth()
+  const isMobile = windowWidth <= 640
 
   const handleClick = (val: ProductList) => {
+    const price = val.discountPrice ? val.discountPrice : val.price
     addProduct({
       discount: val.discount,
       name: val.name,
-      price: val.discountPrice ? val.discountPrice : val.price,
+      price,
       productId: Number(val.id),
       qty: 1,
-      subtotal: val.price,
+      subtotal: price,
     })
   }
 
@@ -95,14 +99,21 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
           <div className="flex items-end h-full w-full !pt-0">
             {ordData ? (
               <div className="flex items-center justify-between w-full">
-                <button
-                  className="flex items-center space-x-2 rounded-full h-fit text-neutral-3"
-                  onClick={() => handleNotes(Number(item.id))}
-                >
-                  <ICONS.Note height={24} width={24} />
-                </button>
+                {isMobile ? (
+                  <button
+                    className="flex items-center space-x-2 rounded-full h-fit text-neutral-3"
+                    onClick={() => handleNotes(Number(item.id))}
+                  >
+                    <ICONS.Note height={24} width={24} />
+                  </button>
+                ) : null}
 
-                <div className="flex items-center justify-between h-12 min-w-20">
+                <div
+                  className={clsx([
+                    'flex items-center justify-between h-12 min-w-20',
+                    !isMobile ? 'w-full' : '',
+                  ])}
+                >
                   <button
                     className="h-full"
                     onClick={() => minusQty(Number(item.id))}

@@ -18,16 +18,13 @@ export const OrderSection = () => {
   const subtotal = products
     .map((item) => item.subtotal)
     .reduce((a, b) => a + b, 0)
-  const discount = products
-    .map((item) => item.discount)
-    .reduce((a, b) => a + b, 0)
-  const textRate = discount > 0 ? discount * 0.1 : subtotal * 0.1
+  const textRate = subtotal * 0.1
 
   const summary = [
-    { label: 'Subtotal', value: discount > 0 ? discount : subtotal },
+    { label: 'Subtotal', value: subtotal },
     { label: 'Pajak 10%', value: textRate },
   ]
-  const bill = subtotal - discount + textRate
+  const bill = subtotal + textRate
 
   const onSuccess = (receipt: ReceiptData) => {
     setPrintData(receipt)
