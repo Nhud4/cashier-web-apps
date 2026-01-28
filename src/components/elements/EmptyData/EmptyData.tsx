@@ -1,6 +1,16 @@
+import type React from 'react'
+
 import styles from './styles.module.css'
 
-export const EmptyData = () => {
+type Props = {
+  title?: string
+  desc?: string
+}
+
+export const EmptyData: React.FC<Props> = ({
+  desc = 'Pesanan yang dibuat akan tampil di sini.',
+  title = 'Belum Ada Pesanan',
+}) => {
   return (
     <section className={styles.container}>
       <div className={styles.emptyState}>
@@ -12,10 +22,8 @@ export const EmptyData = () => {
             </div>
           </div>
         </div>
-        <div className={styles.emptyTitle}>Belum Ada Pesanan</div>
-        <div className={styles.emptyDescription}>
-          Pesanan yang dibuat akan tampil di sini.
-        </div>
+        <div className={styles.emptyTitle}>{title}</div>
+        <div className={styles.emptyDescription}>{desc}</div>
       </div>
     </section>
   )

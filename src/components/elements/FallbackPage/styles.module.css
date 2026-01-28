@@ -21,7 +21,7 @@
 }
 
 .loadingText {
-  color: #ea7c69;
+  @apply text-orange;
   font-size: 18px;
   font-weight: 500;
   margin-top: 30px;
@@ -47,8 +47,8 @@
   height: 100%;
   border-radius: 50%;
   border: 4px solid transparent;
-  border-top-color: #ea7c69;
-  border-right-color: #ea7c69;
+  border-top-color: #f97415;
+  border-right-color: #f97415;
   animation: spin 1.5s linear infinite;
 }
 
@@ -80,7 +80,7 @@
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ea7c69 0%, #d96b58 100%);
+  background: linear-gradient(135deg, #f97415 0%, #d96b58 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,7 +142,7 @@
 .eye {
   width: 8px;
   height: 8px;
-  background: #ea7c69;
+  background: #f97415;
   border-radius: 50%;
   position: absolute;
   top: 25%;
@@ -160,7 +160,7 @@
 .mouth {
   width: 30px;
   height: 15px;
-  border: 3px solid #ea7c69;
+  border: 3px solid #f97415;
   border-top: none;
   border-radius: 0 0 20px 20px;
   position: absolute;

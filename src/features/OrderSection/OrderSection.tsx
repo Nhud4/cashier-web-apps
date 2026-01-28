@@ -1,8 +1,11 @@
+import EmptyData from '@components/elements/EmptyData'
 import { CartContext } from '@contexts/CartContext/context'
 import { ModalContext } from '@contexts/ModalContext'
 import CheckoutOrder from '@features/CheckoutOrder'
 import OrderItems from '@features/OrderItems'
 import PrintDocument from '@features/PrintDocument'
+import { useAppDispatch,useAppSelector } from '@redux/hooks'
+import { fetchProductList } from '@redux/slices/products/action'
 import { formatIDR } from '@utils/index'
 import { useContext, useState } from 'react'
 
@@ -14,6 +17,9 @@ export const OrderSection = () => {
   const { setModal } = useContext(ModalContext)
   const { products, clearCart } = useContext(CartContext)
   const [printData, setPrintData] = useState<ReceiptData>()
+  const dispatch = useAppDispatch()
+
+  const { data } = useAppSelector((state) => state.products.list)
 
   const subtotal = products
     .map((item) => item.subtotal)
@@ -30,6 +36,7 @@ export const OrderSection = () => {
     setPrintData(receipt)
     PrintStruk()
     clearCart()
+    dispatch(fetchProductList({ page: 1, size: 0 }))
   }
 
   const handlePayment = () => {
@@ -44,22 +51,36 @@ export const OrderSection = () => {
       {/* content */}
       <div className="p-8 space-y-4">
         {/* header */}
-        <h1 className={styles.title}>Dfatar Pesanan</h1>
+        <div>
+          <h1 className={styles.title}>Dfatar Pesanan</h1>
+          <p>Menu: {products.length}</p>
+        </div>
 
         {/* content */}
-        <div className="space-y-4">
-          <div className="grid grid-cols-5 gap-2 border-b border-border pb-4">
-            <div className="col-span-3">Menu</div>
-            <div className="justify-self-center">Qty</div>
-            <div className="justify-self-end">Total</div>
+        {products.length === 0 ? (
+          <EmptyData desc="Silahkan pilih menu untuk menambahkan pesanan" />
+        ) : (
+          <div className="space-y-4 pt-8">
+            <div className="overflow-y-auto min-h-[20vh] max-h-[54vh] p-4 -m-4 space-y-4">
+              {products.map((item, i) => {
+                const ordData = data?.filter(
+                  (val) => Number(val.id) === item.productId
+                )[0]
+                const stock = ordData?.stock || 0
+                const isAvail = stock > 0 && stock <= item.qty ? false : true
+                return (
+                  <OrderItems
+                    active
+                    available={isAvail}
+                    data={item}
+                    key={i}
+                    notes="notes"
+                  />
+                )
+              })}
+            </div>
           </div>
-
-          <div className="overflow-y-auto h-[54vh] p-4 -m-4 space-y-4">
-            {products.map((item, i) => (
-              <OrderItems active data={item} key={i} notes="notes" />
-            ))}
-          </div>
-        </div>
+        )}
       </div>
 
       {/* footer */}

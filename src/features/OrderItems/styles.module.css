@@ -3,11 +3,11 @@
 }
 
 .wrapper {
-  @apply grid grid-cols-5 gap-2 text-sm;
+  @apply grid grid-cols-4 gap-2 text-sm;
 }
 
 .header {
-  @apply col-span-3;
+  @apply col-span-2;
 }
 
 .header > h2 {
@@ -19,11 +19,11 @@
 }
 
 .qty {
-  @apply flex items-center space-x-2 justify-self-center h-fit;
+  @apply flex items-center space-x-2 justify-self-end h-fit;
 }
 
 .qty > div {
-  @apply w-4 text-center;
+  @apply text-center;
 }
 
 .footer {

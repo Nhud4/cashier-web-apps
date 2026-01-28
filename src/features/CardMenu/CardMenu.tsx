@@ -24,6 +24,10 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
   const windowWidth = useWindowWidth()
   const isMobile = windowWidth <= 640
 
+  const availData = data?.filter((item) => item.stock > 0) || []
+  const inactiveData = data?.filter((item) => item.stock === 0) || []
+  const newData = [...availData, ...inactiveData]
+
   const handleClick = (val: ProductList) => {
     const price = val.discountPrice ? val.discountPrice : val.price
     addProduct({
@@ -67,11 +71,14 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
       </div>
     ))
   }
-  return data?.map((item, index) => {
+  return newData?.map((item, index) => {
     const ordData = products.filter(
       (val) => val.productId === Number(item.id)
     )[0]
-    const isAvail = item?.stock !== 0 ? ordData?.qty !== item.stock : false
+    const itemQty = ordData?.qty || 0
+    let isAvail = true
+    if (item.stock === 0) isAvail = false
+    if (itemQty > 0 && itemQty >= item.stock) isAvail = false
     return (
       <div className={styles.container} key={index}>
         <BaseCard className={styles.card}>
@@ -85,28 +92,26 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
             <h1>{item.name}</h1>
             {item.discountPrice > 0 ? (
               <div className="flex items-center space-x-1">
-                <p className="text-neutral-3 line-through">
+                <h2>{formatIDR(item.discountPrice)}</h2>
+                <p className="text-neutral-3 line-through text-sm">
                   {formatIDR(item.price)}
                 </p>
-                <h2>{formatIDR(item.discountPrice)}</h2>
               </div>
             ) : (
               <h2>{formatIDR(item.price)}</h2>
             )}
-            <p>Tersedia {item.stock}</p>
+            <p>Tersedia {item.stock - itemQty}</p>
           </div>
 
           <div className="flex items-end h-full w-full !pt-0">
-            {ordData ? (
+            {isMobile && ordData ? (
               <div className="flex items-center justify-between w-full">
-                {isMobile ? (
-                  <button
-                    className="flex items-center space-x-2 rounded-full h-fit text-neutral-3"
-                    onClick={() => handleNotes(Number(item.id))}
-                  >
-                    <ICONS.Note height={24} width={24} />
-                  </button>
-                ) : null}
+                <button
+                  className="flex items-center space-x-2 rounded-full h-fit text-neutral-3"
+                  onClick={() => handleNotes(Number(item.id))}
+                >
+                  <ICONS.Note height={24} width={24} />
+                </button>
 
                 <div
                   className={clsx([
@@ -132,7 +137,7 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
               </div>
             ) : (
               <button
-                className="flex items-center justify-center text-sm border border-orange rounded-full w-full h-10"
+                className="flex items-center justify-center text-sm bg-neutral-1 rounded-full w-full h-10"
                 disabled={!isAvail}
                 onClick={() => handleClick(item)}
               >

@@ -79,7 +79,10 @@ export const Dashboard: React.FC = () => {
             </div>
           </div>
           {!loading && data.length === 0 ? (
-            <EmptyData />
+            <EmptyData
+              desc="Silahkan tambah menu untuk terlebih dahulu"
+              title="Belum ada menu"
+            />
           ) : (
             <div className={styles.menu}>
               <CardMenu data={data} loading={loading} />

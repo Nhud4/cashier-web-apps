@@ -12,9 +12,15 @@ type Props = {
   data: CartProduct
   active?: boolean
   notes?: string
+  available?: boolean
 }
 
-export const OrderItems: React.FC<Props> = ({ active, notes, data }) => {
+export const OrderItems: React.FC<Props> = ({
+  active,
+  notes,
+  data,
+  available,
+}) => {
   const [productNotes, setProductNotes] = useState(data.notes)
   const { plusQty, minusQty, removeProduct, addNotes } = useContext(CartContext)
 
@@ -34,11 +40,15 @@ export const OrderItems: React.FC<Props> = ({ active, notes, data }) => {
         {active ? (
           <div className={styles.qty}>
             <button onClick={() => minusQty(data.productId)} type="button">
-              <ICONS.MinusCircle />
+              <ICONS.MinusCircle height={22} width={22} />
             </button>
             <div>{data.qty}</div>
-            <button onClick={() => plusQty(data.productId)} type="button">
-              <ICONS.PlusCircle />
+            <button
+              disabled={!available}
+              onClick={() => plusQty(data.productId)}
+              type="button"
+            >
+              <ICONS.PlusCircle height={22} width={22} />
             </button>
           </div>
         ) : (

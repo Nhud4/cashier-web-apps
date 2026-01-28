@@ -27,7 +27,7 @@
   width: 100%;
   height: 100%;
   background: rgba(234, 124, 105, 0.1);
-  border: 3px solid #ea7c69;
+  border: 3px solid #f97415;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@
   position: absolute;
   width: 100%;
   height: 4px;
-  background: #ea7c69;
+  background: #f97415;
   border-radius: 2px;
   top: 50%;
   left: 0;
@@ -75,7 +75,7 @@
 }
 
 .errorTitle {
-  color: #ea7c69;
+  color: #f97415;
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -89,7 +89,7 @@
 }
 
 .retryButton {
-  background: #ea7c69;
+  background: #f97415;
   color: white;
   border: none;
   padding: 12px 30px;
