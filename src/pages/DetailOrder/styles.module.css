@@ -14,8 +14,13 @@
   @apply font-normal text-left text-neutral-5 pr-8 pb-2;
 }
 
+.customer > tr > td {
+  @apply flex;
+}
+
 .customer > tr > td::before {
-  content: ': ';
+  content: ':';
+  padding-right: 0.5rem;
 }
 
 .paymentButton {

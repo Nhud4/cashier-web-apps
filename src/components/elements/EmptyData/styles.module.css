@@ -1,0 +1,84 @@
+.container {
+  @apply flex justify-center items-center;
+  height: 50vh;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container > div {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.emptyState {
+  text-align: center;
+}
+
+.emptyIcon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+.emptyBag {
+  width: 100%;
+  height: 100%;
+  border: 4px dashed rgba(234, 124, 105, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bagSimple {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.bagSimpleBody {
+  width: 100%;
+  height: 70%;
+  background: rgba(234, 124, 105, 0.2);
+  border-radius: 6px 6px 3px 3px;
+  position: relative;
+  top: 30%;
+}
+
+.bagSimpleHandle {
+  width: 60%;
+  height: 20px;
+  border: 3px solid rgba(234, 124, 105, 0.3);
+  border-bottom: none;
+  border-radius: 15px 15px 0 0;
+  position: absolute;
+  top: 0;
+  left: 20%;
+}
+
+.emptyTitle {
+  color: #ea7c69;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.emptyDescription {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+}

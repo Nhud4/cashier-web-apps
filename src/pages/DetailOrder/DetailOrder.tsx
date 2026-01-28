@@ -2,6 +2,7 @@ import Button from '@components/elements/Button'
 import Spinner from '@components/elements/Spinner'
 import TextInput from '@components/fields/TextInput'
 import Layout from '@components/layout'
+import LoadingText from '@components/modules/LoadingText'
 import ICONS from '@configs/icons'
 import IMAGES from '@configs/images'
 import PrintDocument from '@features/PrintDocument'
@@ -36,7 +37,10 @@ export const DetailOrder = () => {
   const [payment, setPayment] = useState(0)
   const [receipt, setReceipt] = useState<ReceiptData>()
 
-  const { data } = useQuerySlice<TransactionDetail | null, { id: string }>({
+  const { data, loading } = useQuerySlice<
+    TransactionDetail | null,
+    { id: string }
+  >({
     clearSlice: clearTransaction('detail'),
     initial: id,
     key: 'detail',
@@ -135,33 +139,67 @@ export const DetailOrder = () => {
                   <tbody className={styles.customer}>
                     <tr>
                       <th>Kode Transaksi</th>
-                      <td className="capitalize">{data?.code}</td>
+                      <td className="capitalize">
+                        <LoadingText data={data?.code} loading={loading} />
+                      </td>
                     </tr>
                     <tr>
                       <th>Pelanggan</th>
-                      <td className="capitalize">{data?.customerName}</td>
+                      <td className="capitalize">
+                        <LoadingText
+                          data={data?.customerName}
+                          loading={loading}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <th>No Meja</th>
-                      <td>{data?.tableNumber}</td>
+                      <td>
+                        <LoadingText
+                          data={data?.tableNumber}
+                          loading={loading}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <th>Jenis Transaksi</th>
-                      <td>{transactionType?.label}</td>
+                      <td>
+                        <LoadingText
+                          data={transactionType?.label}
+                          loading={loading}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <th>Tanggal Pesanan</th>
-                      <td>{data?.transactionDate}</td>
+                      <td>
+                        <LoadingText
+                          data={data?.transactionDate}
+                          loading={loading}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <th>Waktu Pesanan</th>
                       <td>
-                        {customDateFormat(data?.createdAt, 'HH.mm', 'WIB')}
+                        <LoadingText
+                          data={customDateFormat(
+                            data?.createdAt,
+                            'HH.mm',
+                            'WIB'
+                          )}
+                          loading={loading}
+                        />
                       </td>
                     </tr>
                     <tr>
                       <th>Kasir</th>
-                      <td>{data?.user?.name}</td>
+                      <td>
+                        <LoadingText
+                          data={data?.user?.name}
+                          loading={loading}
+                        />
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -186,15 +224,21 @@ export const DetailOrder = () => {
                         src={IMAGES.RestoLogo}
                       />
                       <div className="space-y-2">
-                        <h1 className="capitalize font-semibold">
-                          {item.name}
-                        </h1>
-                        <h2 className="text-sm text-neutral-5">
-                          Qty: {item.qty}
-                        </h2>
-                        <p className="text-sm font-semibold text-orange">
-                          {item.subtotal}
-                        </p>
+                        <LoadingText
+                          className="capitalize font-semibold"
+                          data={item.name}
+                          loading={loading}
+                        />
+                        <LoadingText
+                          className="text-sm text-neutral-5"
+                          data={`Qty: ${item.qty}`}
+                          loading={loading}
+                        />
+                        <LoadingText
+                          className="text-sm font-semibold text-orange"
+                          data={item.subtotal}
+                          loading={loading}
+                        />
                       </div>
                     </div>
                     {item.note ? (
@@ -220,48 +264,79 @@ export const DetailOrder = () => {
                           <tr>
                             <th>Metode Pembayaran</th>
                             <td className="capitalize">
-                              {['finish', 'success'].includes(
-                                data?.paymentStatus || ''
-                              )
-                                ? data?.paymentMethod
-                                : '-'}
+                              <LoadingText
+                                data={
+                                  ['finish', 'success'].includes(
+                                    data?.paymentStatus || ''
+                                  )
+                                    ? data?.paymentMethod
+                                    : '-'
+                                }
+                                loading={loading}
+                              />
                             </td>
                           </tr>
                           <tr>
                             <th>Status pembayaran</th>
                             <td className="capitalize">
-                              {data?.paymentStatus}
+                              <LoadingText
+                                data={data?.paymentStatus}
+                                loading={loading}
+                              />
                             </td>
                           </tr>
                           <tr>
                             <th>Subtotal</th>
-                            <td>{formatIDR(data?.subtotal || 0)}</td>
+                            <td>
+                              <LoadingText
+                                data={formatIDR(data?.subtotal || 0)}
+                                loading={loading}
+                              />
+                            </td>
                           </tr>
                           <tr>
                             <th>PPN</th>
-                            <td>{formatIDR(data?.ppn || 0)}</td>
+                            <td>
+                              <LoadingText
+                                data={formatIDR(data?.ppn || 0)}
+                                loading={loading}
+                              />
+                            </td>
                           </tr>
                           <tr>
                             <th>Total Tagihan</th>
-                            <td>{formatIDR(data?.bill || 0)}</td>
+                            <td>
+                              <LoadingText
+                                data={formatIDR(data?.bill || 0)}
+                                loading={loading}
+                              />
+                            </td>
                           </tr>
                           <tr>
                             <th>Total Bayar</th>
                             <td>
-                              {formatIDR(data?.payment || data?.bill || 0)}
+                              <LoadingText
+                                data={formatIDR(
+                                  data?.payment || data?.bill || 0
+                                )}
+                                loading={loading}
+                              />
                             </td>
                           </tr>
                           <tr>
                             <th>kembalian</th>
                             <td>
-                              {formatIDR(
-                                data?.paymentMethod === 'tunai' &&
-                                  ['finish', 'success'].includes(
-                                    data?.paymentStatus || ''
-                                  )
-                                  ? (data?.payment || 0) - (data?.bill || 0)
-                                  : 0
-                              )}
+                              <LoadingText
+                                data={formatIDR(
+                                  data?.paymentMethod === 'tunai' &&
+                                    ['finish', 'success'].includes(
+                                      data?.paymentStatus || ''
+                                    )
+                                    ? (data?.payment || 0) - (data?.bill || 0)
+                                    : 0
+                                )}
+                                loading={loading}
+                              />
                             </td>
                           </tr>
                         </tbody>
@@ -273,26 +348,44 @@ export const DetailOrder = () => {
                             <tr>
                               <th>Metode Pembayaran</th>
                               <td className="capitalize">
-                                {['finish', 'success'].includes(
-                                  data?.paymentStatus || ''
-                                )
-                                  ? data?.paymentMethod
-                                  : '-'}
+                                <LoadingText
+                                  data={
+                                    ['finish', 'success'].includes(
+                                      data?.paymentStatus || ''
+                                    )
+                                      ? data?.paymentMethod
+                                      : '-'
+                                  }
+                                  loading={loading}
+                                />
                               </td>
                             </tr>
                             <tr>
                               <th>Status pembayaran</th>
                               <td className="capitalize">
-                                {data?.paymentStatus}
+                                <LoadingText
+                                  data={data?.paymentStatus}
+                                  loading={loading}
+                                />
                               </td>
                             </tr>
                             <tr>
                               <th>Subtotal</th>
-                              <td>{formatIDR(data?.subtotal || 0)}</td>
+                              <td>
+                                <LoadingText
+                                  data={formatIDR(data?.subtotal || 0)}
+                                  loading={loading}
+                                />
+                              </td>
                             </tr>
                             <tr>
                               <th>PPN</th>
-                              <td>{formatIDR(data?.ppn || 0)}</td>
+                              <td>
+                                <LoadingText
+                                  data={formatIDR(data?.ppn || 0)}
+                                  loading={loading}
+                                />
+                              </td>
                             </tr>
                           </tbody>
                         </table>
@@ -301,25 +394,36 @@ export const DetailOrder = () => {
                           <tbody className={styles.customer}>
                             <tr>
                               <th>Total Tagihan</th>
-                              <td>{formatIDR(data?.bill || 0)}</td>
+                              <td>
+                                <LoadingText
+                                  data={formatIDR(data?.bill || 0)}
+                                  loading={loading}
+                                />
+                              </td>
                             </tr>
                             <tr>
                               <th>Total Bayar</th>
                               <td>
-                                {formatIDR(data?.payment || data?.bill || 0)}
+                                <LoadingText
+                                  data={formatIDR(data?.payment || 0)}
+                                  loading={loading}
+                                />
                               </td>
                             </tr>
                             <tr>
                               <th>kembalian</th>
                               <td>
-                                {formatIDR(
-                                  data?.paymentMethod === 'tunai' &&
-                                    ['finish', 'success'].includes(
-                                      data?.paymentStatus || ''
-                                    )
-                                    ? (data?.payment || 0) - (data?.bill || 0)
-                                    : 0
-                                )}
+                                <LoadingText
+                                  data={formatIDR(
+                                    data?.paymentMethod === 'tunai' &&
+                                      ['finish', 'success'].includes(
+                                        data?.paymentStatus || ''
+                                      )
+                                      ? (data?.payment || 0) - (data?.bill || 0)
+                                      : 0
+                                  )}
+                                  loading={loading}
+                                />
                               </td>
                             </tr>
                           </tbody>

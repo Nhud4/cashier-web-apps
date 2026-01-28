@@ -77,7 +77,7 @@ const Navbar: React.FC<Props> = ({
               styles.navMenu,
               pathname === '/' ? styles.active : '',
             ])}
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/?cat=')}
           >
             <ICONS.Home />
           </button>

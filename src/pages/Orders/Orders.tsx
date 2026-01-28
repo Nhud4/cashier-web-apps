@@ -2,7 +2,7 @@ import DatePicker from '@components/fields/DatePicker'
 import Dropdown from '@components/fields/Dropdown'
 import Search from '@components/fields/Search'
 import Layout from '@components/layout'
-import CardOrder from '@features/CardOrder'
+import OrderList from '@features/OrderList'
 import { useQuerySlice } from '@redux/hooks'
 import { clearTransaction } from '@redux/slices/transaction'
 import { fetchTransactionList } from '@redux/slices/transaction/action'
@@ -93,19 +93,7 @@ export const Orders = () => {
             </div>
           </div>
 
-          {loading ? (
-            <div className={styles.list}>
-              {new Array(12).fill('').map((_, index) => (
-                <CardOrder key={index} loading />
-              ))}
-            </div>
-          ) : (
-            <div className={styles.list}>
-              {data.map((item, index) => (
-                <CardOrder data={item} key={index} />
-              ))}
-            </div>
-          )}
+          <OrderList data={data} loading={loading} />
         </div>
       </section>
     </Layout>

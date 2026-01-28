@@ -1,0 +1,107 @@
+.container {
+  @apply flex justify-center items-center min-h-screen;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container > div {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.errorState {
+  @apply flex flex-col items-center;
+  text-align: center;
+}
+
+.errorIcon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+.errorCircle {
+  width: 100%;
+  height: 100%;
+  background: rgba(234, 124, 105, 0.1);
+  border: 3px solid #ea7c69;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+.errorX {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.errorX::before,
+.errorX::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #ea7c69;
+  border-radius: 2px;
+  top: 50%;
+  left: 0;
+}
+
+.errorX::before {
+  transform: rotate(45deg);
+}
+
+.errorX::after {
+  transform: rotate(-45deg);
+}
+
+.errorTitle {
+  color: #ea7c69;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.errorDescription {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.retryButton {
+  background: #ea7c69;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.retryButton:hover {
+  background: #d96b58;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(234, 124, 105, 0.3);
+}

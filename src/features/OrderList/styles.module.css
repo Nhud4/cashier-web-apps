@@ -1,0 +1,47 @@
+.container {
+  @apply flex items-center justify-between pb-8;
+}
+
+.container > div > h1 {
+  @apply font-semibold text-lg;
+}
+
+.container > div > p {
+  @apply text-sm;
+}
+
+.action {
+  @apply flex items-center space-x-4;
+}
+
+.list {
+  @apply grid grid-cols-4 gap-4;
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    @apply flex-col items-start space-y-2;
+  }
+
+  .action {
+    @apply grid grid-cols-2 gap-2 space-x-0 w-full;
+  }
+
+  .list {
+    @apply grid-cols-1;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    @apply flex-col items-start space-y-2;
+  }
+
+  .action {
+    @apply w-full;
+  }
+
+  .list {
+    @apply grid-cols-2;
+  }
+}
