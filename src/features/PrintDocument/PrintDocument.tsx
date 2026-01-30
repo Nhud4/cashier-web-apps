@@ -267,10 +267,6 @@ export const PrintDocument: React.FC<Props> = ({ receiptData }) => {
             <span>Subtotal</span>
             <span>{formatIDR(receiptData?.subtotal || 0)}</span>
           </div>
-          <div className="total-row">
-            <span>PPN 10%</span>
-            <span>{formatIDR(receiptData?.tax || 0)}</span>
-          </div>
           <div className="total-row grand-total">
             <span>Total</span>
             <span>{formatIDR(receiptData?.total || 0)}</span>

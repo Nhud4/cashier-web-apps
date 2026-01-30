@@ -4,7 +4,7 @@ import { ModalContext } from '@contexts/ModalContext'
 import CheckoutOrder from '@features/CheckoutOrder'
 import OrderItems from '@features/OrderItems'
 import PrintDocument from '@features/PrintDocument'
-import { useAppDispatch,useAppSelector } from '@redux/hooks'
+import { useAppDispatch, useAppSelector } from '@redux/hooks'
 import { fetchProductList } from '@redux/slices/products/action'
 import { formatIDR } from '@utils/index'
 import { useContext, useState } from 'react'
@@ -24,13 +24,13 @@ export const OrderSection = () => {
   const subtotal = products
     .map((item) => item.subtotal)
     .reduce((a, b) => a + b, 0)
-  const textRate = subtotal * 0.1
+  // const textRate = subtotal * 0.1
 
   const summary = [
     { label: 'Subtotal', value: subtotal },
-    { label: 'Pajak 10%', value: textRate },
+    // { label: 'Pajak 10%', value: textRate },
   ]
-  const bill = subtotal + textRate
+  const bill = subtotal
 
   const onSuccess = (receipt: ReceiptData) => {
     setPrintData(receipt)

@@ -29,7 +29,7 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
   const newData = [...availData, ...inactiveData]
 
   const handleClick = (val: ProductList) => {
-    const price = val.discountPrice ? val.discountPrice : val.price
+    const price = val.discountPrice ? val.price - val.discountPrice : val.price
     addProduct({
       discount: val.discount,
       name: val.name,
@@ -92,7 +92,7 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
             <h1>{item.name}</h1>
             {item.discountPrice > 0 ? (
               <div className="flex items-center space-x-1">
-                <h2>{formatIDR(item.discountPrice)}</h2>
+                <h2>{formatIDR(item.price - item.discountPrice)}</h2>
                 <p className="text-neutral-3 line-through text-sm">
                   {formatIDR(item.price)}
                 </p>

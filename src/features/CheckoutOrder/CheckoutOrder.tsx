@@ -41,13 +41,13 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
   const subtotal = products
     .map((item) => item.subtotal)
     .reduce((a, b) => a + b, 0)
-  const textRate = subtotal * 0.1
+  // const textRate = subtotal * 0.1
 
   const summary = [
     { label: 'Subtotal', value: subtotal },
-    { label: 'Pajak 10%', value: textRate },
+    // { label: 'Pajak 10%', value: textRate },
   ]
-  const bill = subtotal + textRate
+  const bill = subtotal
 
   const deliveryOps = [
     { label: 'Dine In', value: 'dineIn' },
@@ -87,7 +87,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
       printed: false,
       subtotal,
       table: tableNumber,
-      tax: textRate,
+      tax: 0,
       time: `${hour} WIB`,
       total: bill,
       tunai: payment,
@@ -105,7 +105,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
       paymentMethod,
       paymentStatus: paymentStatus === 'now' ? 'success' : 'pending',
       paymentType: paymentStatus,
-      ppn: textRate,
+      ppn: 0,
       subtotal,
       tableNumber,
       totalDiscount: 0,
@@ -137,7 +137,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
         storeName: 'SaR-1 Cafe and Resto',
         subtotal,
         table: tableNumber,
-        tax: textRate,
+        tax: 0,
         time: `${hour} WIB`,
         total: bill,
       })
@@ -244,7 +244,7 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
         <div
           className={clsx([
             'space-y-4',
-            paymentStatus === 'later' ? 'hidden' : '',
+            paymentStatus === 'later' ? 'opacity-0' : 'opacity-110',
           ])}
         >
           <div className="pb-4 mb-4 border-b border-border bg-white">
