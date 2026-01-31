@@ -98,6 +98,7 @@ export const DetailOrder = () => {
       date: data?.transactionDate || '',
       items: data?.items || [],
       orderNumber: data?.code || '',
+      orderType: transactionType?.label || '',
       storeName: 'udin',
       subtotal:
         data?.totalDiscount && data.totalDiscount > 0

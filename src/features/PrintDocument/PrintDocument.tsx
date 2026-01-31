@@ -215,21 +215,18 @@ export const PrintDocument: React.FC<Props> = ({ receiptData }) => {
           <div className="store-address">{receiptData?.address}</div>
         </div>
 
+        <div className="info-row">
+          <span>
+            No. <br /> {receiptData?.orderNumber.split('TRX-')}
+          </span>
+          <span>
+            {receiptData?.date} <br /> {receiptData?.time}
+          </span>
+        </div>
+
         <div className="divider"></div>
 
         <div className="receipt-info">
-          <div className="info-row">
-            <span>No Pesanan:</span>
-            <span>{receiptData?.orderNumber}</span>
-          </div>
-          <div className="info-row">
-            <span>Tanggal:</span>
-            <span>{receiptData?.date}</span>
-          </div>
-          <div className="info-row">
-            <span>Jam:</span>
-            <span>{receiptData?.time}</span>
-          </div>
           <div className="info-row">
             <span>Customer:</span>
             <span>{receiptData?.customer}</span>
@@ -242,22 +239,42 @@ export const PrintDocument: React.FC<Props> = ({ receiptData }) => {
             <span>Kasir:</span>
             <span>{receiptData?.cashier}</span>
           </div>
+          <div className="info-row">
+            <span>Order:</span>
+            <span className="capitalize">{receiptData?.orderType}</span>
+          </div>
         </div>
 
         <div className="divider"></div>
 
         <div className="items-section">
-          {receiptData?.items.map((item, index) => (
-            <div className="item" key={index}>
-              <div className="item-header">
-                <span>{item.name}</span>
-                <span>{formatIDR(item.qty * item.price)}</span>
+          {receiptData?.items.map((item, index) => {
+            const priceDiscount = item.discount
+              ? (item.price * item.discount) / 100
+              : 0
+            return (
+              <div className="item" key={index}>
+                <div className="item-header">
+                  <span>{item.name}</span>
+                  <span>
+                    {formatIDR(item.qty * (item.price - priceDiscount))}
+                  </span>
+                </div>
+                {item.discount ? (
+                  <div className="item-header">
+                    <span>
+                      {item.qty} x {formatIDR(item.price - priceDiscount)}
+                    </span>
+                    <span>Diskon ({item.discount})%</span>
+                  </div>
+                ) : (
+                  <div className="item-detail">
+                    {item.qty} x {formatIDR(item.price - priceDiscount)}
+                  </div>
+                )}
               </div>
-              <div className="item-detail">
-                {item.qty} x {formatIDR(item.price)}
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <div className="divider"></div>

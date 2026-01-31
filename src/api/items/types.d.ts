@@ -30,6 +30,7 @@ type ProductList = {
   category: {
     id: string
     name: string
+    printTarget: string
   }
 }
 

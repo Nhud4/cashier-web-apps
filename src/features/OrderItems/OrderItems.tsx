@@ -35,7 +35,7 @@ export const OrderItems: React.FC<Props> = ({
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <h2>{data.name}</h2>
-          <p>{formatIDR(data.price)}</p>
+          <p>{formatIDR(data.price - (data.price * data.discount) / 100)}</p>
         </div>
         {active ? (
           <div className={styles.qty}>

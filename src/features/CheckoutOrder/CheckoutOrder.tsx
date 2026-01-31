@@ -72,18 +72,22 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
   }
 
   const printerJob = (code: string) => {
+    const items = products
+      .filter((item) => item.printTarget === 'kitchen')
+      .map((item) => ({
+        name: item.name,
+        price: item.price,
+        qty: item.qty,
+      }))
     const doc = {
       cashier: user.name,
       createdAt: serverTimestamp(),
       customer: customerName,
       date,
-      items: products.map((item) => ({
-        name: item.name,
-        price: item.price,
-        qty: item.qty,
-      })),
+      items,
       kembalian: payment > 0 ? payment - bill : 0,
       orderNo: code,
+      orderType: selectedDelivery[0].label,
       printed: false,
       subtotal,
       table: tableNumber,
@@ -128,12 +132,14 @@ export const CheckoutOrder: React.FC<Props> = ({ products, onSuccess }) => {
         customer: customerName,
         date,
         items: products.map((item) => ({
+          discount: item.discount,
           name: item.name,
           note: item.notes,
           price: item.price,
           qty: item.qty,
         })),
         orderNumber: data.code,
+        orderType: selectedDelivery[0].label,
         storeName: 'SaR-1 Cafe and Resto',
         subtotal,
         table: tableNumber,

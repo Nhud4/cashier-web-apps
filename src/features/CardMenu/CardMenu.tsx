@@ -29,14 +29,17 @@ export const CardMenu: React.FC<Props> = ({ data, loading }) => {
   const newData = [...availData, ...inactiveData]
 
   const handleClick = (val: ProductList) => {
-    const price = val.discountPrice ? val.price - val.discountPrice : val.price
+    const subtotal = val.discountPrice
+      ? val.price - val.discountPrice
+      : val.price
     addProduct({
       discount: val.discount,
       name: val.name,
-      price,
+      price: val.price,
+      printTarget: val.category.printTarget,
       productId: Number(val.id),
       qty: 1,
-      subtotal: price,
+      subtotal,
     })
   }
 

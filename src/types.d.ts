@@ -125,6 +125,8 @@ type ReceiptItems = {
   name: string
   qty: number
   price: number
+  discount?: number
+  note?: string
 }
 
 type ReceiptData = {
@@ -142,6 +144,7 @@ type ReceiptData = {
   cash: number
   change: number
   table: number
+  orderType: string
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

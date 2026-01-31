@@ -40,6 +40,7 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
           name: val.name,
           notes: val.notes,
           price: val.price,
+          printTarget: val.printTarget,
           productId: val.productId,
           qty: 1,
           subtotal: val.subtotal,

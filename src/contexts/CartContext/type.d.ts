@@ -6,6 +6,7 @@ type CartProduct = {
   discount: number
   price: number
   name: string
+  printTarget: string
 }
 
 type CartContextType = {
